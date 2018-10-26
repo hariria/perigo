@@ -28,9 +28,9 @@ review = db.Review
 locations = [
 	{'locationName' : 'Tommy Trojan',  'zipCode': 90089, 'address' : '123 Sesame St.'},
 	{'locationName' : 'Lyon Center', 'zipCode': 90089, 'address' : '123 Sesame St.'},
-	{'locationName' : 'USC Village Starbucks', 'zipCode': '123 Sesame St.', 'address' : '123 Sesame St.'},
+	{'locationName' : 'USC Village Starbucks', 'zipCode': 90089, 'address' : '123 Sesame St.'},
 	{'locationName' : 'Blaze Pizza', 'zipCode': 90089, 'address' : '123 Sesame St.'},
-	{'locationName' : 'Ronald Tutor Campus Center', 'zipCode': '123 Sesame St.', 'address' : '123 Sesame St.'},
+	{'locationName' : 'Ronald Tutor Campus Center', 'zipCode': 90089, 'address' : '123 Sesame St.'},
 	{'locationName' : 'Fertitta Hall', 'zipCode': 90089, 'address' : '123 Sesame St.'},
 	{'locationName' : 'Chick-fil-A', 'zipCode': 90089, 'address' : '123 Sesame St.'},
 	{'locationName' : 'Leavy Library', 'zipCode': 90089, 'address' : '123 Sesame St.'}
