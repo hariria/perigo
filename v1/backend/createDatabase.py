@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import os
 
 os.system("echo ----------------------------------------")
@@ -25,14 +26,14 @@ user = db.User
 review = db.Review
 
 locations = [
-	{'locationName' : 'Tommy Trojan',  'zipCode': 90089, 'address' : None},
-	{'locationName' : 'Lyon Center', 'zipCode': 90089, 'address' : None},
-	{'locationName' : 'USC Village Starbucks', 'zipCode': None, 'address' : None},
-	{'locationName' : 'Blaze Pizza', 'zipCode': 90089, 'address' : None},
-	{'locationName' : 'Ronald Tutor Campus Center', 'zipCode': None, 'address' : None},
-	{'locationName' : 'Fertitta Hall', 'zipCode': 90089, 'address' : None},
-	{'locationName' : 'Chick-fil-A', 'zipCode': 90089, 'address' : None},
-	{'locationName' : 'Leavy Library', 'zipCode': 90089, 'address' : None}
+	{'locationName' : 'Tommy Trojan',  'zipCode': 90089, 'address' : '123 Sesame St.'},
+	{'locationName' : 'Lyon Center', 'zipCode': 90089, 'address' : '123 Sesame St.'},
+	{'locationName' : 'USC Village Starbucks', 'zipCode': '123 Sesame St.', 'address' : '123 Sesame St.'},
+	{'locationName' : 'Blaze Pizza', 'zipCode': 90089, 'address' : '123 Sesame St.'},
+	{'locationName' : 'Ronald Tutor Campus Center', 'zipCode': '123 Sesame St.', 'address' : '123 Sesame St.'},
+	{'locationName' : 'Fertitta Hall', 'zipCode': 90089, 'address' : '123 Sesame St.'},
+	{'locationName' : 'Chick-fil-A', 'zipCode': 90089, 'address' : '123 Sesame St.'},
+	{'locationName' : 'Leavy Library', 'zipCode': 90089, 'address' : '123 Sesame St.'}
 ]
 
 print("=====================================================")
@@ -44,8 +45,8 @@ for location in locations:
 print("CREATED LOCATION COLLECTION")
 
 item.insert_one({'title' : 'Bruin Bear', 'description' : 'Worst mascot ever', 
-	'condition' : 'Poor', 'forSale' : True, 'userSellingItem' : '1234567', 
-	'highestBidder' : '8765432', 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0})
+	'condition' : 'Poor', 'forSale' : True, 'userSellingItem' : ObjectId(), 
+	'highestBidder' : ObjectId(), 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0})
 print("CREATED ITEM COLLECTION")
 
 user.insert_one({'firstName' : 'Tommy', 'lastName' : 'Trojan', 
@@ -54,11 +55,11 @@ user.insert_one({'firstName' : 'Tommy', 'lastName' : 'Trojan',
 print("CREATED USER COLLECTION")
 
 message.insert_one({'content' : 'This is a test message. Fight On!',
-	'userSendingMessage' : '1234567', 'userReceivingMessage' : None})
+	'userSendingMessage' : ObjectId(), 'userReceivingMessage' : ObjectId()})
 print("CREATED MESSAGE COLLECTION")
 
-review.insert_one({'reviewMessage' : 'Great seller', 'reviewerId' : None,
-	'userBeingReviewed' : '1234567'})
+review.insert_one({'reviewMessage' : 'Great seller', 'reviewerId' : ObjectId(),
+	'userBeingReviewed' : ObjectId()})
 print("CREATED REVIEW COLLECTION")
 
 print("=====================================================")
