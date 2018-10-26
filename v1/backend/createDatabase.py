@@ -14,6 +14,8 @@ os.system('pip install pymongo')
 
 client = MongoClient('localhost', 27017)
 
+client.drop_database('perigo')
+
 db = client.perigo
 
 meetup_location = db.MeetupLocation
