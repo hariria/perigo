@@ -11,10 +11,10 @@ public class MeetupLocation {
 	public ObjectId _id;
 	
 	public String locationName;
-	public long zipCode;
+	public int zipCode;
 	public String address;
 	
-	public MeetupLocation(ObjectId _id, String locationName, long zipCode, String address) {
+	public MeetupLocation(ObjectId _id, String locationName, int zipCode, String address) {
 		super();
 		this._id = _id;
 		this.locationName = locationName;
@@ -37,7 +37,7 @@ public class MeetupLocation {
 	public long getZipCode() {
 		return zipCode;
 	}
-	public void setZipCode(long zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 	public String getAddress() {

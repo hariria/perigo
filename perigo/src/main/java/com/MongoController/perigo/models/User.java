@@ -1,11 +1,20 @@
 package com.MongoController.perigo.models;
 
+import java.io.Serializable;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 @Document(collection="User")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	public ObjectId _id;
@@ -13,12 +22,13 @@ public class User {
 	public String firstName;
 	public String lastName;
 	public String phoneNumber;
-	public long zipCode;
+	public int zipCode;
 	public String googleUserId;
-	public int review;
+	public int userRating;
 	
-	public User(ObjectId _id, String firstName, String lastName, String phoneNumber, long zipCode, String googleUserId,
-			int review) {
+	@JsonCreator
+	public User(ObjectId _id, String firstName, String lastName, String phoneNumber, int zipCode, String googleUserId, 
+			int userRating) {
 		super();
 		this._id = _id;
 		this.firstName = firstName;
@@ -26,7 +36,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.zipCode = zipCode;
 		this.googleUserId = googleUserId;
-		this.review = review;
+		this.userRating = userRating;
 	}
 
 	public ObjectId get_id() {
@@ -61,11 +71,11 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public long getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(long zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 
@@ -77,12 +87,12 @@ public class User {
 		this.googleUserId = googleUserId;
 	}
 
-	public int getReview() {
-		return review;
+	public int getuserRating() {
+		return userRating;
 	}
 
-	public void setReview(int review) {
-		this.review = review;
+	public void setuserRating(int userRating) {
+		this.userRating = userRating;
 	}
 	
 	
