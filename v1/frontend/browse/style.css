@@ -1,0 +1,353 @@
+body{
+	margin: 0px;
+	overflow-y: auto;
+}
+
+.header{
+	position: relative;
+	padding-top: 25px;
+	height: 75px;
+	width: 100%;
+}
+
+.header-text{
+  font-family: Avenir Next;
+  font-size: 22px;
+  font-weight: bold;
+  color: #4D4D4D;
+  padding-top: 25px;
+}
+
+.title-text{
+	font-family: Avenir Next;
+  font-size: 35px;
+  font-weight: bold;
+  color: #4D4D4D;
+  bottom: 0px;
+  position: absolute;
+}
+
+.header-text:hover{
+  cursor: pointer;
+}
+
+.icon{
+	position: relative;
+	float: left;
+	margin-left: 50px;
+	height: 75px;
+	width: 100px;
+}
+
+.icon:hover{
+  cursor: pointer;
+}
+
+.icon-image{
+	display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top: 12px;
+}
+
+.search-bar{
+	position: relative;
+  float: left;
+	margin-left: 50px;
+  height: 75px;
+  width: 38%;
+  max-width: 650px;
+}
+
+.header-frame{
+  position: relative;
+  float: right;
+  margin-right: 50px;
+  width: 30%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.main{
+	position: relative;
+	height: calc(100vh - 100px);
+	width: 100%;
+}
+
+.main-frame{
+	position: relative;
+	top: 50px;
+	left: 150px;
+	width: calc(100% - 300px);
+	padding-bottom: 50px;
+}
+
+.inner-frame{
+  display: flex;
+}
+
+.browser-bar{
+	position: relative;
+	height: 75px;
+	width: 100%;
+}
+
+.browser-text{
+	position: relative;
+  margin-left: 60px;
+  height: 75px;
+  width: 200px;
+}
+
+.saved-items{
+  height: 70vh;
+  width: 0%;
+  display: none;
+  float: right;
+  
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  position: relative;
+  top: 0px;
+}
+
+.saved-title{
+  font-family: Avenir Next Italic;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4D4D4D;
+  padding-top: 30px;
+  padding-left: 35px;
+  padding-bottom: 10px;
+}
+
+#saved-table{
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+td {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding-left: 35px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.table-item-text { 
+  font-family: 'Avenir Next';
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.table-item-text:hover{
+  cursor: pointer;
+}
+
+.table-price-text {  
+  font-family: 'Avenir Next Italic';
+  font-weight: normal;
+  font-size: 16px;
+}
+
+/* third column */ 
+td:first-child + td + td { 
+  min-width: 20px;
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.heart{
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  color: white;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+.heart:hover{
+  cursor: pointer;
+}
+
+.item-frame{
+  position: relative;
+  padding-top: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  height: calc(100% - 100px);
+  width: calc(100% - 80px);
+  max-width: 1525px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.item{
+	height: 300px;
+  width: 325px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  min-width: 250px;
+  overflow: hidden;
+  flex: 0 1 calc(25% - 40px)
+}
+
+.item-image{
+	height: 200px;
+	max-width: 325px;
+	overflow: hidden;
+  justify-content: center;
+  display: flex;
+}
+
+.item-image:hover{
+  cursor: pointer;
+}
+
+.item-image-pic{
+	max-height: 200px;
+	max-width: 325px;
+	min-height: 200px;
+	min-width: 325px;
+}
+
+.item-title{
+	height: 27px;
+	width: 325px;
+}
+
+.item-title:hover{
+  cursor: pointer;
+}
+
+.item-title-text{
+	font-family: Avenir Next;
+  font-size: 20px;
+  font-weight: bold;
+  color: #3C3C3C;
+}
+
+.item-location{
+	height: 22px;
+	width: 325px;
+}
+
+.item-location-text{
+	font-family: Avenir Next Italic;
+  font-size: 14px;
+  font-weight: 200;
+  color: #505050;
+}
+
+.item-price{
+	height: 25px;
+	width: 325px;
+}
+
+.item-price-text{
+	font-family: Avenir Next Italic;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4C4C4C;
+}
+
+.footer{
+	position: absolute;
+	bottom: 0px;
+	height: 75px;
+	width: 100%;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+input[type=text] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  height: 65px;
+  width: 100%;
+ 
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  transition: 0.5s;
+  outline: none;
+  position: absolute;
+    
+  font-size: 20px;
+  font-family: Avenir Next;
+  color: #4D4D4D;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+input[type=text]:focus {
+  border: 3px solid #4D4D4D;
+  border-radius: 4px;
+}
+
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url("./fonts/AvenirNext-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url("./fonts/AvenirNext-Medium.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url("./fonts/AvenirNext-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-UltraLightItalic.ttf");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-Italic.ttf");
+  font-weight: normal;
+  font-style : normal;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-MediumItalic.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-BoldItalic.ttf");
+  font-weight: bold;
+}
