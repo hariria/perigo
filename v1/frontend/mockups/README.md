@@ -15,31 +15,27 @@
 ![AccountExtendedSaved](./AccountExtendedSaved.png)
 
 
-<div id='dg'></div>
+
 ## Design Guidelines
 
 
-<div id='styles'></div>
 ### Styles
 
 
 
 
-<div id='colors' />
 #### Colors
 
 
 
-
-<div id='flexbox' />
 ### Page Layout
 
 
-<div id='pages' />
+
 ## Pages
 
 
-<div id='home' />
+
 ### Home
 ![BrowseFinal.png](./BrowseFinal.png)
 ![AccountExtendedSaved](./AccountExtendedSaved.png)
@@ -48,9 +44,9 @@
 ![BrowseAddSaved.png](./BrowseAddSaved.png)
 
 
-<div id='product' />
+
 ### Product
 
 
-<div id='account' />
+
 ### Account
