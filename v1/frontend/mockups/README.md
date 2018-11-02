@@ -13,11 +13,11 @@
     - [Account](#account)
 
 
-<div id='dg' />
+<div id='dg'></div>
 ## Design Guidelines
 
 
-<div id='styles' />
+<div id='styles'> </div>
 ### Styles
 
 
