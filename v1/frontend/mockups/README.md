@@ -3,21 +3,21 @@
 
 
 ## Table of Contents
-- [Design Guideleines](#dg)
-    - [Styles](#styles)
-        - [Colors](#colors)
-    - [Page Layout](#flexbox)
-- [Pages](#pages)
-    - [Home](#home)
-    - [Product](#product)
-    - [Account](#account)
+-   [Design Guideleines](#dg)
+    -   [Styles](#styles)
+        -   [Colors](#colors)
+    -   [Page Layout](#flexbox)
+-   [Pages](#pages)
+    -   [Home](#home)
+    -   [Product](#product)
+    -   [Account](#account)
 
 
 <div id='dg'></div>
 ## Design Guidelines
 
 
-<div id='styles'> </div>
+<div id='styles'></div>
 ### Styles
 
 
