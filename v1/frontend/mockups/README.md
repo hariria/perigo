@@ -82,15 +82,20 @@
 
 ### Page Layout
 
-This is an idea of how the product page should be setup. Use flexbox to organize the divs on the page and
+This is an idea of how the product page should be setup. Use flexbox in your CSS to organize the divs on the page and checkout <https://css-tricks.com/snippets/css/a-guide-to-flexbox/> for a guide on how to use flexbox.
 
 ![ProductPageWithSavedCSSBreakdown.png](./ProductPageWithSavedCSSBreakdown.png)
 
 
 ## Pages
-
+Important things to consider about the pages:
+1. No more Messages Tab
+2. Sign In turns from Sign In to Account when user Signs in
+3. You must Sign In to save Items (ie. when you click the heart on tile). Check the browse page with the popup to see how it behaves when a user tries to save an item and the user hasn't logged in.
+4. The Saved Tab pops out when you click on it
 
 ### Home
+
 ![BrowseFinal.png](./BrowseFinal.png)
 ![BrowsePopUp.png](./BrowsePopUp.png)
 ![BrowseSignIn.png](./BrowseSignIn.png)
