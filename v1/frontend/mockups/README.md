@@ -12,6 +12,8 @@
     -   [Product](#product)
     -   [Account](#account)
 
+![AccountExtendedSaved](./AccountExtendedSaved.png)
+
 
 <div id='dg'></div>
 ## Design Guidelines
@@ -40,6 +42,7 @@
 <div id='home' />
 ### Home
 ![BrowseFinal.png](./BrowseFinal.png)
+![AccountExtendedSaved](./AccountExtendedSaved.png)
 ![BrowsePopUp.png](./BrowsePopUp.png)
 ![BrowseSignIn.png](./BrowseSignIn.png)
 ![BrowseAddSaved.png](./BrowseAddSaved.png)
