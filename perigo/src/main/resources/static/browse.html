@@ -1,0 +1,60 @@
+<!-- TODO -->
+<!--
+1. have saved items div stay in place during scroll
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Browse</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="scripts.js"></script>
+	<body onload="return getAllItems()">
+		<div id="outerContainer">
+			<div class="header">
+				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
+				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
+				<div class="header-frame">
+					<div class="header-text" onClick="showSavedItems()">Saved</div>
+					<div class="header-text">Sign In</div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="main-frame">
+					<div class="browser-bar">
+						<div class="browser-text"><div class="title-text">Browse</div></div>
+					</div>
+					<div class="inner-frame">
+						<div class="item-frame">
+
+						</div>
+						<div class="saved-items" id="saved-items">
+							<div class="saved-title">Saved Items</div>
+							<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
+							<table id="saved-table">
+								<tr> 
+									<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
+									<td><div class="table-price-text">$100</div></td>
+									<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
+								</tr>
+								<tr> 
+									<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
+									<td><div class="table-price-text">$100</div></td>
+									<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
+								</tr>
+								<tr> 
+									<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
+									<td><div class="table-price-text">$100</div></td>
+									<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

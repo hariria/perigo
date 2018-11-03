@@ -21,6 +21,11 @@ public class UserController {
 	@Autowired
 	private UserRepository repository;
 	
+	@RequestMapping(value="/googleuser/{googleUserId}", method=RequestMethod.GET)
+	public User getUserBygoogleUserId(@PathVariable("googleUserId") String googleUserId) {
+		return repository.findBygoogleUserId(googleUserId);
+	}
+	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public List<User> getAllUsers() {
 		return repository.findAll();

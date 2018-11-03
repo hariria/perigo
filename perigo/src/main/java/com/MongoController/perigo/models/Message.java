@@ -4,9 +4,14 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 @Document(collection="Message")
 public class Message {
+	
 	@Id
+	@JsonSerialize(using = ToStringSerializer.class)
 	ObjectId _id;
 	
 	public String content;

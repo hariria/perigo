@@ -1,12 +1,15 @@
 package com.MongoController.perigo.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @Document(collection="User")
 public class User implements Serializable {
@@ -17,6 +20,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@JsonSerialize(using = ToStringSerializer.class)
 	public ObjectId _id;
 	
 	public String firstName;
@@ -25,10 +29,11 @@ public class User implements Serializable {
 	public int zipCode;
 	public String googleUserId;
 	public int userRating;
+	public List<SavedItem> savedItems;
 	
 	@JsonCreator
 	public User(ObjectId _id, String firstName, String lastName, String phoneNumber, int zipCode, String googleUserId, 
-			int userRating) {
+			int userRating, List<SavedItem> savedItems) {
 		super();
 		this._id = _id;
 		this.firstName = firstName;
@@ -37,6 +42,7 @@ public class User implements Serializable {
 		this.zipCode = zipCode;
 		this.googleUserId = googleUserId;
 		this.userRating = userRating;
+		this.savedItems = savedItems;
 	}
 
 	public ObjectId get_id() {
@@ -95,6 +101,12 @@ public class User implements Serializable {
 		this.userRating = userRating;
 	}
 	
+	public List<SavedItem> getsavedItems() {
+		return savedItems;
+	}
 	
+	public void setsavedItems(List<SavedItem> savedItems) {
+		this.savedItems = savedItems;
+	}
 
 }

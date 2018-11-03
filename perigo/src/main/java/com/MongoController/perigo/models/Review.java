@@ -4,10 +4,14 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 @Document(collection="Review")
 public class Review {
 	
 	@Id
+	@JsonSerialize(using = ToStringSerializer.class)
 	public ObjectId _id;
 	
 	public ObjectId reviewerId;
