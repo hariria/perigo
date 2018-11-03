@@ -117,7 +117,7 @@ body{
 
 .saved-items{
   height: 70vh;
-  width: 0%;
+  width: 0px;
   display: none;
   float: right;
   

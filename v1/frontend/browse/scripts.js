@@ -25,13 +25,13 @@ function unsaveItem(element){
 function showSavedItems(){
     var table = document.getElementById("saved-items");
     if (table.style.display === "block") {
-         $('#saved-items').animate({width: "0%"}, 500);
+         $('#saved-items').animate({width: "0px"}, 500);
          setTimeout(function(){
         	table.style.display = "none";
     	},450);
     } else {
     	table.style.display = "block";
-        $('#saved-items').animate({width: "30%"}, 500);
+        $('#saved-items').animate({width: "400px"}, 500);
     }
 };
 
