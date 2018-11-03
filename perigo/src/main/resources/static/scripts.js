@@ -1,14 +1,34 @@
-function clickedHeart(element){
-	var elementID = element.getAttribute("data-itemID");
-	console.log(elementID);
+// NEED TO STORE USER OBJECT ID IN SESSION VARIABLE
 
+
+function clickedHeart(element){
+	
+	
+	var elementID = element.getAttribute("data-itemID");
+	
+
+	// If item saved
 	if(element.innerHTML === "<i class=\"fas fa-heart\"></i>"){
 		element.innerHTML = "<i class='far fa-heart'></i>";
 		element.style.color = "white";
 
-	}else{
+	}else{ // If not saved
 		element.innerHTML = "<i class='fas fa-heart'></i>";
 		element.style.color = "#FF4755";
+		
+		const Url = 'http://localhost:9000/user/' + userObjectId;
+		$.ajax({
+			url: Url,
+			type: "GET",
+			dataType: 'JSON',
+	    	success: function(result) {
+	    		displayItems(result);
+	    	},
+			error: function(error) {
+				console.log('Error: ' + error);
+			}
+		})
+		
 	}
 };
 
@@ -22,6 +42,51 @@ function unsaveItem(element){
 	console.log(elementID);
 };
 
+function generateSavedItems(result) {
+	var savedItems = result['savedItems'];
+	for (var i = 0; i < savedItems.length; i++) {
+    	const Url = 'http://localhost:9000/item/' + savedItems[i]['itemId'];
+    	$.ajax({
+    		url: Url,
+    		type: "GET",
+    		dataType: 'JSON',
+        	success: function(result) {
+        		var tr = document.createElement('tr');
+
+        		var td1 = document.createElement('td');
+        		var table_item_text = document.createElement('div');
+        		table_item_text.setAttribute('class', 'table-item-text');
+        		table_item_text.setAttribute('data-itemID', result['_id']);
+        		table_item_text.setAttribute('onClick', 'getItem(this)');
+        		table_item_text.innerHTML = result['title'];
+        		td1.appendChild(table_item_text);
+        		tr.appendChild(td1);
+        		
+        		var td2 = document.createElement('td');
+        		var table_price_text = document.createElement('div');
+        		table_price_text.innerHTML = '$' + result['maxBid'];
+        		td2.appendChild(table_price_text);
+        		tr.appendChild(td2);
+        		
+        		var td3 = document.createElement('td');
+        		var i_class = document.createElement('i');
+        		i_class.setAttribute('class', 'fas fa-times');
+        		i_class.setAttribute('style', 'color: #949494;');
+        		i_class.setAttribute('data-itemID', result['_id']);
+        		i_class.setAttribute('onClick', 'unsaveItem(this)');
+        		td3.appendChild(i_class);
+        		tr.appendChild(td3);
+        		
+        		document.getElementById('saved-table').appendChild(tr);
+        	
+        	},
+    		error: function(error) {
+    			console.log('Error: ' + error);
+    		}
+    	})
+	}
+}
+
 function showSavedItems(){
     var table = document.getElementById("saved-items");
     if (table.style.display === "block") {
@@ -30,8 +95,32 @@ function showSavedItems(){
         	table.style.display = "none";
     	},450);
     } else {
+    	
+    	var objectId = sessionStorage.getItem("objectId");
+    	if (objectId == null) {
+    		
+    	}
+    	
+    	document.getElementById("saved-table").innerHTML = "";
+    	
     	table.style.display = "block";
-        $('#saved-items').animate({width: "400px"}, 500);
+    	
+    	const Url = 'http://localhost:9000/user/' + "5bddef3afdba6536e06b985c";
+
+    	$.ajax({
+    		url: Url,
+    		type: "GET",
+    		dataType: 'JSON',
+        	success: function(result) {
+        		generateSavedItems(result);
+        	},
+    		error: function(error) {
+    			console.log('Error: ' + error);
+    		}
+    	})
+    	
+    	
+    	$('#saved-items').animate({width: "400px"}, 500);
     }
 };
 
