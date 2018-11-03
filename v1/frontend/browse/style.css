@@ -64,8 +64,9 @@ body{
   position: relative;
   float: right;
   margin-right: 50px;
-  width: 30%;
-
+  width: 20%;
+  max-width: 300px;
+  
   display: flex;
   justify-content: space-between;
 }
