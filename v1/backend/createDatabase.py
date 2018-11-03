@@ -44,14 +44,27 @@ for location in locations:
 	meetup_location.insert_one(location)
 print("CREATED LOCATION COLLECTION")
 
-item.insert_one({'title' : 'Bruin Bear', 'description' : 'Worst mascot ever', 
+itemInserted1 = item.insert_one({'title' : 'Bruin Bear', 'description' : 'Worst mascot ever', 
 	'condition' : 'Poor', 'forSale' : True, 'userSellingItem' : ObjectId(), 
-	'highestBidder' : ObjectId(), 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0})
+	'highestBidder' : ObjectId(), 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0,
+	'image' : 'https://pbs.twimg.com/profile_images/952872960767025152/t_ssj_Uy_400x400.jpg',
+	'location' : 'Los Angeles, CA', 'usersWatching' : [{'userWatchingId' : ObjectId()}]
+	})
+itemInserted2 = item.insert_one({'title' : 'Stanford Cardinal', 'description' : 'Inferior football team',
+	'condition' : 'Poor', 'forSale' : True, 'userSellingItem' : ObjectId(),
+	'highestBidder' : ObjectId(), 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0,
+	'image' : 'http://web.stanford.edu/~siegelr/stanford/homecoming2014/IMG_8867%20trees%2010-25-2014%20stanford%20stadium.JPG',
+	'location' : 'Los Angeles, CA', 'usersWatching' : [{'userWatchingId' : ObjectId()}]
+	})
 print("CREATED ITEM COLLECTION")
+
+
 
 user.insert_one({'firstName' : 'Tommy', 'lastName' : 'Trojan', 
 	'phoneNumber' : '213-123-4567', 'zipCode' : 90089,
-	'googleUserId' : '1234567', 'userRating' : 5})
+	'googleUserId' : '1234567', 'userRating' : 5, 
+	'savedItems' : [{'itemId' : itemInserted1.inserted_id}, {'itemId' : itemInserted2.inserted_id}]
+	})
 print("CREATED USER COLLECTION")
 
 message.insert_one({'content' : 'This is a test message. Fight On!',
