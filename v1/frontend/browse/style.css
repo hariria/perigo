@@ -1,6 +1,19 @@
 body{
 	margin: 0px;
+  width: 100%;
 	overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#outerContainer{
+  max-width: 1500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header{
@@ -200,7 +213,7 @@ tr:hover {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  min-width: 250px;
+  min-width: 225px;
   overflow: hidden;
   flex: 0 1 calc(25% - 40px)
 }

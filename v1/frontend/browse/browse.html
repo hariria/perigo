@@ -13,119 +13,121 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
 	<body>
-		<div class="header">
-			<div class="icon"><img class="icon-image" src="./icon.png"/></div>
-			<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
-			<div class="header-frame">
-				<div class="header-text" onClick="showSavedItems()">Saved</div>
-				<div class="header-text">Sign In</div>
-			</div>
-		</div>
-		<div class="main">
-			<div class="main-frame">
-				<div class="browser-bar">
-					<div class="browser-text"><div class="title-text">Browse</div></div>
+		<div id="outerContainer">
+			<div class="header">
+				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
+				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
+				<div class="header-frame">
+					<div class="header-text" onClick="showSavedItems()">Saved</div>
+					<div class="header-text">Sign In</div>
 				</div>
-				<div class="inner-frame">
-					<div class="item-frame">
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="1"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="1" onClick="getItem(this)"><img class="item-image-pic" src="https://placeimg.com/325/200/tech"/></div>
-							<div class="item-title" data-itemID="1" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="2"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="2" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/326/200/tech"/></div>
-							<div class="item-title" data-itemID="2" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="3"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="3" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/327/200/tech"/></div>
-							<div class="item-title" data-itemID="3" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="4"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="4" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/328/200/tech"/></div>
-							<div class="item-title" data-itemID="4" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="5"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="5" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/329/200/tech"/></div>
-							<div class="item-title" data-itemID="5" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="6"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="6" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/330/200/tech"/></div>
-							<div class="item-title" data-itemID="6" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="7"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="7" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/331/200/tech"/></div>
-							<div class="item-title" data-itemID="7" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="8"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="8" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/332/200/tech"/></div>
-							<div class="item-title" data-itemID="8" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="9"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="9" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/333/200/tech"/></div>
-							<div class="item-title" data-itemID="9" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="10"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="10" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/334/200/tech"/></div>
-							<div class="item-title" data-itemID="10" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
-						<div class="item">
-							<div class="heart" onClick="clickedHeart(this)" data-itemID="11"><i class="far fa-heart"></i></div>
-							<div class="item-image" data-itemID="11" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/335/200/tech"/></div>
-							<div class="item-title" data-itemID="11" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
-							<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
-							<div class="item-price"><div class="item-price-text">$100</div></div>
-						</div>
+			</div>
+			<div class="main">
+				<div class="main-frame">
+					<div class="browser-bar">
+						<div class="browser-text"><div class="title-text">Browse</div></div>
 					</div>
-					<div class="saved-items" id="saved-items">
-						<div class="saved-title">Saved Items</div>
-						<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
-						<table id="saved-table">
-							<tr> 
-								<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
-								<td><div class="table-price-text">$100</div></td>
-								<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
-							</tr>
-							<tr> 
-								<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
-								<td><div class="table-price-text">$100</div></td>
-								<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
-							</tr>
-							<tr> 
-								<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
-								<td><div class="table-price-text">$100</div></td>
-								<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
-							</tr>
-						</table>
+					<div class="inner-frame">
+						<div class="item-frame">
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="1"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="1" onClick="getItem(this)"><img class="item-image-pic" src="https://placeimg.com/325/200/tech"/></div>
+								<div class="item-title" data-itemID="1" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="2"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="2" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/326/200/tech"/></div>
+								<div class="item-title" data-itemID="2" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="3"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="3" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/327/200/tech"/></div>
+								<div class="item-title" data-itemID="3" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="4"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="4" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/328/200/tech"/></div>
+								<div class="item-title" data-itemID="4" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="5"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="5" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/329/200/tech"/></div>
+								<div class="item-title" data-itemID="5" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="6"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="6" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/330/200/tech"/></div>
+								<div class="item-title" data-itemID="6" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="7"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="7" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/331/200/tech"/></div>
+								<div class="item-title" data-itemID="7" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="8"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="8" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/332/200/tech"/></div>
+								<div class="item-title" data-itemID="8" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="9"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="9" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/333/200/tech"/></div>
+								<div class="item-title" data-itemID="9" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="10"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="10" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/334/200/tech"/></div>
+								<div class="item-title" data-itemID="10" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+							<div class="item">
+								<div class="heart" onClick="clickedHeart(this)" data-itemID="11"><i class="far fa-heart"></i></div>
+								<div class="item-image" data-itemID="11" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/335/200/tech"/></div>
+								<div class="item-title" data-itemID="11" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+								<div class="item-price"><div class="item-price-text">$100</div></div>
+							</div>
+						</div>
+						<div class="saved-items" id="saved-items">
+							<div class="saved-title">Saved Items</div>
+							<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
+							<table id="saved-table">
+								<tr> 
+									<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
+									<td><div class="table-price-text">$100</div></td>
+									<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
+								</tr>
+								<tr> 
+									<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
+									<td><div class="table-price-text">$100</div></td>
+									<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
+								</tr>
+								<tr> 
+									<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
+									<td><div class="table-price-text">$100</div></td>
+									<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
