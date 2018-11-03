@@ -2,13 +2,22 @@
 <html>
 	<head>
 		<title>Browse</title>
+		<meta name="google-signin-client_id" content="58684548257-biadarc2qic8v5841bd06cblv1sddgbc.apps.googleusercontent.com">
 	</head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<meta name="google-signin-client_id" content="58684548257-biadarc2qic8v5841bd06cblv1sddgbc.apps.googleusercontent.com">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
+	<script>
+		function onSignIn(googleUser) {
+		  var profile = googleUser.getBasicProfile();
+		  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		  console.log('Name: ' + profile.getName());
+		  console.log('Image URL: ' + profile.getImageUrl());
+		  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		}
+	</script>
 	<body>
 		<div id="outerContainer">
 			<div class="header">
@@ -16,7 +25,7 @@
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame">
 					<div class="header-text" onClick="showSavedItems()">Saved</div>
-					<div class="header-text">Sign In</div>
+					<div class="header-text"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
 				</div>
 			</div>
 			<div class="main">
