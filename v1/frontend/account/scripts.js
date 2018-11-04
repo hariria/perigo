@@ -40,6 +40,8 @@ $(window).scroll(function() {
     $('#saved-items').css('top', windowpos + "px");
 });
 
+
+
 function resetSavedItems(){
     var choice = confirm("Are you sure you want to remove all saved items?");
     if (choice == true){
@@ -58,6 +60,36 @@ function addAListing(){
     window.location.href = './newListing.html';
 }
 
-function uploadImage(){
+function previewFile() {
 
+    var preview = document.createElement("div");
+    var image = document.createElement("img");
+
+
+    var icon = '<i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i>';
+    preview.appendChild(image); 
+    preview.appendChild(icon);
+    preview.classList.add('uploaded-image');
+    document.getElementById("picture-container").prepend(preview);
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+        preview.src = reader.result;
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+
+function getCityState(){
+    zip = document.getElementById('zipcode').value
+    zip = zip.toString();
+    console.log("Zip: " + zip);
+    var geoInfo = $.getJSON("http://www.geonames.org/postalCodeLookupJSON?&country=DE&callback=?", {postalcode: zip }, function(response) {
+		console.log(response);
+	});
+    // console.log(geoInfo);
 }
