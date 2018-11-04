@@ -8,6 +8,7 @@
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<style>
 		body{
 			background: #f2f2f2
@@ -21,10 +22,12 @@
 		#main-container{
 			display: flex;
 			margin-top: 20vh;
-			height: 60vh;
+			margin-bottom: 20vh;
+			height: 575px;
 			width: 300px;
 
 			padding: 0px 100px;
+			justify-content: center;
 
 	  		background: white;
 	  		border-radius: 20px;
@@ -57,10 +60,21 @@
 			position: relative;
 			border-bottom: 2px solid #adadad;
 			margin-bottom: 37px;
-
 		}
 
-		#username, #password{
+		#sectionTwo{
+			height: 0px;
+		}
+
+		#emailContainer, #locationContainer, #zipContainer{
+			width: 100%;
+			position: relative;
+			border-bottom: 2px solid #adadad;
+			margin-bottom: 37px;
+			display: none;
+		}
+
+		#username, #password, #email, #location, #zipCode{
 			font-family: Avenir Next;
 			font-size: 15px;
 			color: #555555;
@@ -70,53 +84,172 @@
 			height: 45px;
 			background: transparent;
 			padding: 0 5px;
-
 		}
 
-		#submit{
+		.redPlaceholder::-webkit-input-placeholder {
+		    color: #cc0000;
+		}
+
+		#next, #submit{
 			font-size: 16px;
 			background: -webkit-linear-gradient(right,  #91A8D2, #F9CBC9);
 		    color: #fff;
 		    line-height: 1.2;
 		    text-transform: uppercase;
-		    padding: 0 20px;
 		    width: 100%;
 		    height: 50px;
-		    border-radius: 25px
+		    border-radius: 25px;
+		    border: 0;
+		    cursor: pointer;
 		}
 
-		/* Change background to this on hover
-		#submit:hover{
-			background: -webkit-linear-gradient(left,  #91A8D2, #F9CBC9);
+		#submit{
+			display:none;
 		}
-		*/
+
+		#buttons{
+			height:50px;
+			padding: 0 20px;
+			margin-top: 25px;
+			margin-bottom: 25px;
+		}
 
 	</style>
-
 	<script type="text/javascript">
-		/*
-		$(document).ready(function() {
-			$('#submit').hover(
-		   		function() {
-		        	$(this).stop().animate({backgroundColor:'#91A8D2'}, 300);
-		        }, function () {
-		        	$(this).stop().animate({backgroundColor:'#F9CBC9'}, 100);
-		    });
-		});
-		*/
-	</script>
 
+		function next(){
+
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+
+			var invalid = false;
+			if(username === null || username === ""){
+				$('#username').addClass('redPlaceholder');
+				document.getElementById("usernameContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(password === null || password ===  ""){
+				$('#password').addClass('redPlaceholder');
+				document.getElementById("passwordContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(invalid){
+				return;
+			}
+
+			$('#username').removeClass('redPlaceholder');
+			$('#password').removeClass('redPlaceholder');
+			document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("passwordContainer").style.borderBottom = "2px solid #adadad";
+
+			$('#main-container').animate({margin: "10vh 0vh"}, 250);
+			setTimeout(function(){
+				$('#main-container').animate({width: "500px"}, 500);
+				
+				setTimeout(function(){
+					$('#main-container').animate({height: "800px"}, 500); 
+					$('#sectionTwo').animate({height: "215px"}, 500); 
+
+					setTimeout(function(){
+						$("#emailContainer").delay(250).fadeIn();
+						$("#locationContainer").delay(250).fadeIn();
+						$("#zipContainer").delay(250).fadeIn();
+						$("#next").fadeOut();
+
+						setTimeout(function(){
+							$("#next").hide();
+						}, 250);
+
+						setTimeout(function(){
+							$("#submit").fadeIn();
+						}, 275);
+					}, 500);
+				}, 500);
+			}, 250);
+		};
+
+		function submit(){
+			
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+			var email = document.getElementById('email').value;
+			var location = document.getElementById('location').value;
+			var zipCode = document.getElementById('zipCode').value;
+
+			var invalid = false;
+			if(username === null || username === ""){
+				$('#username').addClass('redPlaceholder');
+				document.getElementById("usernameContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(password === null || password ===  ""){
+				$('#password').addClass('redPlaceholder');
+				document.getElementById("passwordContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(email === null || email === ""){
+				$('#email').addClass('redPlaceholder');
+				document.getElementById("emailContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(location === null || location ===  ""){
+				$('#location').addClass('redPlaceholder');
+				document.getElementById("locationContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(zipCode === null || zipCode === ""){
+				$('#zipCode').addClass('redPlaceholder');
+				document.getElementById("zipContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(invalid){
+				return;
+			}
+
+			$('#username').removeClass('redPlaceholder');
+			$('#password').removeClass('redPlaceholder');
+			$('#email').removeClass('redPlaceholder');
+			$('#location').removeClass('redPlaceholder');
+			$('#zipCode').removeClass('redPlaceholder');
+			document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("passwordContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("emailContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("locationContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("zipCodeContainer").style.borderBottom = "2px solid #adadad";
+
+
+			console.log(username);
+			console.log(password);
+			console.log(email);
+			console.log(location);
+			console.log(zipCode);
+		}
+
+	</script>
 	<body>
 		<div id="main-container">
-			<div id="header">Perigo</div>
+			<div id="header">Welcome</div>
 			<img src=./icon.png id="icon">
 			<form name="sign-up" id="sign-up">
 				<div id="usernameContainer"><input type="text" name="username" id="username" placeholder="username"></div>
 				<div id="passwordContainer"><input type="password" name="password" id="password" placeholder="password"></div>
-				<input type="submit" value="Sign Up" id="submit">
+				<div id="sectionTwo">
+					<div id="emailContainer"><input type="text" name="email" id="email" placeholder="email"></div>
+					<div id="locationContainer"><input type="text" name="location" id="location" placeholder="city, state"></div>
+					<div id="zipContainer"><input type="text" name="zipCode" id="zipCode" placeholder="zip code"></div>
+				</div>
 			</form>
-
-
+			<div id="buttons">
+				<button id="next" onclick="next()">Next</button>
+				<button id="submit" onclick="submit()">Submit</button>
+			</div>
 		</div>
 	</body>
 </html>
