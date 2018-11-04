@@ -312,13 +312,14 @@ tr:hover {
 .sign-out-button{
     width: 100px;
     height: 30px;
-    border: 1px solid #494949;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 60px;
     background-color: #F8CBCA;
+    cursor: pointer;
+    margin-top: 25px;
 }
 
 .footer {
