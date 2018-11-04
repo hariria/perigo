@@ -1,0 +1,291 @@
+.Header{
+	margin-top:11px;
+	display: flex;
+	flex-flow: row wrap;
+	font-size: 20px;
+	font-family: Avenir Next;
+    font-size: 22px;
+    font-weight: bold;
+    color: #4D4D4D;
+    padding-top: 25px;
+	white-space: nowrap;
+}
+
+
+.icon {
+	height: 50px;
+	width: 50px;
+	margin-left: 65px;
+}
+
+.H-b1 {
+	flex:1;
+}
+
+.H-b2 {
+	flex:4;
+	width:66%;
+
+}
+.H-b3 {
+	margin-left:100px;
+	flex:4;
+}
+
+.H-b3 a {
+	margin-left: 100px;
+	 font-weight: bold;
+    color: #4D4D4D;
+}
+
+
+
+input[type=text] {
+   	padding: 12px 20px;
+    height: 40px;
+    width: 40%;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    border-radius: 4px;
+    transition: 0.5s;
+    outline: none;
+    position: absolute;
+    font-size: 20px;
+    font-family: Avenir Next;
+    color: #4D4D4D;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.Product {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.Product .P-b1 {
+	width: 60%;
+}
+
+.Product .Seller{
+	width: 20%;
+}
+.Product .P-b2 {
+	width: 60%;
+}
+.Product .P-b3 {
+	width: 60%;
+}
+
+.main-frame{
+	position: relative;
+	top: 50px;
+	left: 200px;
+	width: calc(100% - 200px);
+	padding-bottom: 50px;
+	font-family: Avenir Next;
+}
+.main-frame hr {
+	border-top: 1px solid black;
+	margin-bottom: 20px;
+}
+
+.Product img {
+	max-width: 100%;
+}
+.Product-detail {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+.Product-detail h5{
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.heart {
+  border: 0;
+  text-decoration: none;
+  position: absolute;
+  vertical-align: middle;
+  display: inline-block;
+  color: white;
+  background: none;
+  font-size: 2vw;
+  margin-left:50%;
+  margin-top:  3%;
+}
+
+.D1 {
+	flex:1
+
+}
+.D2 {
+	flex:1
+
+}
+.D3 {
+	flex:1
+
+}
+.Seller{
+	position: fixed;
+	top: 170px;
+	right: 10%;
+    width: 300px;
+    box-shadow: 0 0 10px 10px rgba(0,0,0,.3);
+    display: inline;
+    
+}
+
+
+.Seller img {
+	width: 70px;
+	border-radius: 50%;
+	display: inline-block;
+	text-align: middle;
+	margin: 0;
+	margin-left: 30px;
+	margin-top: 30px;
+	float: left;
+}
+.Seller button {
+	 text-align: center;
+	 color: white;
+	 background:rgb(244, 183, 182);
+	 border-radius: 25px;	
+	 width: 50%;
+	 margin:auto;
+  	 display:block;
+  	 margin-bottom: 20px;
+  	 font-size:15px;
+}
+
+.Seller hr {
+    height: 2px;
+    border: 0;
+    border-top: 1px solid black;
+    width:80%;
+}
+
+.Seller-info {
+	position: absolute;
+	margin-left: 46%;
+	margin-top: 50px;
+}
+
+
+
+sep {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 1px solid grey;
+    padding: 0;
+    padding-bottom: 5px;
+}
+
+
+
+h4, h5, h6{
+	display: inline-block;
+	margin: 0;
+	line-height: 0;
+}
+
+h4 {
+	font-weight: 700;
+}
+
+h5{
+	font-weight: 100;
+}
+
+.category button {
+	 text-align: center;
+	 color: black;
+	 background: #D3D3D3;
+	 border-radius: 25px;
+	 margin-right: 10px;
+}
+
+.space {
+	padding-top:150px;
+}
+
+
+input {
+	width: 250px;
+}
+a	{
+	text-decoration: none;
+	color: black;
+	margin-left: 20px;
+}
+
+h2{
+	margin-bottom: 5px;
+	padding-bottom: 0;
+}
+
+h3{
+	margin: 0;
+	padding: 0;
+	padding-bottom: 20px;
+	font-weight: 350;
+}
+
+h1 h2 h3 h4 h5 h6 {
+	 font-family: Avenir Next;
+}
+
+@media screen and (max-width: 800px) {
+
+    .Seller {
+    	display: none;
+    }
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url("./fonts/AvenirNext-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url("./fonts/AvenirNext-Medium.ttf");
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url("./fonts/AvenirNext-Bold.ttf");
+  font-weight: bold;
+}
+
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-UltraLightItalic.ttf");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-Italic.ttf");
+  font-weight: normal;
+  font-style : normal;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-MediumItalic.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Avenir Next Italic';
+  src: url("./fonts/AvenirNext-BoldItalic.ttf");
+  font-weight: bold;
+}

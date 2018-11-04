@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Account</title>
+		<meta name="google-signin-client_id" content="58684548257-biadarc2qic8v5841bd06cblv1sddgbc.apps.googleusercontent.com">
+	</head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="scripts.js"></script>
+	<script>
+		function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+        function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+	</script>
+	<body>
+		<div id="outerContainer">
+			<div class="header">
+				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
+				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
+				<div class="header-frame">
+					<div class="header-text" onClick="showSavedItems()">Saved</div>
+					<div class="header-text"><div class="g-signin2" data-onsuccess="onSignIn">Account</div></div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="main-frame">
+					<div class="browser-bar">
+						<div class="browser-text">
+                            <div class="title-text">Account</div>
+                        </div>
+					</div>
+					<div class="inner-frame">
+                        <div class="account-section">
+                            <h3 class="section-text">Personal Details</h3>
+                            <table style="margin-left: 60px;">
+                                <tr>
+                                    <td>Email Address</td>
+                                    <td>jeffreyMillerPhD@usc.edu</td>
+                                </tr>
+                                <tr>
+                                    <td>Name</td>
+                                    <td id="name-field" contenteditable="true">Jeffrey Miller PhD</td>
+                                </tr>
+                                <tr>
+                                    <td>Zip Code</td>
+                                    <td id="zip-field" contenteditable="true">90089</td>
+                                </tr>
+                                <tr>
+                                    <td>My Rating</td>
+                                    <td>4.8 ★</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="account-section">
+                            <h3 class="section-text">Your Listings</h3>
+                            <div class="item-frame">
+                                <div class="item">
+    								<div class="item-image" data-itemID="10" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/334/200/tech"/></div>
+    								<div class="item-title" data-itemID="10" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+    								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+    								<div class="item-price"><div class="item-price-text">$100</div></div>
+    							</div>
+    							<div class="item">
+    								<div class="item-image" data-itemID="11" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/335/200/tech"/></div>
+    								<div class="item-title" data-itemID="11" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+    								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+    								<div class="item-price"><div class="item-price-text">$100</div></div>
+    							</div>
+                                <div class="new-item">
+    								Add a Listing
+    							</div>
+                            </div>
+                        </div>
+
+                        <div class="account-section">
+                            <h3 class="section-text">Saved Items</h3>
+    						<div class="item-frame">
+    							<div class="item">
+    								<div class="heart" onClick="clickedHeart(this)" data-itemID="8"><i class="far fa-heart"></i></div>
+    								<div class="item-image" data-itemID="8" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/332/200/tech"/></div>
+    								<div class="item-title" data-itemID="8" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+    								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+    								<div class="item-price"><div class="item-price-text">$100</div></div>
+    							</div>
+    							<div class="item">
+    								<div class="heart" onClick="clickedHeart(this)" data-itemID="9"><i class="far fa-heart"></i></div>
+    								<div class="item-image" data-itemID="9" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/333/200/tech"/></div>
+    								<div class="item-title" data-itemID="9" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
+    								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
+    								<div class="item-price"><div class="item-price-text">$100</div></div>
+    							</div>
+                                <div class="new-item">
+    								Reset Saved Items
+    							</div>
+    						</div>
+                        </div>
+
+                        <div class="account-section">
+                            <div class="saved-items" id="saved-items">
+    							<div class="saved-title">Saved Items</div>
+    							<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
+    							<table id="saved-table">
+    								<tr>
+    									<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
+    									<td><div class="table-price-text">$100</div></td>
+    									<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
+    								</tr>
+    								<tr>
+    									<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
+    									<td><div class="table-price-text">$100</div></td>
+    									<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
+    								</tr>
+    								<tr>
+    									<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
+    									<td><div class="table-price-text">$100</div></td>
+    									<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
+    								</tr>
+    							</table>
+    						</div>
+                        </div>
+                        <div class="account-section">
+                            <h3 class="section-text">Logout</h3>
+
+                            <div class="sign-out-button">
+                                <a href="#" style="text-decoration: none; color: white;" onclick="signOut();">Sign out</a>
+    						</div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
