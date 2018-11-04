@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MongoController.perigo.models.Item;
+import com.MongoController.perigo.models.UserWatching;
 import com.MongoController.perigo.repositories.ItemRepository;
 
 @RestController
@@ -37,6 +38,22 @@ public class ItemController {
 		repository.save(item);
 	}
 
+	@RequestMapping(value="/addwatchinguser/{id}", method=RequestMethod.PUT)
+	public void modifySavedItems(@PathVariable("id") ObjectId id, @Valid @RequestBody UserWatching userWatchingId) {		
+		Item update = repository.findBy_id(id);
+		update.getUsersWatching().add(userWatchingId);
+		repository.save(update);	
+	}
+	
+	@RequestMapping(value="/removewatchinguser/{id}", method=RequestMethod.PUT)
+	public void removedSavedItem(@PathVariable("id") ObjectId id, @Valid @RequestBody UserWatching userWatchingId) {		
+		Item update = repository.findBy_id(id);
+		update.getUsersWatching().removeIf(si -> si.getUserWatchingId().equals(userWatchingId.getUserWatchingId()));
+
+		repository.save(update);	
+	}
+	
+	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public Item createItem(@Valid @RequestBody Item item) {
 		item.set_id(ObjectId.get());

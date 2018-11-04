@@ -3,52 +3,46 @@
 	<head>
 		<title>Browse</title>
 		<meta name="google-signin-client_id" content="58684548257-9sudakl3qmrjgmao6bukgldrt5f0dt3k.apps.googleusercontent.com">
+		<meta name="google-signin-scope" content="profile email">
 	</head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
-	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
 	<script>
-	
 		function onSignIn(googleUser) {
-		  var profile = googleUser.getBasicProfile();
-		  var dm = profile.getEmail().split('@')[1];
-		  if(dm != "usc.edu"){
-		  	alert("Please sign in with a USC email");
-		  	signOut();
-		  }
-		  
-		  var id = profile.getId();
-		  
-		  sessionStorage.setItem("googleUserId", id);
-		  
-		  const Url = "http://localhost:9000/user/" + id;
-		  $.ajax({
-		  	url: Url,
-		  	type: GET,
-		  	dataType: 'JSON',
-		  	success: function(result) {
-		  		var objectId = result['_id'];
-		  		sessionStorage.setItem("objectId", objectId);
-		  	},
-		  	error: function(error){
-		  		console.log("Error: " + error);
-		  	}
-		  })
+			console.log("User signed in");
+			
+			var profile = googleUser.getBasicProfile();
+			var id = profile.getId();
+			console.log(id);
+			
+			var dm = profile.getEmail().split('@')[1];
+			if(dm != "usc.edu"){
+			  	alert("Please sign in with a USC email");
+			  	signOut();
+			  	return;
+			}
+			
+			var id = profile.getId();  
+			sessionStorage.setItem("googleUserId", id);
+			
+			//AJAX call to server
+		}
+	
+		function signOut() {
+			var auth = gapi.auth2.getAuthInstance();
+			auth.signOut().then(function () {
+					console.log('User signed out.');
+			});
 		};
 		
 		function isSignedIn(){
 			var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
 			console.log(isSignedIn);
 		};
-		
-		function signOut() {
-    		var auth2 = gapi.auth2.getAuthInstance();
-    		auth2.signOut().then(function () {
-      			console.log('User signed out.');
-			})
-		};
+
 		
 	</script>
 	<body onload="return getAllItems()">
@@ -58,8 +52,7 @@
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame">
 					<div class="header-text" onClick="showSavedItems()">Saved</div>
-					<div class="header-text"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
-					<div class="header-text"><a href="#" onclick="signOut();">Sign out</a></div>
+					<div class="account"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
 				</div>
 			</div>
 			<div class="main">

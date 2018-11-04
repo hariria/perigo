@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.MongoController.perigo.models.SavedItem;
 import com.MongoController.perigo.models.User;
 import com.MongoController.perigo.repositories.UserRepository;
 
@@ -40,6 +41,20 @@ public class UserController {
 	public void modifyUserById(@PathVariable("id") ObjectId id, @Valid @RequestBody User user) {
 		user.set_id(id);
 		repository.save(user);
+	}
+	
+	@RequestMapping(value="/addsaveditem/{id}", method=RequestMethod.PUT)
+	public void modifySavedItems(@PathVariable("id") ObjectId id, @Valid @RequestBody SavedItem savedItem) {
+		User update = repository.findBy_id(id);
+		update.getsavedItems().add(savedItem);
+		repository.save(update);
+	}
+	
+	@RequestMapping(value="/removesaveditem/{id}", method=RequestMethod.PUT)
+	public void removeSavedItem(@PathVariable("id") ObjectId id, @Valid @RequestBody SavedItem savedItem) {
+		User update = repository.findBy_id(id);
+		update.getsavedItems().removeIf(si -> si.getItemId().equals(savedItem.getItemId()));
+		repository.save(update);
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
