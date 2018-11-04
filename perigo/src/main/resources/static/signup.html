@@ -8,11 +8,115 @@
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
+	<style>
+		body{
+			background: #f2f2f2
+		}
+
+		input {
+		    outline: none;
+		    border: none;
+		}
+
+		#main-container{
+			display: flex;
+			margin-top: 20vh;
+			height: 60vh;
+			width: 300px;
+
+			padding: 0px 100px;
+
+	  		background: white;
+	  		border-radius: 20px;
+	  		flex-direction: column;
+
+
+	  		box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+		}
+
+		#header{
+			font-family: Avenir Next;
+			font-size: 40px;
+			font-weight: bold;
+			color: #4D4D4D;
+			padding-top: 25px;
+			text-align: center;
+		}
+
+		#icon{
+			padding-top: 50px;
+			align-self: center;
+			max-width:100px;
+			max-height: 100px;
+			padding-bottom: 75px;
+
+		}
+
+		#usernameContainer, #passwordContainer{
+			width: 100%;
+			position: relative;
+			border-bottom: 2px solid #adadad;
+			margin-bottom: 37px;
+
+		}
+
+		#username, #password{
+			font-family: Avenir Next;
+			font-size: 15px;
+			color: #555555;
+			line-height: 1.2;
+			display: block;
+			width: 100%;
+			height: 45px;
+			background: transparent;
+			padding: 0 5px;
+
+		}
+
+		#submit{
+			font-size: 16px;
+			background: -webkit-linear-gradient(right,  #91A8D2, #F9CBC9);
+		    color: #fff;
+		    line-height: 1.2;
+		    text-transform: uppercase;
+		    padding: 0 20px;
+		    width: 100%;
+		    height: 50px;
+		    border-radius: 25px
+		}
+
+		/* Change background to this on hover
+		#submit:hover{
+			background: -webkit-linear-gradient(left,  #91A8D2, #F9CBC9);
+		}
+		*/
+
+	</style>
+
+	<script type="text/javascript">
+		/*
+		$(document).ready(function() {
+			$('#submit').hover(
+		   		function() {
+		        	$(this).stop().animate({backgroundColor:'#91A8D2'}, 300);
+		        }, function () {
+		        	$(this).stop().animate({backgroundColor:'#F9CBC9'}, 100);
+		    });
+		});
+		*/
+	</script>
+
 	<body>
-		<form name="sign-up" id="sign-up">
-			<input type="text" name="username" placeholder="username">
-			<input type="password" name="password" placeholder="password">
-			<input type="submit" value="Sign Up"
-		</form>
+		<div id="main-container">
+			<div id="header">Perigo</div>
+			<img src=./icon.png id="icon">
+			<form name="sign-up" id="sign-up">
+				<div id="usernameContainer"><input type="text" name="username" id="username" placeholder="username"></div>
+				<div id="passwordContainer"><input type="password" name="password" id="password" placeholder="password"></div>
+				<input type="submit" value="Sign Up" id="submit">
+			</form>
+
+
+		</div>
 	</body>
 </html>
