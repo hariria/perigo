@@ -25,7 +25,8 @@
 			  	return;
 			}
 			
-			var id = profile.getId();  
+			var id = profile.getId();
+			$('#account').html("<div onClick='goToProfile()'>Account</div>");    
 			sessionStorage.setItem("googleUserId", id);
 			
 			//AJAX call to server
@@ -43,7 +44,9 @@
 			console.log(isSignedIn);
 		};
 
-		
+		function goToProfile(){
+			console.log("HERE");
+		};
 	</script>
 	<body onload="return getAllItems()">
 		<div id="outerContainer">
@@ -52,7 +55,7 @@
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame">
 					<div class="header-text" onClick="showSavedItems()">Saved</div>
-					<div class="account"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
+					<div class="header-text" id="account"><div class="g-signin2" style="margin-top: -5px" data-onsuccess="onSignIn"></div></div>
 				</div>
 			</div>
 			<div class="main">
