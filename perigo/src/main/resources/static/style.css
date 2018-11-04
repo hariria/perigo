@@ -298,7 +298,7 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
-input[type=text] {
+#search {
   padding: 12px 20px;
   margin: 8px 0;
   height: 65px;
@@ -318,7 +318,7 @@ input[type=text] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-input[type=text]:focus {
+#search:focus {
   border: 3px solid #4D4D4D;
   border-radius: 4px;
 }
