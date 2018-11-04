@@ -39,3 +39,25 @@ $(window).scroll(function() {
 	var windowpos = $(window).scrollTop();
     $('#saved-items').css('top', windowpos + "px");
 });
+
+function resetSavedItems(){
+    var choice = confirm("Are you sure you want to remove all saved items?");
+    if (choice == true){
+        var savedItems = document.getElementsByClassName("saved-item");
+        Array.from(document.getElementsByClassName('saved-item')).forEach(v => {
+            v.style.display = "none";
+        });
+    }
+    else{
+        console.log();
+    }
+}
+
+
+function addAListing(){
+    window.location.href = './newListing.html';
+}
+
+function uploadImage(){
+
+}

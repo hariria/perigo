@@ -126,7 +126,7 @@ body {
     position: relative;
     margin-left: 60px;
     height: 75px;
-    width: 200px;
+    width: 300px;
 }
 
 .saved-items {
@@ -342,7 +342,7 @@ body::-webkit-scrollbar-thumb {
     outline: 1px solid slategrey;
 }
 
-input[type=text] {
+#search {
     padding: 12px 20px;
     margin: 8px 0;
     height: 65px;
@@ -359,7 +359,28 @@ input[type=text] {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-input[type=text]:focus {
+.new-listing-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-input{
+    border: none;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-left: 60px;
+    border-bottom: 1px solid #494949;
+}
+
+.listing-input::placeholder{
+    left: 50px;
+}
+
+#upload-image{
+    margin-left: 60px;
+}
+
+#search:focus {
     border: 3px solid #4D4D4D;
     border-radius: 4px;
 }

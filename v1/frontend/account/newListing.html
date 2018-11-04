@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Add a Listing</title>
+		<meta name="google-signin-client_id" content="58684548257-biadarc2qic8v5841bd06cblv1sddgbc.apps.googleusercontent.com">
+	</head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="scripts.js"></script>
+	<script>
+		function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+        function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+	</script>
+	<body>
+		<div id="outerContainer">
+			<div class="header">
+				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
+				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
+				<div class="header-frame">
+					<div class="header-text" style="visibility: hidden" onClick="showSavedItems()">Saved</div>
+					<div class="header-text"><div class="g-signin2" data-onsuccess="onSignIn" onclick="location.href='./account.html'">Account</div></div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="main-frame">
+					<div class="browser-bar">
+						<div class="browser-text">
+                            <div class="title-text">Add a Listing</div>
+                        </div>
+					</div>
+					<div class="inner-frame">
+                        <form class="new-listing-form" action="" method="POST">
+                            <input class="listing-input" type="text" name="title" placeholder="Title of your listing...">
+                            <textarea class="listing-input" style="border:1px solid #494949; border-radius: 15px;" rows="4" cols="50" name="description" placeholder="Description up to 500 words..."></textarea>
+                            <input class="listing-input" type="text" name="keywords" placeholder="Up to 5 keywords separated by [,]">
+                            <input class="listing-input" type="number" name="zipcode" required pattern="[0-9]{5}" min="000000" max="99999" placeholder="Zip Code...">
+                            <input class="listing-input" type="number" name="price" placeholder="Price..." step=".01">
+                            <div class="new-item" id="upload-image" onclick="uploadImage()">
+                                Upload an image
+                                <input type="file" multiple />
+                            </div>
+                            <input class="listing-input" style="border:1px solid #494949; border-radius: 15px; width: 100px; color: #494949;" type="submit" value="submit">
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
