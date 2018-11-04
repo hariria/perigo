@@ -48,13 +48,13 @@ itemInserted1 = item.insert_one({'title' : 'Bruin Bear', 'description' : 'Worst 
 	'condition' : 'Poor', 'forSale' : True, 'userSellingItem' : ObjectId(), 
 	'highestBidder' : ObjectId(), 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0,
 	'image' : 'https://pbs.twimg.com/profile_images/952872960767025152/t_ssj_Uy_400x400.jpg',
-	'location' : 'Los Angeles, CA', 'usersWatching' : [{'userWatchingId' : ObjectId()}]
+	'location' : 'Los Angeles, CA', 'usersWatching' : []
 	})
 itemInserted2 = item.insert_one({'title' : 'Stanford Cardinal', 'description' : 'Inferior football team',
 	'condition' : 'Poor', 'forSale' : True, 'userSellingItem' : ObjectId(),
 	'highestBidder' : ObjectId(), 'endForSaleDate' : 12342153, 'startForSaleDate' : 12342100, 'maxBid' : 0,
 	'image' : 'http://web.stanford.edu/~siegelr/stanford/homecoming2014/IMG_8867%20trees%2010-25-2014%20stanford%20stadium.JPG',
-	'location' : 'Los Angeles, CA', 'usersWatching' : [{'userWatchingId' : ObjectId()}]
+	'location' : 'Los Angeles, CA', 'usersWatching' : []
 	})
 print("CREATED ITEM COLLECTION")
 
