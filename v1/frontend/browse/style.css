@@ -1,27 +1,27 @@
 body{
-	margin: 0px;
-	width: 100%;
-	overflow-y: auto;
- 	display: flex;
-	align-items: center;
-	justify-content: center;
+  margin: 0px;
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #outerContainer{
-	max-width: 1500px;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
+  max-width: 1300px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header{
-	position: relative;
-	padding-top: 25px;
-	height: 75px;
-	width: 100%;
+  position: relative;
+  padding-top: 25px;
+  height: 75px;
+  width: 100%;
 }
 
 .header-text{
@@ -33,7 +33,7 @@ body{
 }
 
 .title-text{
-	font-family: Avenir Next;
+  font-family: Avenir Next;
   font-size: 35px;
   font-weight: bold;
   color: #4D4D4D;
@@ -46,11 +46,11 @@ body{
 }
 
 .icon{
-	position: relative;
-	float: left;
-	margin-left: 50px;
-	height: 75px;
-	width: 100px;
+  position: relative;
+  float: left;
+  margin-left: 50px;
+  height: 75px;
+  width: 100px;
 }
 
 .icon:hover{
@@ -58,7 +58,7 @@ body{
 }
 
 .icon-image{
-	display: block;
+  display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
@@ -66,9 +66,9 @@ body{
 }
 
 .search-bar{
-	position: relative;
+  position: relative;
   float: left;
-	margin-left: 50px;
+  margin-left: 50px;
   height: 75px;
   width: 38%;
   max-width: 650px;
@@ -86,17 +86,17 @@ body{
 }
 
 .main{
-	position: relative;
-	height: calc(100vh - 100px);
-	width: 100%;
+  position: relative;
+  height: calc(100vh - 100px);
+  width: 100%;
 }
 
 .main-frame{
-	position: relative;
-	top: 50px;
-	left: 150px;
-	width: calc(100% - 300px);
-	padding-bottom: 50px;
+  position: relative;
+  top: 50px;
+  left: 150px;
+  width: calc(100% - 300px);
+  padding-bottom: 50px;
 }
 
 .inner-frame{
@@ -104,13 +104,13 @@ body{
 }
 
 .browser-bar{
-	position: relative;
-	height: 75px;
-	width: 100%;
+  position: relative;
+  height: 75px;
+  width: 100%;
 }
 
 .browser-text{
-	position: relative;
+  position: relative;
   margin-left: 60px;
   height: 75px;
   width: 200px;
@@ -209,7 +209,7 @@ tr:hover {
 }
 
 .item{
-	height: 300px;
+  height: 300px;
   width: 325px;
   margin-left: 20px;
   margin-right: 20px;
@@ -220,9 +220,9 @@ tr:hover {
 }
 
 .item-image{
-	height: 200px;
-	max-width: 325px;
-	overflow: hidden;
+  height: 200px;
+  max-width: 325px;
+  overflow: hidden;
   justify-content: center;
   display: flex;
 }
@@ -232,15 +232,15 @@ tr:hover {
 }
 
 .item-image-pic{
-	max-height: 200px;
-	max-width: 325px;
-	min-height: 200px;
-	min-width: 325px;
+  max-height: 200px;
+  max-width: 325px;
+  min-height: 200px;
+  min-width: 325px;
 }
 
 .item-title{
-	height: 27px;
-	width: 325px;
+  height: 27px;
+  width: 325px;
 }
 
 .item-title:hover{
@@ -248,41 +248,41 @@ tr:hover {
 }
 
 .item-title-text{
-	font-family: Avenir Next;
+  font-family: Avenir Next;
   font-size: 20px;
   font-weight: bold;
   color: #3C3C3C;
 }
 
 .item-location{
-	height: 22px;
-	width: 325px;
+  height: 22px;
+  width: 325px;
 }
 
 .item-location-text{
-	font-family: Avenir Next Italic;
+  font-family: Avenir Next Italic;
   font-size: 14px;
   font-weight: 200;
   color: #505050;
 }
 
 .item-price{
-	height: 25px;
-	width: 325px;
+  height: 25px;
+  width: 325px;
 }
 
 .item-price-text{
-	font-family: Avenir Next Italic;
+  font-family: Avenir Next Italic;
   font-size: 14px;
   font-weight: bold;
   color: #4C4C4C;
 }
 
 .footer{
-	position: absolute;
-	bottom: 0px;
-	height: 75px;
-	width: 100%;
+  position: absolute;
+  bottom: 0px;
+  height: 75px;
+  width: 100%;
 }
 
 body::-webkit-scrollbar {

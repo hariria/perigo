@@ -21,4 +21,8 @@ public class UserWatching {
 		super();
 		this.userWatchingId = userWatchingId;
 	}
+	
+	public UserWatching() {
+		
+	}
 }

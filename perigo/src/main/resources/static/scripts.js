@@ -1,36 +1,223 @@
-// NEED TO STORE USER OBJECT ID IN SESSION VARIABLE
+function createNewUser(profile) {
 
+	const Url = 'http://localhost:9000/user/';
+	
+	var newUser = 				
+	{
+		'firstName' : profile.getGivenName(),
+		'lastName' : profile.getFamilyName(),
+		'phoneNumber' : "",
+		'zipCode' : null,
+		'googleUserId' : profile.getId(),
+		'userRating' : null,
+		'savedItems' : [],
+	}
+	
+	$.ajax({
+		url: Url,
+		dataType: 'JSON',
+		type: 'POST',
+		contentType:'application/json',
+
+		data: JSON.stringify(newUser),
+		success: function(result) {
+			console.log('User added to database');
+		},
+		error: function(error){
+			console.log("Error: " + error);
+		}
+	})}
+
+function onSignIn(googleUser) {
+	var profile = googleUser.getBasicProfile();
+	var dm = profile.getEmail().split('@')[1];
+	if(dm != "usc.edu"){
+		alert("Please sign in with a USC email");
+		signOut();
+		return;
+	}
+
+	var id = profile.getId();
+	$('#account').html("<div onClick='goToProfile()'>Account</div>");    
+	sessionStorage.setItem("googleUserId", id);	
+	
+	const Url = "http://localhost:9000/user/googleuser/" + id;
+	$.ajax({
+		url: Url,
+		type: "GET",
+		dataType: 'JSON',
+		success: function(result) {
+			console.log("User already exists");
+			var objectId = result['_id'];
+			sessionStorage.setItem("objectId", objectId);
+			sessionStorage.setItem("user", JSON.stringify(result));
+		},
+		error: function(error){
+			console.log("User doesn't exist");
+			createNewUser(profile);
+			$.ajax({
+				url: Url,
+				type: "GET",
+				dataType: 'JSON',
+				success: function(result) {
+					var objectId = result['_id'];
+					sessionStorage.setItem("objectId", objectId);
+					sessionStorage.setItem("user", JSON.stringify(result));
+				}
+			})
+		}
+	})
+};
+
+function isSignedIn(){
+	var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
+	console.log(isSignedIn);
+};
+
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+		console.log('User signed out.');
+	})
+};
+
+function removeSavedItem(elementID) {
+	const UserUrl = 'http://localhost:9000/user/removesaveditem/' + sessionStorage.getItem('objectId');
+	$.ajax({
+		url: UserUrl,
+		type: "PUT",
+		contentType:'application/json',
+		data: JSON.stringify({'itemId' : elementID}),
+		
+		success: function(result) {
+			console.log('SUCCESS');
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
+	
+	const ItemUrl = 'http://localhost:9000/item/removewatchinguser/' + elementID;
+			
+	$.ajax({
+		url: ItemUrl,
+		type: "PUT",
+		contentType:'application/json',
+		data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
+		
+		success: function(result) {
+			console.log('SUCCESS');
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
+}
+
+
+function removeRow(elementID){
+	document.getElementById(elementID).remove();
+}
 
 function clickedHeart(element){
 	
+	if (sessionStorage.getItem('objectId') == null) {
+		alert("Please sign in to view save items!");
+		return;
+	}
 	
 	var elementID = element.getAttribute("data-itemID");
 	
-
-	// If item saved
-	if(element.innerHTML === "<i class=\"fas fa-heart\"></i>"){
+	
+	if(element.getAttribute('saved') === 'true'){
 		element.innerHTML = "<i class='far fa-heart'></i>";
 		element.style.color = "white";
+		element.setAttribute('saved', 'false');
 
-	}else{ // If not saved
+		removeSavedItem(elementID);
+		
+		removeRow(elementID);
+		
+	}
+	else{ // If not saved
 		element.innerHTML = "<i class='fas fa-heart'></i>";
 		element.style.color = "#FF4755";
-		
-		const Url = 'http://localhost:9000/user/' + userObjectId;
+		element.setAttribute('saved', 'true');
+		const UserUrl = 'http://localhost:9000/user/addsaveditem/' + sessionStorage.getItem('objectId');
 		$.ajax({
-			url: Url,
-			type: "GET",
-			dataType: 'JSON',
-	    	success: function(result) {
-	    		displayItems(result);
-	    	},
+			url: UserUrl,
+			type: "PUT",
+			contentType:'application/json',
+			data: JSON.stringify({'itemId' : elementID}),
+			
+			success: function(result) {
+				console.log('SUCCESS');
+			},
 			error: function(error) {
-				console.log('Error: ' + error);
+				console.log(error);
+			}
+		})
+		
+		const ItemUrl = 'http://localhost:9000/item/addwatchinguser/' + elementID;
+				
+		$.ajax({
+			url: ItemUrl,
+			type: "PUT",
+			contentType:'application/json',
+			data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
+			
+			success: function(result) {
+				console.log('SUCCESS');
+			},
+			error: function(error) {
+				console.log(error);
+			}
+		})
+		
+		const GetItemUrl = 'http://localhost:9000/item/' + elementID;
+		$.ajax({
+			url: GetItemUrl,
+			type: 'GET',
+			contentType: 'application/json',
+			success: function(result) {
+				
+				var tr = document.createElement('tr');
+				tr.setAttribute('id', elementID);
+					
+				var td1 = document.createElement('td');
+				var table_item_text = document.createElement('div');
+				table_item_text.setAttribute('class', 'table-item-text');
+				table_item_text.setAttribute('data-itemID', elementID);
+				table_item_text.setAttribute('onClick', 'getItem(this)');
+				table_item_text.innerHTML = result['title'];
+				td1.appendChild(table_item_text);
+				tr.appendChild(td1);
+
+				var td2 = document.createElement('td');
+				var table_price_text = document.createElement('div');
+				table_price_text.innerHTML = '$' + result['maxBid'];
+				td2.appendChild(table_price_text);
+				tr.appendChild(td2);
+
+				var td3 = document.createElement('td');
+				var i_class = document.createElement('i');
+				i_class.setAttribute('class', 'fas fa-times');
+				i_class.setAttribute('style', 'color: #949494;');
+				i_class.setAttribute('data-itemID', elementID);
+				i_class.setAttribute('onClick', 'unsaveItem(this)');
+				td3.appendChild(i_class);
+				tr.appendChild(td3);
+
+				document.getElementById('saved-table').appendChild(tr);	
 			}
 		})
 		
 	}
 };
+
+
+
+
 
 function getItem(element){
 	var elementID = element.getAttribute("data-itemID");
@@ -39,109 +226,143 @@ function getItem(element){
 
 function unsaveItem(element){
 	var elementID = element.getAttribute("data-itemID");
-	console.log(elementID);
+	removeSavedItem(elementID);
+	removeRow(elementID);
+	
+	var heart = $('div').find(`[data-itemID='${elementID}']`)[0];
+	heart.setAttribute('saved', 'false');
+	heart.setAttribute('style', 'color: white');
+	
+	var i_temp = document.createElement('i');
+	i_temp.setAttribute('class', 'far fa-heart');
+	heart.innerHTML = "";
+	heart.appendChild(i_temp);
+
+	
+	
 };
 
 function generateSavedItems(result) {
 	var savedItems = result['savedItems'];
-	for (var i = 0; i < savedItems.length; i++) {
-    	const Url = 'http://localhost:9000/item/' + savedItems[i]['itemId'];
-    	$.ajax({
-    		url: Url,
-    		type: "GET",
-    		dataType: 'JSON',
-        	success: function(result) {
-        		var tr = document.createElement('tr');
+	var userObjectId = sessionStorage.getItem("objectId");
 
-        		var td1 = document.createElement('td');
-        		var table_item_text = document.createElement('div');
-        		table_item_text.setAttribute('class', 'table-item-text');
-        		table_item_text.setAttribute('data-itemID', result['_id']);
-        		table_item_text.setAttribute('onClick', 'getItem(this)');
-        		table_item_text.innerHTML = result['title'];
-        		td1.appendChild(table_item_text);
-        		tr.appendChild(td1);
-        		
-        		var td2 = document.createElement('td');
-        		var table_price_text = document.createElement('div');
-        		table_price_text.innerHTML = '$' + result['maxBid'];
-        		td2.appendChild(table_price_text);
-        		tr.appendChild(td2);
-        		
-        		var td3 = document.createElement('td');
-        		var i_class = document.createElement('i');
-        		i_class.setAttribute('class', 'fas fa-times');
-        		i_class.setAttribute('style', 'color: #949494;');
-        		i_class.setAttribute('data-itemID', result['_id']);
-        		i_class.setAttribute('onClick', 'unsaveItem(this)');
-        		td3.appendChild(i_class);
-        		tr.appendChild(td3);
-        		
-        		document.getElementById('saved-table').appendChild(tr);
-        	
-        	},
-    		error: function(error) {
-    			console.log('Error: ' + error);
-    		}
-    	})
+	for (var i = 0; i < savedItems.length; i++) {
+		const Url = 'http://localhost:9000/item/' + savedItems[i]['itemId'];
+		$.ajax({
+			url: Url,
+			type: "GET",
+			dataType: 'JSON',
+			success: function(result) {				
+				
+				var tr = document.createElement('tr');
+				tr.setAttribute('id', result['_id']);
+				
+				var td1 = document.createElement('td');
+				var table_item_text = document.createElement('div');
+				table_item_text.setAttribute('class', 'table-item-text');
+				table_item_text.setAttribute('data-itemID', result['_id']);
+				table_item_text.setAttribute('onClick', 'getItem(this)');
+				table_item_text.innerHTML = result['title'];
+				td1.appendChild(table_item_text);
+				tr.appendChild(td1);
+
+				var td2 = document.createElement('td');
+				var table_price_text = document.createElement('div');
+				table_price_text.innerHTML = '$' + result['maxBid'];
+				td2.appendChild(table_price_text);
+				tr.appendChild(td2);
+
+				var td3 = document.createElement('td');
+				var i_class = document.createElement('i');				
+				i_class.setAttribute('class', 'fas fa-times');
+				i_class.setAttribute('style', 'color: #949494;');					
+				i_class.setAttribute('data-itemID', result['_id']);
+				i_class.setAttribute('onClick', 'unsaveItem(this)');
+				td3.appendChild(i_class);
+				tr.appendChild(td3);
+
+				document.getElementById('saved-table').appendChild(tr);
+
+			},
+			error: function(error) {
+				console.log('Error: ' + error);
+			}
+		})
 	}
 }
 
 function showSavedItems(){
-    var table = document.getElementById("saved-items");
-    if (table.style.display === "block") {
-         $('#saved-items').animate({width: "0px"}, 500);
-         setTimeout(function(){
-        	table.style.display = "none";
-    	},450);
-    } else {
-    	
-    	var objectId = sessionStorage.getItem("objectId");
-    	if (objectId == null) {
-    		
-    	}
-    	
-    	document.getElementById("saved-table").innerHTML = "";
-    	
-    	table.style.display = "block";
-    	
-    	const Url = 'http://localhost:9000/user/' + "5bddef3afdba6536e06b985c";
+	var objectId = sessionStorage.getItem("objectId");
+	if (objectId == null) {
+		alert("Please sign in to view saved items!");
+		return;
+	}
+	
+	var table = document.getElementById("saved-items");
+	if (table.style.display === "block") {
+		$('#saved-items').animate({width: "0px"}, 500);
+		setTimeout(function(){
+			table.style.display = "none";
+		},450);
+	} else {
 
-    	$.ajax({
-    		url: Url,
-    		type: "GET",
-    		dataType: 'JSON',
-        	success: function(result) {
-        		generateSavedItems(result);
-        	},
-    		error: function(error) {
-    			console.log('Error: ' + error);
-    		}
-    	})
-    	
-    	
-    	$('#saved-items').animate({width: "400px"}, 500);
-    }
+		document.getElementById("saved-table").innerHTML = "";
+
+		table.style.display = "block";
+
+		const Url = 'http://localhost:9000/user/' + objectId;
+
+		$.ajax({
+			url: Url,
+			type: "GET",
+			dataType: 'JSON',
+			success: function(result) {
+				generateSavedItems(result);
+			},
+			error: function(error) {
+				console.log('Error: ' + error);
+			}
+		})
+
+
+		$('#saved-items').animate({width: "400px"}, 500);
+	}
 };
 
 $(window).scroll(function() {
 	var windowpos = $(window).scrollTop();
-    $('#saved-items').css('top', windowpos + "px");
+	$('#saved-items').css('top', windowpos + "px");
 });
 
 function displayItems(items) {
+	var userObjectId = sessionStorage.getItem('objectId');
 	for (var i = 0; i < items.length; i++) {
 		var item = document.createElement('div');
+
+		var isSavedState = false;
+		var usersWatching = items[i]['usersWatching'];
+		for (var j = 0; j < usersWatching.length; j++) {
+			if (usersWatching[j]['userWatchingId'] == userObjectId) {
+				isSavedState = true;
+				break;
+			}
+		}
 		
 		var heart = document.createElement('div');
 		heart.setAttribute('class', 'heart');
 		heart.setAttribute('data-itemID', items[i]['_id']);
 		heart.setAttribute('onClick', 'clickedHeart(this)');
+		heart.setAttribute('saved', 'false');
 		var heart_i = document.createElement('i');
 		heart_i.setAttribute('class', 'far fa-heart');
+		if (isSavedState) {
+			heart_i.setAttribute('class', 'fas fa-heart');
+			heart_i.setAttribute('style', 'color: #ff4755');
+			heart.setAttribute('saved', 'true');
+		}
 		heart.appendChild(heart_i);
 		item.appendChild(heart);
-		
+
 		var item_image = document.createElement('div');
 		item_image.setAttribute('class', 'item-image');
 		item_image.setAttribute('data-itemID', items[i]['_id']);
@@ -151,7 +372,7 @@ function displayItems(items) {
 		image.setAttribute('src', items[i]['image']);
 		item_image.appendChild(image);
 		item.appendChild(item_image);
-		
+
 		var item_title = document.createElement('div');
 		item_title.setAttribute('class', 'item-title');
 		item_title.setAttribute('data-itemID', items[i]['_id']);
@@ -161,7 +382,7 @@ function displayItems(items) {
 		item_title_text.innerHTML = items[i]['title'];
 		item_title.appendChild(item_title_text);
 		item.appendChild(item_title);
-		
+
 		var item_location = document.createElement('div');
 		item_location.setAttribute('class', 'item-location');
 		item_location.setAttribute('data-itemID', items[i]['_id']);
@@ -171,7 +392,7 @@ function displayItems(items) {
 		item_location_text.innerHTML = items[i]['location'];
 		item_location.appendChild(item_location_text);
 		item.appendChild(item_location);
-		
+
 		var item_price = document.createElement('div');
 		item_price.setAttribute('class', 'item-location');
 		item_price.setAttribute('data-itemID', items[i]['_id']);
@@ -181,7 +402,7 @@ function displayItems(items) {
 		item_price_text.innerHTML = '$' + items[i]['maxBid'];
 		item_price.appendChild(item_price_text);
 		item.appendChild(item_price);
-		
+
 		var item_frame = document.getElementsByClassName('item-frame')[0].appendChild(item);
 	}
 }
@@ -193,9 +414,9 @@ function getAllItems() {
 		url: Url,
 		type: "GET",
 		dataType: 'JSON',
-    	success: function(result) {
-    		displayItems(result);
-    	},
+		success: function(result) {
+			displayItems(result);
+		},
 		error: function(error) {
 			console.log('Error: ' + error);
 		}

@@ -21,4 +21,8 @@ public class SavedItem {
 		super();
 		this.itemId = itemId;
 	}
+	
+	public SavedItem() {
+		
+	}
 }
