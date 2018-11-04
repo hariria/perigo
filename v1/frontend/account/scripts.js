@@ -64,18 +64,25 @@ function previewFile() {
 
     var preview = document.createElement("div");
     var image = document.createElement("img");
+    var str = '<i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i>';
+    var icon = document.createElement("i");
 
+    icon.classList.add('fas');
+    icon.style.zIndex = "10";
+    icon.classList.add('fa-times');
+    icon.style.color = "#949494";
+    icon.setAttribute('data-itemID', "1");
+    icon.onclick = unsaveItem(icon);
 
-    var icon = '<i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i>';
-    preview.appendChild(image); 
+    preview.appendChild(image);
     preview.appendChild(icon);
-    preview.classList.add('uploaded-image');
+    image.classList.add('uploaded-image');
     document.getElementById("picture-container").prepend(preview);
     var file = document.querySelector('input[type=file]').files[0];
     var reader = new FileReader();
 
     reader.addEventListener("load", function () {
-        preview.src = reader.result;
+        image.src = reader.result;
     }, false);
 
     if (file) {
