@@ -11,42 +11,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
 	<script>
-		function onSignIn(googleUser) {
-			console.log("User signed in");
-			
-			var profile = googleUser.getBasicProfile();
-			var id = profile.getId();
-			console.log(id);
-			
-			var dm = profile.getEmail().split('@')[1];
-			if(dm != "usc.edu"){
-			  	alert("Please sign in with a USC email");
-			  	signOut();
-			  	return;
-			}
-			
-			var id = profile.getId();
-			$('#account').html("<div onClick='goToProfile()'>Account</div>");    
-			sessionStorage.setItem("googleUserId", id);
-			
-			//AJAX call to server
-		}
-	
-		function signOut() {
-			var auth = gapi.auth2.getAuthInstance();
-			auth.signOut().then(function () {
-					console.log('User signed out.');
-			});
-		};
-		
-		function isSignedIn(){
-			var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
-			console.log(isSignedIn);
-		};
 
-		function goToProfile(){
-			console.log("HERE");
-		};
+		
+		
 	</script>
 	<body onload="return getAllItems()">
 		<div id="outerContainer">

@@ -34,11 +34,13 @@ function onSignIn(googleUser) {
 	if(dm != "usc.edu"){
 		alert("Please sign in with a USC email");
 		signOut();
+		return;
 	}
 
 	var id = profile.getId();
-
-	sessionStorage.setItem("googleUserId", id);
+	$('#account').html("<div onClick='goToProfile()'>Account</div>");    
+	sessionStorage.setItem("googleUserId", id);	
+	
 	const Url = "http://localhost:9000/user/googleuser/" + id;
 	$.ajax({
 		url: Url,
