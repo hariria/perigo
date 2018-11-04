@@ -126,7 +126,7 @@ body {
     position: relative;
     margin-left: 60px;
     height: 75px;
-    width: 200px;
+    width: 300px;
 }
 
 .saved-items {
@@ -243,6 +243,8 @@ tr:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    z-index: 4;
 }
 
 .new-item:hover{
@@ -342,7 +344,7 @@ body::-webkit-scrollbar-thumb {
     outline: 1px solid slategrey;
 }
 
-input[type=text] {
+#search {
     padding: 12px 20px;
     margin: 8px 0;
     height: 65px;
@@ -359,7 +361,56 @@ input[type=text] {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-input[type=text]:focus {
+#new-listing-form{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.listing-input{
+    border: none;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-left: 60px;
+    border-bottom: 1px solid #494949;
+    padding: 10px;
+}
+
+.listing-input::placeholder{
+    padding-left: 10px;
+}
+
+#upload-image{
+    margin-left: 60px;
+}
+
+.uploaded-image{
+    margin-left: 60px;
+    height: 300px;
+    width: 225px;
+    border-radius: 25px;
+    object-fit: cover;
+    margin-top: 20px;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+#upload-image input[type=file]{
+    opacity: 0;
+    cursor: pointer;
+    height: 300px;
+    position: absolute;
+}
+
+#picture-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#search:focus {
     border: 3px solid #4D4D4D;
     border-radius: 4px;
 }

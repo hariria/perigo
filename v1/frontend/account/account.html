@@ -30,7 +30,7 @@
 				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame">
-					<div class="header-text" onClick="showSavedItems()">Saved</div>
+					<div class="header-text" style="visibility: hidden" onClick="showSavedItems()">Saved</div>
 					<div class="header-text"><div class="g-signin2" data-onsuccess="onSignIn">Account</div></div>
 				</div>
 			</div>
@@ -66,19 +66,19 @@
                         <div class="account-section">
                             <h3 class="section-text">Your Listings</h3>
                             <div class="item-frame">
-                                <div class="item">
+                                <div class="item listing-item">
     								<div class="item-image" data-itemID="10" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/334/200/tech"/></div>
     								<div class="item-title" data-itemID="10" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
     								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
     								<div class="item-price"><div class="item-price-text">$100</div></div>
     							</div>
-    							<div class="item">
+    							<div class="item listing-item">
     								<div class="item-image" data-itemID="11" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/335/200/tech"/></div>
     								<div class="item-title" data-itemID="11" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
     								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
     								<div class="item-price"><div class="item-price-text">$100</div></div>
     							</div>
-                                <div class="new-item">
+                                <div class="new-item" id="add-listing" onclick="addAListing()">
     								Add a Listing
     							</div>
                             </div>
@@ -87,52 +87,27 @@
                         <div class="account-section">
                             <h3 class="section-text">Saved Items</h3>
     						<div class="item-frame">
-    							<div class="item">
+    							<div class="item saved-item">
     								<div class="heart" onClick="clickedHeart(this)" data-itemID="8"><i class="far fa-heart"></i></div>
     								<div class="item-image" data-itemID="8" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/332/200/tech"/></div>
     								<div class="item-title" data-itemID="8" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
     								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
     								<div class="item-price"><div class="item-price-text">$100</div></div>
     							</div>
-    							<div class="item">
+    							<div class="item saved-item">
     								<div class="heart" onClick="clickedHeart(this)" data-itemID="9"><i class="far fa-heart"></i></div>
     								<div class="item-image" data-itemID="9" onClick="getItem(this)"><img class="item-image-pic" src="http://placeimg.com/333/200/tech"/></div>
     								<div class="item-title" data-itemID="9" onClick="getItem(this)"><div class="item-title-text">Lorem ipsum dolor sit amet</div></div>
     								<div class="item-location"><div class="item-location-text">Palo Alto, CA</div></div>
     								<div class="item-price"><div class="item-price-text">$100</div></div>
     							</div>
-                                <div class="new-item">
+                                <div class="new-item" id="reset-saved" onclick="resetSavedItems()">
     								Reset Saved Items
     							</div>
     						</div>
                         </div>
-
-                        <div class="account-section">
-                            <div class="saved-items" id="saved-items">
-    							<div class="saved-title">Saved Items</div>
-    							<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
-    							<table id="saved-table">
-    								<tr>
-    									<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
-    									<td><div class="table-price-text">$100</div></td>
-    									<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
-    								</tr>
-    								<tr>
-    									<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
-    									<td><div class="table-price-text">$100</div></td>
-    									<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
-    								</tr>
-    								<tr>
-    									<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
-    									<td><div class="table-price-text">$100</div></td>
-    									<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
-    								</tr>
-    							</table>
-    						</div>
-                        </div>
                         <div class="account-section">
                             <h3 class="section-text">Logout</h3>
-
                             <div class="sign-out-button">
                                 <a href="#" style="text-decoration: none; color: white;" onclick="signOut();">Sign out</a>
     						</div>
