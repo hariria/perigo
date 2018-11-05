@@ -2,27 +2,22 @@
 <html>
 	<head>
 		<title>Browse</title>
-		<meta name="google-signin-client_id" content="58684548257-9sudakl3qmrjgmao6bukgldrt5f0dt3k.apps.googleusercontent.com">
-		<meta name="google-signin-scope" content="profile email">
 	</head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
-	<script>
-
-		
-		
-	</script>
-	<body onload="return getAllItems()">
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	
+	<body onload="return onLoadFunction();">
 		<div id="outerContainer">
 			<div class="header">
 				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame">
 					<div class="header-text" onClick="showSavedItems()">Saved</div>
-					<div class="header-text" id="account"><div class="g-signin2" style="margin-top: -5px" data-onsuccess="onSignIn"></div></div>
+					<div class="header-text" id="account"></div>
 				</div>
 			</div>
 			<div class="main">

@@ -1,18 +1,25 @@
-function createNewUser(profile) {
+function checkCookie() {
+	var value = $.cookie("login_cookie");
+	if (value == 'true') {
+		document.getElementById("account").innerHTML = 'Account';
+	}
+}
+
+/*function createNewUser(profile) {
 
 	const Url = 'http://localhost:9000/user/';
-	
+
 	var newUser = 				
 	{
-		'firstName' : profile.getGivenName(),
-		'lastName' : profile.getFamilyName(),
-		'phoneNumber' : "",
-		'zipCode' : null,
-		'googleUserId' : profile.getId(),
-		'userRating' : null,
-		'savedItems' : [],
+			'firstName' : profile.getGivenName(),
+			'lastName' : profile.getFamilyName(),
+			'phoneNumber' : "",
+			'zipCode' : null,
+			'googleUserId' : profile.getId(),
+			'userRating' : null,
+			'savedItems' : [],
 	}
-	
+
 	$.ajax({
 		url: Url,
 		dataType: 'JSON',
@@ -26,9 +33,10 @@ function createNewUser(profile) {
 		error: function(error){
 			console.log("Error: " + error);
 		}
-	})}
+	})
+}*/
 
-function onSignIn(googleUser) {
+/*function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
 	var dm = profile.getEmail().split('@')[1];
 	if(dm != "usc.edu"){
@@ -40,7 +48,7 @@ function onSignIn(googleUser) {
 	var id = profile.getId();
 	$('#account').html("<div onClick='goToProfile()'>Account</div>");    
 	sessionStorage.setItem("googleUserId", id);	
-	
+
 	const Url = "http://localhost:9000/user/googleuser/" + id;
 	$.ajax({
 		url: Url,
@@ -67,9 +75,9 @@ function onSignIn(googleUser) {
 			})
 		}
 	})
-};
+};*/
 
-function isSignedIn(){
+/*function isSignedIn(){
 	var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
 	console.log(isSignedIn);
 };
@@ -79,7 +87,7 @@ function signOut() {
 	auth2.signOut().then(function () {
 		console.log('User signed out.');
 	})
-};
+};*/
 
 function removeSavedItem(elementID) {
 	const UserUrl = 'http://localhost:9000/user/removesaveditem/' + sessionStorage.getItem('objectId');
@@ -88,7 +96,7 @@ function removeSavedItem(elementID) {
 		type: "PUT",
 		contentType:'application/json',
 		data: JSON.stringify({'itemId' : elementID}),
-		
+
 		success: function(result) {
 			console.log('SUCCESS');
 		},
@@ -96,15 +104,15 @@ function removeSavedItem(elementID) {
 			console.log(error);
 		}
 	})
-	
+
 	const ItemUrl = 'http://localhost:9000/item/removewatchinguser/' + elementID;
-			
+	console.log(sessionStorage.getItem('objectId'));
 	$.ajax({
 		url: ItemUrl,
 		type: "PUT",
 		contentType:'application/json',
 		data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
-		
+
 		success: function(result) {
 			console.log('SUCCESS');
 		},
@@ -120,24 +128,24 @@ function removeRow(elementID){
 }
 
 function clickedHeart(element){
-	
+
 	if (sessionStorage.getItem('objectId') == null) {
 		alert("Please sign in to view save items!");
 		return;
 	}
-	
+
 	var elementID = element.getAttribute("data-itemID");
-	
-	
+
+
 	if(element.getAttribute('saved') === 'true'){
 		element.innerHTML = "<i class='far fa-heart'></i>";
 		element.style.color = "white";
 		element.setAttribute('saved', 'false');
 
 		removeSavedItem(elementID);
-		
+
 		removeRow(elementID);
-		
+
 	}
 	else{ // If not saved
 		element.innerHTML = "<i class='fas fa-heart'></i>";
@@ -149,7 +157,7 @@ function clickedHeart(element){
 			type: "PUT",
 			contentType:'application/json',
 			data: JSON.stringify({'itemId' : elementID}),
-			
+
 			success: function(result) {
 				console.log('SUCCESS');
 			},
@@ -157,15 +165,15 @@ function clickedHeart(element){
 				console.log(error);
 			}
 		})
-		
+
 		const ItemUrl = 'http://localhost:9000/item/addwatchinguser/' + elementID;
-				
+		
 		$.ajax({
 			url: ItemUrl,
 			type: "PUT",
 			contentType:'application/json',
 			data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
-			
+
 			success: function(result) {
 				console.log('SUCCESS');
 			},
@@ -173,17 +181,17 @@ function clickedHeart(element){
 				console.log(error);
 			}
 		})
-		
+
 		const GetItemUrl = 'http://localhost:9000/item/' + elementID;
 		$.ajax({
 			url: GetItemUrl,
 			type: 'GET',
 			contentType: 'application/json',
 			success: function(result) {
-				
+
 				var tr = document.createElement('tr');
 				tr.setAttribute('id', elementID);
-					
+
 				var td1 = document.createElement('td');
 				var table_item_text = document.createElement('div');
 				table_item_text.setAttribute('class', 'table-item-text');
@@ -211,12 +219,9 @@ function clickedHeart(element){
 				document.getElementById('saved-table').appendChild(tr);	
 			}
 		})
-		
+
 	}
 };
-
-
-
 
 
 function getItem(element){
@@ -228,18 +233,18 @@ function unsaveItem(element){
 	var elementID = element.getAttribute("data-itemID");
 	removeSavedItem(elementID);
 	removeRow(elementID);
-	
+
 	var heart = $('div').find(`[data-itemID='${elementID}']`)[0];
 	heart.setAttribute('saved', 'false');
 	heart.setAttribute('style', 'color: white');
-	
+
 	var i_temp = document.createElement('i');
 	i_temp.setAttribute('class', 'far fa-heart');
 	heart.innerHTML = "";
 	heart.appendChild(i_temp);
 
-	
-	
+
+
 };
 
 function generateSavedItems(result) {
@@ -253,10 +258,10 @@ function generateSavedItems(result) {
 			type: "GET",
 			dataType: 'JSON',
 			success: function(result) {				
-				
+
 				var tr = document.createElement('tr');
 				tr.setAttribute('id', result['_id']);
-				
+
 				var td1 = document.createElement('td');
 				var table_item_text = document.createElement('div');
 				table_item_text.setAttribute('class', 'table-item-text');
@@ -297,7 +302,7 @@ function showSavedItems(){
 		alert("Please sign in to view saved items!");
 		return;
 	}
-	
+
 	var table = document.getElementById("saved-items");
 	if (table.style.display === "block") {
 		$('#saved-items').animate({width: "0px"}, 500);
@@ -347,7 +352,7 @@ function displayItems(items) {
 				break;
 			}
 		}
-		
+
 		var heart = document.createElement('div');
 		heart.setAttribute('class', 'heart');
 		heart.setAttribute('data-itemID', items[i]['_id']);
@@ -421,4 +426,9 @@ function getAllItems() {
 			console.log('Error: ' + error);
 		}
 	})
+}
+
+function onLoadFunction() {
+	checkCookie();
+	getAllItems();
 }

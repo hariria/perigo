@@ -1,4 +1,4 @@
-package com.MongoController.perigo;
+package com.MongoController.perigo.controller;
 
 import java.util.List;
 

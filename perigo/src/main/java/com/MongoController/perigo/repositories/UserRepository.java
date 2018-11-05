@@ -7,5 +7,6 @@ import com.MongoController.perigo.models.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
 	User findBy_id(ObjectId _id);
-    User findBygoogleUserId(String googleUserId);
+    User findByUsername(String username);
+    User findByEmail(String email);
 }

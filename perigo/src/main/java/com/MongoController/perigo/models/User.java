@@ -7,42 +7,39 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @Document(collection="User")
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@JsonSerialize(using = ToStringSerializer.class)
 	public ObjectId _id;
 	
+	public String username;
+	public int hash;
 	public String firstName;
 	public String lastName;
-	public String phoneNumber;
-	public int zipCode;
-	public String googleUserId;
+	public String email;
+	public String location;
+	public String zipCode;
 	public int userRating;
 	public List<SavedItem> savedItems;
 	
-	@JsonCreator
-	public User(ObjectId _id, String firstName, String lastName, String phoneNumber, int zipCode, String googleUserId, 
-			int userRating, List<SavedItem> savedItems) {
-		super();
-		this._id = _id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.zipCode = zipCode;
-		this.googleUserId = googleUserId;
-		this.userRating = userRating;
-		this.savedItems = savedItems;
+
+	public User() {
+
+	}
+
+	public int getHash() {
+		return hash;
+	}
+
+	public void setHash(int hash) {
+		this.hash = hash;
 	}
 
 	public ObjectId get_id() {
@@ -51,6 +48,14 @@ public class User implements Serializable {
 
 	public void set_id(ObjectId _id) {
 		this._id = _id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getFirstName() {
@@ -69,44 +74,48 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public int getZipCode() {
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(int zipCode) {
+	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
-	public String getGoogleUserId() {
-		return googleUserId;
-	}
-
-	public void setGoogleUserId(String googleUserId) {
-		this.googleUserId = googleUserId;
-	}
-
-	public int getuserRating() {
+	public int getUserRating() {
 		return userRating;
 	}
 
-	public void setuserRating(int userRating) {
+	public void setUserRating(int userRating) {
 		this.userRating = userRating;
 	}
-	
-	public List<SavedItem> getsavedItems() {
+
+	public List<SavedItem> getSavedItems() {
 		return savedItems;
 	}
-	
-	public void setsavedItems(List<SavedItem> savedItems) {
+
+	public void setSavedItems(List<SavedItem> savedItems) {
 		this.savedItems = savedItems;
 	}
+	
+	
+
+	
 
 }
