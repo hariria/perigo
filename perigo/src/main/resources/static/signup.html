@@ -66,6 +66,25 @@
 			height: 0px;
 		}
 
+		#nameContainer{
+			display: flex;
+			flex-direction: row;
+		}
+
+		#firstNameContainer, #lastNameContainer{
+			width: 47.5%;
+			position: relative;
+			border-bottom: 2px solid #adadad;
+			margin-bottom: 37px;
+			display: none;
+		}
+
+		#firstNameContainer{
+			margin-right: 5%;
+		}
+
+
+
 		#emailContainer, #locationContainer, #zipContainer{
 			width: 100%;
 			position: relative;
@@ -84,6 +103,28 @@
 			height: 45px;
 			background: transparent;
 			padding: 0 5px;
+		}
+
+		#firstName, #lastName{
+			font-family: Avenir Next;
+			font-size: 15px;
+			color: #555555;
+			line-height: 1.2;
+			display: block;
+			width: 97.5%;
+			height: 45px;
+			background: transparent;
+			padding: 0 5px;
+		}
+
+		#usernameError, #emailError, #zipCodeError{
+			display: none;
+			position: relative;
+			font-family: Avenir Next;
+			font-size: 12px;
+		    color: #cc0000;
+		    top: 0px;
+		    padding: 5px 5px 0px 5px;
 		}
 
 		.redPlaceholder::-webkit-input-placeholder {
@@ -105,6 +146,7 @@
 
 		#submit{
 			display:none;
+			margin-top: 10px;
 		}
 
 		#buttons{
@@ -149,13 +191,17 @@
 				$('#main-container').animate({width: "500px"}, 500);
 				
 				setTimeout(function(){
-					$('#main-container').animate({height: "800px"}, 500); 
-					$('#sectionTwo').animate({height: "215px"}, 500); 
+					$('#main-container').animate({height: "900px"}, 500); 
+					$('#sectionTwo').animate({height: "300px"}, 500); 
 
 					setTimeout(function(){
+						$("#firstNameContainer").delay(250).fadeIn();
+						$("#lastNameContainer").delay(250).fadeIn();
+
 						$("#emailContainer").delay(250).fadeIn();
 						$("#locationContainer").delay(250).fadeIn();
 						$("#zipContainer").delay(250).fadeIn();
+
 						$("#next").fadeOut();
 
 						setTimeout(function(){
@@ -174,6 +220,8 @@
 			
 			var username = document.getElementById('username').value;
 			var password = document.getElementById('password').value;
+			var firstName = document.getElementById('firstName').value;
+			var lastName = document.getElementById('lastName').value;
 			var email = document.getElementById('email').value;
 			var location = document.getElementById('location').value;
 			var zipCode = document.getElementById('zipCode').value;
@@ -188,6 +236,18 @@
 			if(password === null || password ===  ""){
 				$('#password').addClass('redPlaceholder');
 				document.getElementById("passwordContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(firstName === null || firstName ===  ""){
+				$('#firstName').addClass('redPlaceholder');
+				document.getElementById("firstNameContainer").style.borderBottom = "2px solid #cc0000";
+				invalid = true;
+			}
+
+			if(lastName === null || lastName ===  ""){
+				$('#lastName').addClass('redPlaceholder');
+				document.getElementById("lastNameContainer").style.borderBottom = "2px solid #cc0000";
 				invalid = true;
 			}
 
@@ -215,21 +275,67 @@
 
 			$('#username').removeClass('redPlaceholder');
 			$('#password').removeClass('redPlaceholder');
+			$('#firstName').removeClass('redPlaceholder');
+			$('#lastName').removeClass('redPlaceholder');
 			$('#email').removeClass('redPlaceholder');
 			$('#location').removeClass('redPlaceholder');
 			$('#zipCode').removeClass('redPlaceholder');
 			document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
 			document.getElementById("passwordContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("firstNameContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("lastNameContainer").style.borderBottom = "2px solid #adadad";
 			document.getElementById("emailContainer").style.borderBottom = "2px solid #adadad";
 			document.getElementById("locationContainer").style.borderBottom = "2px solid #adadad";
-			document.getElementById("zipCodeContainer").style.borderBottom = "2px solid #adadad";
+			document.getElementById("zipContainer").style.borderBottom = "2px solid #adadad";
 
 
 			console.log(username);
 			console.log(password);
+			console.log(firstName);
+			console.log(lastName);
 			console.log(email);
 			console.log(location);
 			console.log(zipCode);
+		}
+
+
+		function usernameError(errorMsg){
+			$('#usernameContainer').animate({margin: "0px"}, 0);
+			$('#usernameError').animate({margin: "0px 0px 16px 0px"}, 0);
+			$('#usernameError').fadeIn();
+			$("#usernameError").html(errorMsg);	
+		}
+
+		function hideUsernameError(){
+			$('#usernameContainer').animate({margin: "0px 0px 37px 0px"}, 0);
+			$('#usernameError').animate({margin: "0px"}, 0);
+			$('#usernameError').hide();
+		}
+
+		function emailError(errorMsg){
+			$('#emailContainer').animate({margin: "0px"}, 0);
+			$('#emailError').animate({margin: "0px 0px 16px 0px"}, 0);
+			$('#emailError').fadeIn();
+			$("#emailError").html(errorMsg);	
+		}
+
+		function hideEmailError(){
+			$('#emailContainer').animate({margin: "0px 0px 37px 0px"}, 0);
+			$('#emailError').animate({margin: "0px"}, 0);
+			$('#emailError').hide();
+		}
+
+		function zipCodeError(errorMsg){
+			$('#zipContainer').animate({margin: "0px"}, 0);
+			$('#zipCodeError').animate({margin: "0px 0px 16px 0px"}, 0);
+			$('#zipCodeError').fadeIn();
+			$("#zipCodeError").html(errorMsg);	
+		}
+
+		function hideZipCodeError(){
+			$('#zipContainer').animate({margin: "0px 0px 37px 0px"}, 0);
+			$('#zipCodeError').animate({margin: "0px"}, 0);
+			$('#zipCodeError').hide();
 		}
 
 	</script>
@@ -239,11 +345,18 @@
 			<img src=./icon.png id="icon">
 			<form name="sign-up" id="sign-up">
 				<div id="usernameContainer"><input type="text" name="username" id="username" placeholder="username"></div>
+				<div id="usernameError">Invalid username</div>
 				<div id="passwordContainer"><input type="password" name="password" id="password" placeholder="password"></div>
 				<div id="sectionTwo">
-					<div id="emailContainer"><input type="text" name="email" id="email" placeholder="email"></div>
+					<div id="nameContainer">
+						<div id="firstNameContainer"><input type="text" name="name" id="firstName" placeholder="first name"></div>
+						<div id="lastNameContainer"><input type="text" name="name" id="lastName" placeholder="last name"></div>
+					</div>
+					<div id="emailContainer"><input type="email" name="email" id="email" placeholder="email"></div>
+					<div id="emailError">Invalid email</div>
 					<div id="locationContainer"><input type="text" name="location" id="location" placeholder="city, state"></div>
-					<div id="zipContainer"><input type="text" name="zipCode" id="zipCode" placeholder="zip code"></div>
+					<div id="zipContainer"><input type="number" name="zipCode" id="zipCode" placeholder="zip code"></div>
+					<div id="zipCodeError">Invalid zipcode</div>
 				</div>
 			</form>
 			<div id="buttons">
