@@ -154,7 +154,7 @@ function generateListing(item) {
 }
 
 function showListings() {
-	var itemsForSale = JSON.parse(sessionStorage.getItem('userForSale'));
+	var itemsForSale = JSON.parse(sessionStorage.getItem('user'))['sellingItems'];
 
 	for (var i = 0; i < itemsForSale.length; i++) {
 		const Url = 'http://localhost:9000/item/' + itemsForSale[i]['itemId'];
