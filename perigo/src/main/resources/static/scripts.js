@@ -1,93 +1,23 @@
 function checkCookie() {
 	var value = $.cookie("login_cookie");
-	if (value == 'true') {
-		document.getElementById("account").innerHTML = 'Account';
+	console.log(value);
+	var accountDiv = document.getElementById("account");
+	var aTag = document.createElement('a');
+
+	if (value == null) {
+		aTag.setAttribute('href', '/signup.html');
+		aTag.innerHTML = 'Sign Up';
 	}
+	else {
+		aTag.setAttribute('href', '/account.html');
+		aTag.innerHTML = 'Account';
+		
+		sessionStorage.setItem("objectId", value);
+	}
+	
+	aTag.setAttribute('style', 'text-decoration: none; color: inherit;')
+	accountDiv.appendChild(aTag);
 }
-
-/*function createNewUser(profile) {
-
-	const Url = 'http://localhost:9000/user/';
-
-	var newUser = 				
-	{
-			'firstName' : profile.getGivenName(),
-			'lastName' : profile.getFamilyName(),
-			'phoneNumber' : "",
-			'zipCode' : null,
-			'googleUserId' : profile.getId(),
-			'userRating' : null,
-			'savedItems' : [],
-	}
-
-	$.ajax({
-		url: Url,
-		dataType: 'JSON',
-		type: 'POST',
-		contentType:'application/json',
-
-		data: JSON.stringify(newUser),
-		success: function(result) {
-			console.log('User added to database');
-		},
-		error: function(error){
-			console.log("Error: " + error);
-		}
-	})
-}*/
-
-/*function onSignIn(googleUser) {
-	var profile = googleUser.getBasicProfile();
-	var dm = profile.getEmail().split('@')[1];
-	if(dm != "usc.edu"){
-		alert("Please sign in with a USC email");
-		signOut();
-		return;
-	}
-
-	var id = profile.getId();
-	$('#account').html("<div onClick='goToProfile()'>Account</div>");    
-	sessionStorage.setItem("googleUserId", id);	
-
-	const Url = "http://localhost:9000/user/googleuser/" + id;
-	$.ajax({
-		url: Url,
-		type: "GET",
-		dataType: 'JSON',
-		success: function(result) {
-			console.log("User already exists");
-			var objectId = result['_id'];
-			sessionStorage.setItem("objectId", objectId);
-			sessionStorage.setItem("user", JSON.stringify(result));
-		},
-		error: function(error){
-			console.log("User doesn't exist");
-			createNewUser(profile);
-			$.ajax({
-				url: Url,
-				type: "GET",
-				dataType: 'JSON',
-				success: function(result) {
-					var objectId = result['_id'];
-					sessionStorage.setItem("objectId", objectId);
-					sessionStorage.setItem("user", JSON.stringify(result));
-				}
-			})
-		}
-	})
-};*/
-
-/*function isSignedIn(){
-	var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
-	console.log(isSignedIn);
-};
-
-function signOut() {
-	var auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function () {
-		console.log('User signed out.');
-	})
-};*/
 
 function removeSavedItem(elementID) {
 	const UserUrl = 'http://localhost:9000/user/removesaveditem/' + sessionStorage.getItem('objectId');
@@ -96,9 +26,8 @@ function removeSavedItem(elementID) {
 		type: "PUT",
 		contentType:'application/json',
 		data: JSON.stringify({'itemId' : elementID}),
-
 		success: function(result) {
-			console.log('SUCCESS');
+			
 		},
 		error: function(error) {
 			console.log(error);
@@ -106,7 +35,6 @@ function removeSavedItem(elementID) {
 	})
 
 	const ItemUrl = 'http://localhost:9000/item/removewatchinguser/' + elementID;
-	console.log(sessionStorage.getItem('objectId'));
 	$.ajax({
 		url: ItemUrl,
 		type: "PUT",
@@ -114,7 +42,7 @@ function removeSavedItem(elementID) {
 		data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
 
 		success: function(result) {
-			console.log('SUCCESS');
+
 		},
 		error: function(error) {
 			console.log(error);
@@ -159,7 +87,7 @@ function clickedHeart(element){
 			data: JSON.stringify({'itemId' : elementID}),
 
 			success: function(result) {
-				console.log('SUCCESS');
+
 			},
 			error: function(error) {
 				console.log(error);
@@ -175,7 +103,6 @@ function clickedHeart(element){
 			data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
 
 			success: function(result) {
-				console.log('SUCCESS');
 			},
 			error: function(error) {
 				console.log(error);
@@ -226,7 +153,6 @@ function clickedHeart(element){
 
 function getItem(element){
 	var elementID = element.getAttribute("data-itemID");
-	console.log(elementID);
 };
 
 function unsaveItem(element){

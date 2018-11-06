@@ -20,7 +20,7 @@ public class User implements Serializable {
 	public ObjectId _id;
 	
 	public String username;
-	public int hash;
+	public String hash;
 	public String firstName;
 	public String lastName;
 	public String email;
@@ -34,11 +34,11 @@ public class User implements Serializable {
 
 	}
 
-	public int getHash() {
+	public String getHash() {
 		return hash;
 	}
 
-	public void setHash(int hash) {
+	public void setHash(String hash) {
 		this.hash = hash;
 	}
 

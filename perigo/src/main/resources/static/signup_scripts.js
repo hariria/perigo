@@ -138,7 +138,7 @@ function submit(){
 		'zipCode' : zipCode
 	};
 
-	const Url = 'http://localhost:9000/user/';
+	const Url = 'http://localhost:9000/user/signup';
 
 	$.ajax({
 		url: Url,
@@ -148,15 +148,17 @@ function submit(){
 		data: JSON.stringify(userToTransfer),
 		success: function(result) {	
 
-			sessionStorage.setItem("objectId", result);
-			sessionStorage.setItem("username", username);
 			
-			document.cookie = 'login_cookie=true; path=/';
+			document.cookie = 'login_cookie='+result+';path=/';
 			
-			alert("Account created succesfully!!");
-			// NEED TO STYLE THIS ALERT
-			
-			window.location.href = 'http://localhost:9000/browse.html';
+			swal({
+			    title: "Account created!",
+			    text: "Your perigo account has been created!",
+			    icon: "success"
+			}).then(function() {
+			    window.location = window.location.href = 'http://localhost:9000/browse.html';
+			});
+		
 		},
 		error: function(error){
 			var errorResponse = error['responseText'];

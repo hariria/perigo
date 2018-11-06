@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.MongoController.perigo.UpdatableBCrypt;
+import com.MongoController.perigo.models.LoginTransferObject;
 import com.MongoController.perigo.models.SavedItem;
 import com.MongoController.perigo.models.User;
 import com.MongoController.perigo.models.UserTransferObject;
@@ -23,6 +25,17 @@ import com.MongoController.perigo.repositories.UserRepository;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	
+	private static final UpdatableBCrypt bcrypt = new UpdatableBCrypt(11);
+
+	public static String hash(String password) {
+	    return bcrypt.hash(password);
+	}
+
+	public static boolean verify(String password, String hash) {
+	    return bcrypt.verifyHash(password, hash);
+	}
+	
 	
 	@Autowired
 	private UserRepository repository;
@@ -78,7 +91,7 @@ public class UserController {
 	    return true;		
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.POST)
+	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public ResponseEntity<?> createUser(@Valid @RequestBody UserTransferObject userToTransfer) {
 
 		User usernameCheck = repository.findByUsername(userToTransfer.getUsername());
@@ -99,12 +112,33 @@ public class UserController {
 		userToAdd.setUserRating(5);
 		userToAdd.setSavedItems(new ArrayList<SavedItem>());
 		userToAdd.setUsername(userToTransfer.getUsername());
-		userToAdd.setHash(userToTransfer.getPassword().hashCode());
+		userToAdd.setHash(hash(userToTransfer.getPassword()));
 		
 		repository.save(userToAdd);
 		
-		System.out.println("Adding to Database");
 		return new ResponseEntity<>(userToAdd.get_id().toHexString(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public ResponseEntity<?> loginUser(@Valid @RequestBody LoginTransferObject loginTransferObject) {
+		String username = loginTransferObject.getUsername();
+		String password = loginTransferObject.getPassword();
+
+		User usernameCheck = repository.findByUsername(username);
+		
+		if (usernameCheck == null) {
+			return new ResponseEntity<>("USER DOES NOT EXIST", HttpStatus.BAD_REQUEST);
+		}
+		
+		String hash = usernameCheck.hash;
+		boolean status = verify(password, hash);
+		
+		if (!status) {
+			return new ResponseEntity<>("INCORRECT PASSWORD", HttpStatus.BAD_REQUEST);
+		}
+		else {
+			return new ResponseEntity<>(usernameCheck.get_id().toHexString(), HttpStatus.OK);
+		}
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
