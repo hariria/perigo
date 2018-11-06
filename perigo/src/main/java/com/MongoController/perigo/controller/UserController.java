@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MongoController.perigo.UpdatableBCrypt;
+import com.MongoController.perigo.models.ContentEditable;
 import com.MongoController.perigo.models.LoginTransferObject;
 import com.MongoController.perigo.models.SavedItem;
 import com.MongoController.perigo.models.User;
@@ -60,6 +61,31 @@ public class UserController {
 		user.set_id(id);
 		repository.save(user);
 	}
+	
+	@RequestMapping(value="/contenteditable/{id}", method=RequestMethod.PUT)
+	public void modifyByContentEditable(@PathVariable("id") ObjectId id, @Valid @RequestBody ContentEditable toEdit) {
+		User update = repository.findBy_id(id);
+				
+		if (toEdit.getLocation() != null) update.setLocation(toEdit.getLocation());
+		if (toEdit.getZipCode() != null && checkZipCode(toEdit.getZipCode())) update.setZipCode(toEdit.getZipCode());
+		
+		repository.save(update);
+	}
+	
+	@RequestMapping(value="/addnewlisting/{id}", method=RequestMethod.PUT)
+	public void addNewListing(@PathVariable("id") ObjectId id, @Valid @RequestBody SavedItem newListing) {
+		User update = repository.findBy_id(id);
+		update.getSellingItems().add(newListing);		
+		repository.save(update);
+	}
+	
+	@RequestMapping(value="/removelisting/{id}", method=RequestMethod.PUT)
+	public void removeListing(@PathVariable("id") ObjectId id, @Valid @RequestBody SavedItem toRemove) {
+		User update = repository.findBy_id(id);
+		update.getSellingItems().removeIf(si -> si.getItemId().equals(toRemove.getItemId()));
+		repository.save(update);
+	}
+	
 	
 	@RequestMapping(value="/addsaveditem/{id}", method=RequestMethod.PUT)
 	public void modifySavedItems(@PathVariable("id") ObjectId id, @Valid @RequestBody SavedItem savedItem) {
@@ -108,9 +134,10 @@ public class UserController {
 		userToAdd.setFirstName(userToTransfer.getFirstName());
 		userToAdd.setLastName(userToTransfer.getLastName());
 		userToAdd.setLocation(userToTransfer.getLocation());
-		userToAdd.setZipCode(userToTransfer.getUsername());
+		userToAdd.setZipCode(userToTransfer.getZipCode());
 		userToAdd.setUserRating(5);
 		userToAdd.setSavedItems(new ArrayList<SavedItem>());
+		userToAdd.setSellingItems(new ArrayList<SavedItem>());
 		userToAdd.setUsername(userToTransfer.getUsername());
 		userToAdd.setHash(hash(userToTransfer.getPassword()));
 		

@@ -156,7 +156,7 @@ function submit(){
 			    text: "Your perigo account has been created!",
 			    icon: "success"
 			}).then(function() {
-			    window.location = window.location.href = 'http://localhost:9000/browse.html';
+			    window.location = window.location.href = 'http://localhost:9000/browse/browse.html';
 			});
 		
 		},

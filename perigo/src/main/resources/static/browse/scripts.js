@@ -2,8 +2,8 @@ function checkCookie() {
 	var value = $.cookie("login_cookie");
 	var accountDiv = document.getElementById("account");
 	var aTag = document.createElement('a');
-
-	if (value == null) {
+	console.log(value);
+	if (value == null || value == 'null') {
 		aTag.setAttribute('href', '/signup/signup.html');
 		aTag.innerHTML = 'Sign Up';
 	}
@@ -55,8 +55,8 @@ function removeRow(elementID){
 }
 
 function clickedHeart(element){
-
-	if (sessionStorage.getItem('objectId') == null) {
+	var value = $.cookie("login_cookie");
+	if (sessionStorage.getItem('objectId') == null || value == null || value == 'null' ) {
 		alert("Please sign in to view save items!");
 		return;
 	}
@@ -223,10 +223,13 @@ function generateSavedItems(result) {
 
 function showSavedItems(){
 	var objectId = sessionStorage.getItem("objectId");
-	if (objectId == null) {
-		alert("Please sign in to view saved items!");
+	
+	var value = $.cookie("login_cookie");
+	if (sessionStorage.getItem('objectId') == null || value == null || value == 'null' ) {
+		alert("Please sign in to view save items!");
 		return;
 	}
+
 
 	var table = document.getElementById("saved-items");
 	if (table.style.display === "block") {

@@ -28,12 +28,20 @@ public class User implements Serializable {
 	public String zipCode;
 	public int userRating;
 	public List<SavedItem> savedItems;
+	public List<SavedItem> sellingItems;
 	
-
 	public User() {
 
 	}
 
+	public List<SavedItem> getSellingItems() {
+		return sellingItems;
+	}
+
+	public void setSellingItems(List<SavedItem> sellingItems) {
+		this.sellingItems = sellingItems;
+	}
+	
 	public String getHash() {
 		return hash;
 	}
