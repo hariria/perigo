@@ -25,12 +25,11 @@ function next(){
 	document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("passwordContainer").style.borderBottom = "2px solid #adadad";
 
-	$('#main-container').animate({margin: "10vh 0vh"}, 250);
 	setTimeout(function(){
 		$('#main-container').animate({width: "500px"}, 500);
 		
 		setTimeout(function(){
-			$('#main-container').animate({height: "900px"}, 500); 
+			$('#main-container').animate({height: "925px"}, 500); 
 			$('#sectionTwo').animate({height: "300px"}, 500); 
 
 			setTimeout(function(){
@@ -179,6 +178,21 @@ function submit(){
 	})
 }
 
+
+//Hide errors when a user selects on the box to re-enter information
+$(document).ready(function(){
+	$("#username").focus(function(){
+		hideUsernameError();
+	});
+
+	$("#email").focus(function(){
+		hideEmailError();
+	});
+
+	$("#zipCode").focus(function(){
+		hideZipCodeError();
+	});
+});
 
 function usernameError(errorMsg){
 	$('#usernameContainer').animate({margin: "0px"}, 0);

@@ -9,8 +9,8 @@ input {
 
 #main-container{
 	display: flex;
-	margin-top: 20vh;
-	margin-bottom: 20vh;
+	margin-top: 75px;
+	margin-bottom: 75px;
 	height: 650px;
 	width: 300px;
 
@@ -146,4 +146,13 @@ input {
 	padding: 0 20px;
 	margin-top: 25px;
 	margin-bottom: 25px;
+}
+
+
+#sign-in{
+	text-align: center;
+	font-family: Avenir Next;
+	font-size: 14px;
+	color: #4D4D4D;
+	text-decoration: none;
 }
