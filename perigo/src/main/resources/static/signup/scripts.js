@@ -359,12 +359,6 @@ function onLoadFunction() {
 	getAllItems();
 }
 
-
-function closeSignUp(){
-	$('#modal').fadeOut(250);
-	$('#sign-in').fadeOut(250);
-};
-
 function signUp(){
 	document.location.href = "../signup/signup.html";
 };

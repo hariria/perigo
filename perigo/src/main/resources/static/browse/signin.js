@@ -1,8 +1,13 @@
 function showSignIn(){
 	$('#modal').fadeIn(250);
 	$('#sign-in').fadeIn(250);
-		document.getElementById("sign-in").style.display = "flex";
+	document.getElementById("sign-in").style.display = "flex";
 }
+
+function hideSignIn(){
+	$('#modal').fadeOut(250);
+	$('#sign-in').fadeOut(250);
+};
 
 //Hide errors when a user selects on the box to re-enter information
 $(document).ready(function(){
