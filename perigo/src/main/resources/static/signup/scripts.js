@@ -361,7 +361,6 @@ function onLoadFunction() {
 
 
 function closeSignUp(){
-	console.log("HERE")
 	$('#modal').fadeOut(250);
 	$('#sign-in').fadeOut(250);
 };
