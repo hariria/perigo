@@ -17,12 +17,10 @@ input {
 	padding: 0px 100px;
 	justify-content: center;
 
-		background: white;
-		border-radius: 20px;
-		flex-direction: column;
-
-
-		box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+	background: white;
+	border-radius: 20px;
+	flex-direction: column;
+	box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .swal-modal {
@@ -44,7 +42,6 @@ input {
 	max-width:100px;
 	max-height: 100px;
 	padding-bottom: 75px;
-
 }
 
 #usernameContainer, #passwordContainer{
@@ -74,8 +71,6 @@ input {
 #firstNameContainer{
 	margin-right: 5%;
 }
-
-
 
 #emailContainer, #locationContainer, #zipContainer{
 	width: 100%;
