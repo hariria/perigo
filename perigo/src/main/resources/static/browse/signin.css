@@ -28,7 +28,7 @@
 
 #headerText{
 	font-family: Avenir Next;
-	font-size: 40px;
+	font-size: 35px;
 	font-weight: bold;
 	color: #4D4D4D;
 	padding-top: 25px;
@@ -79,8 +79,29 @@
 	border: none;
 }
 
+#email{
+    font-family: Avenir Next;
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px;
+    outline: none;
+    border: none;
+    display: none;
+}
+
 .redPlaceholder::-webkit-input-placeholder {
     color: #cc0000;
+}
+
+#linkContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #rememberContainer {
@@ -149,6 +170,37 @@
     transform: rotate(45deg);
 }
 
+#forgotPassword{
+    cursor: pointer;  
+    font-family: Avenir Next;
+    font-size: 15px;
+    color: #555555;
+}
+
+#forgotText{
+    font-family: Avenir Next;
+    font-size: 35px;
+    font-weight: bold;
+    color: #4D4D4D;
+    padding-top: 25px;
+    text-align: center;
+    display: none;
+}
+
+#forgotPasswordButton{
+    font-size: 16px;
+    background: -webkit-linear-gradient(right,  #91A8D2, #F9CBC9);
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: 0;
+    cursor: pointer;
+    display: none;
+}
+
 #signUpText{
 	text-align: center;
 	font-family: Avenir Next;
@@ -156,6 +208,10 @@
 	color: #4D4D4D;
 	text-decoration: none;
 	margin-top: 25px;
+}
+
+#buttons{
+    height:75px;
 }
 
 #usernameError, #passwordError{

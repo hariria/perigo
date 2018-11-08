@@ -1,4 +1,28 @@
+function signUp(){
+	document.location.href = "../signup/signup.html";
+};
+
 function showSignIn(){
+
+	/* Revert and changes forgot password made */
+	$('#sign-in').animate({height: "650px"}, 0); 
+	$("#headerText").show();
+
+	$("#username").show();
+	$("#email").hide();
+		document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
+	$('#email').removeClass('redPlaceholder');
+	$("#passwordContainer").show();
+
+	$("#linkContainer").show();
+	$("#forgotText").hide();
+	$("#signUpText").show();
+
+	$('#buttons').animate({height: "75px"}, 0);
+	$("#submit").show();
+	$("#forgotPasswordButton").hide();
+	
+	/* Show the sign in */
 	$('#modal').fadeIn(250);
 	$('#sign-in').fadeIn(250);
 	document.getElementById("sign-in").style.display = "flex";
@@ -44,6 +68,45 @@ function hidePasswordError(){
 	$('#passwordContainer').animate({margin: "0px 0px 37px 0px"}, 0);
 	$('#passwordError').animate({margin: "0px"}, 0);
 	$('#passwordError').hide();
+}
+
+function emailLink(){
+	var email = document.getElementById('email').value;
+
+	var invalid = false;
+	if(email === null || email === ""){
+		$('#email').addClass('redPlaceholder');
+		document.getElementById("usernameContainer").style.borderBottom = "2px solid #cc0000";
+		invalid = true;
+	}
+
+	if(invalid){
+		return;
+	}
+
+	$('#email').removeClass('redPlaceholder');
+	document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
+
+	console.log(email);
+	/* TODO: INSERT BACKEND CALL TO SEND EMAIL */
+}
+
+
+function forgotPassword(){
+	$('#sign-in').animate({height: "475px"}, 500); 
+	$("#headerText").fadeOut();
+	$("#forgotText").delay(400).fadeIn();
+	$("#username").fadeOut();
+	$("#email").delay(400).fadeIn();
+	$("#passwordContainer").fadeOut();
+	$("#linkContainer").fadeOut();
+	$("#submit").fadeOut();
+	$("#signUpText").fadeOut();
+
+	setTimeout(function(){
+		$('#buttons').animate({height: "0px"}, 0);
+		$("#forgotPasswordButton").fadeIn();
+	}, 550);
 }
 
 function verify() {

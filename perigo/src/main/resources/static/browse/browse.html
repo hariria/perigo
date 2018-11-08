@@ -11,21 +11,31 @@
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="signin.css" />
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script src="signin.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<body onload="return onLoadFunction();">
 		<div id="modal" onClick="hideSignIn()"></div>
 		<div id="sign-in">
 			<div id="headerText">Log In</div>
+			<div id="forgotText">Forgot Password</div>
 			<img src=./icon.png id="iconSign">
 			<form name="sign-up" id="sign-up">
-				<div id="usernameContainer"><input type="text" name="username" id="username" placeholder="username"></div>
+				<div id="usernameContainer">
+					<input type="text" name="username" id="username" placeholder="username">
+					<input type="text" name="email" id="email" placeholder="email">
+				</div>
 				<div id="usernameError"></div>
 				<div id="passwordContainer"><input type="password" name="password" id="password" placeholder="password"></div>
 				<div id="passwordError"></div>
-				<label id="rememberContainer">remember me<input type="checkbox"><span class="checkmark"></span></label>
+				<div id="linkContainer">
+					<label id="rememberContainer">remember me<input type="checkbox"><span class="checkmark"></span></label>
+					<div id="forgotPassword" onClick="forgotPassword()">forgot password?</div>
+				</div>
 			</form>
-			<button id="submit" onclick="verify()">SUBMIT</button>
+			<div id="buttons">
+				<button id="submit" onclick="verify()">SUBMIT</button>
+				<button id="forgotPasswordButton" onclick="emailLink()">EMAIL ME</button>
+			</div>
 			<a id="signUpText" href="../signup/signup.html">click here to sign up for perigo</a>
 		</div>
 		<div id="outerContainer">
