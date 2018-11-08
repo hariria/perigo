@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<script>
+function goforit() {
+	var text = document.getElementById("search").value;
+	console.log(text);
+	
+	const GetItemUrl = 'http://localhost:9000/search/' + text;
+	$.ajax({
+		url: GetItemUrl,
+		type: 'GET',
+	}) 
+	
+}
+
+
+
+
+</script>
+
+<body>
+	<form>
+	  Search:<br>
+	  <input id="search" type="text" name="search"><br>
+	  <button onclick="return goforit();">Click</button>
+	</form>
+</body>
+</html>

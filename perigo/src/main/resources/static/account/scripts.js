@@ -1,6 +1,5 @@
 function onload() {
-	retrieveUserInfo();
-	showListings();
+	retrieveUserInfo()
 	showSavedItems();
 }
 
@@ -32,7 +31,11 @@ function retrieveUserInfo() {
 			document.getElementById('zip-field').innerHTML = zipCode;
 			document.getElementById('rating-field').innerHTML = rating;
 
+			console.log('before');
+			console.log(JSON.stringify(result));
 			sessionStorage.setItem('user', JSON.stringify(result));
+			showListings();
+
 		},
 		error: function(error) {
 			console.log('Error: ' + error);
@@ -154,6 +157,9 @@ function generateListing(item) {
 }
 
 function showListings() {
+	console.log('after');
+	console.log(sessionStorage.getItem('objectId'));
+	console.log((sessionStorage.getItem('user')));
 	var itemsForSale = JSON.parse(sessionStorage.getItem('user'))['sellingItems'];
 
 	for (var i = 0; i < itemsForSale.length; i++) {

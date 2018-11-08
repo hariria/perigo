@@ -36,6 +36,10 @@ public class Item {
 	
 	public List<UserWatching> usersWatching;
 
+	public Item() {
+		
+	}
+	
 	public Item(ObjectId _id, String title, String description, String condition, boolean forSale,
 			ObjectId userSellingItem, ObjectId highestBidder, int endForSaleDate, int startForSaleDate, double maxBid,
 			String image, String location, List<UserWatching> usersWatching) {
