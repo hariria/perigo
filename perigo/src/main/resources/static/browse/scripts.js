@@ -262,9 +262,19 @@ function showSavedItems(){
 	}
 };
 
-$(window).scroll(function() {
+$(document).ready(resizeSaved);
+$(window).resize(resizeSaved);
+
+function resizeSaved(){
 	var windowpos = $(window).scrollTop();
 	$('#saved-items').css('top', windowpos + "px");
+	var winheight = $( window ).height();
+	$('#saved-items').css('max-height', winheight - 240 + "px");
+}
+
+/* 225px is the number of pixels the saved is below the top of the screen, so 240px is used as a buffer*/
+$(window).scroll(function() {
+	resizeSaved();
 });
 
 function displayItems(items) {
