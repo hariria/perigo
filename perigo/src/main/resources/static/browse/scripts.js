@@ -2,7 +2,6 @@ function checkCookie() {
 	var value = $.cookie("login_cookie");
 	var accountDiv = document.getElementById("account");
 	var aTag = document.createElement('a');
-	console.log(value);
 	if (value == null || value == 'null') {
 		aTag.setAttribute('href', '/signup/signup.html');
 		aTag.innerHTML = 'Sign Up';
