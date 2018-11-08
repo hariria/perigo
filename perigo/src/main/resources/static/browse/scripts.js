@@ -57,7 +57,11 @@ function removeRow(elementID){
 function clickedHeart(element){
 	var value = $.cookie("login_cookie");
 	if (sessionStorage.getItem('objectId') == null || value == null || value == 'null' ) {
-		alert("Please sign in to view save items!");
+		swal({
+		    title: "User not signed in",
+		    text: "Please sign in to view save items!",
+		    icon: "error"
+		})
 		return;
 	}
 
@@ -226,7 +230,11 @@ function showSavedItems(){
 	
 	var value = $.cookie("login_cookie");
 	if (sessionStorage.getItem('objectId') == null || value == null || value == 'null' ) {
-		alert("Please sign in to view save items!");
+		swal({
+		    title: "User not signed in",
+		    text: "Please sign in to view save items!",
+		    icon: "error"
+		})
 		return;
 	}
 
