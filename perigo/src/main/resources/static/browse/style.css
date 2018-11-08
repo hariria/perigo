@@ -7,6 +7,10 @@ body{
 	justify-content: center;
 }
 
+.swal-modal {
+	font-family: Avenir Next;
+}
+
 #outerContainer{
 	max-width: 1300px;
 	width: 100%;

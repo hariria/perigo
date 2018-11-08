@@ -59,7 +59,7 @@ function clickedHeart(element){
 	if (sessionStorage.getItem('objectId') == null || value == null || value == 'null' ) {
 		swal({
 		    title: "User not signed in",
-		    text: "Please sign in to view save items!",
+		    text: "Please sign in to save items!",
 		    icon: "error"
 		})
 		return;
@@ -232,7 +232,7 @@ function showSavedItems(){
 	if (sessionStorage.getItem('objectId') == null || value == null || value == 'null' ) {
 		swal({
 		    title: "User not signed in",
-		    text: "Please sign in to view save items!",
+		    text: "Please sign in to view your saved items!",
 		    icon: "error"
 		})
 		return;
