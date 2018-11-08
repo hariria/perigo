@@ -5,7 +5,7 @@ function onload() {
 
 function signOut() {
 	$.cookie("login_cookie", null, { path: '/' });
-	sessionStorage.setItem('objectID', null);
+	sessionStorage.setItem('objectId', null);
 	window.location.href = '/browse/browse.html';
 }
 

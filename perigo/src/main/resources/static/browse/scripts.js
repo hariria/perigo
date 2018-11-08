@@ -6,12 +6,15 @@ function checkCookie() {
 	if (value == null || value == 'null') {
 		aTag.setAttribute('href', '/signup/signup.html');
 		aTag.innerHTML = 'Sign Up';
-	}
+			}
 	else {
 		aTag.setAttribute('href', '/account/account.html');
 		aTag.innerHTML = 'Account';
 		
 		sessionStorage.setItem("objectId", value);
+		
+		document.getElementById('sign_in').style.display = 'none';
+
 	}
 	
 	aTag.setAttribute('style', 'text-decoration: none; color: inherit;')
