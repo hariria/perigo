@@ -288,93 +288,99 @@ $(window).scroll(function() {
 	resizeSaved();
 });
 
-function displayItems(items) {
+function displayItems(toAdd) {
 	var userObjectId = sessionStorage.getItem('objectId');
-	for (var i = 0; i < items.length; i++) {
-		var item = document.createElement('div');
 
-		var isSavedState = false;
-		var usersWatching = items[i]['usersWatching'];
-		for (var j = 0; j < usersWatching.length; j++) {
-			if (usersWatching[j]['userWatchingId'] == userObjectId) {
-				isSavedState = true;
-				break;
-			}
+	var item = document.createElement('div');
+
+	var isSavedState = false;
+	var usersWatching = toAdd['usersWatching'];
+	for (var j = 0; j < usersWatching.length; j++) {
+		if (usersWatching[j]['userWatchingId'] == userObjectId) {
+			isSavedState = true;
+			break;
 		}
-
-		var heart = document.createElement('div');
-		heart.setAttribute('class', 'heart');
-		heart.setAttribute('data-itemID', items[i]['_id']);
-		heart.setAttribute('onClick', 'clickedHeart(this)');
-		heart.setAttribute('saved', 'false');
-		var heart_i = document.createElement('i');
-		heart_i.setAttribute('class', 'far fa-heart');
-		if (isSavedState) {
-			heart_i.setAttribute('class', 'fas fa-heart');
-			heart_i.setAttribute('style', 'color: #ff4755');
-			heart.setAttribute('saved', 'true');
-		}
-		heart.appendChild(heart_i);
-		item.appendChild(heart);
-
-		var item_image = document.createElement('div');
-		item_image.setAttribute('class', 'item-image');
-		item_image.setAttribute('data-itemID', items[i]['_id']);
-		item_image.setAttribute('onClick', "getItem(this)");
-		var image = document.createElement('img');
-		image.setAttribute('class', "item-image-pic");
-		image.setAttribute('src', items[i]['image']);
-		item_image.appendChild(image);
-		item.appendChild(item_image);
-
-		var item_title = document.createElement('div');
-		item_title.setAttribute('class', 'item-title');
-		item_title.setAttribute('data-itemID', items[i]['_id']);
-		item_title.setAttribute('onClick', "getItem(this)");		
-		var item_title_text = document.createElement('div');
-		item_title_text.setAttribute('class', 'item-title-text');
-		item_title_text.innerHTML = items[i]['title'];
-		item_title.appendChild(item_title_text);
-		item.appendChild(item_title);
-
-		var item_location = document.createElement('div');
-		item_location.setAttribute('class', 'item-location');
-		item_location.setAttribute('data-itemID', items[i]['_id']);
-		item_location.setAttribute('onClick', "getItem(this)");		
-		var item_location_text = document.createElement('div');
-		item_location_text.setAttribute('class', 'item-title-text');
-		item_location_text.innerHTML = items[i]['location'];
-		item_location.appendChild(item_location_text);
-		item.appendChild(item_location);
-
-		var item_price = document.createElement('div');
-		item_price.setAttribute('class', 'item-location');
-		item_price.setAttribute('data-itemID', items[i]['_id']);
-		item_price.setAttribute('onClick', "getItem(this)");		
-		var item_price_text = document.createElement('div');
-		item_price_text.setAttribute('class', 'item-price-text');
-		item_price_text.innerHTML = '$' + items[i]['maxBid'];
-		item_price.appendChild(item_price_text);
-		item.appendChild(item_price);
-
-		var item_frame = document.getElementsByClassName('item-frame')[0].appendChild(item);
 	}
+
+	var heart = document.createElement('div');
+	heart.setAttribute('class', 'heart');
+	heart.setAttribute('data-itemID', toAdd['_id']);
+	heart.setAttribute('onClick', 'clickedHeart(this)');
+	heart.setAttribute('saved', 'false');
+	var heart_i = document.createElement('i');
+	heart_i.setAttribute('class', 'far fa-heart');
+	if (isSavedState) {
+		heart_i.setAttribute('class', 'fas fa-heart');
+		heart_i.setAttribute('style', 'color: #ff4755');
+		heart.setAttribute('saved', 'true');
+	}
+	heart.appendChild(heart_i);
+	item.appendChild(heart);
+
+	var item_image = document.createElement('div');
+	item_image.setAttribute('class', 'item-image');
+	item_image.setAttribute('data-itemID', toAdd['_id']);
+	item_image.setAttribute('onClick', "getItem(this)");
+	var image = document.createElement('img');
+	image.setAttribute('class', "item-image-pic");
+	image.setAttribute('src', toAdd['image']);
+	item_image.appendChild(image);
+	item.appendChild(item_image);
+
+	var item_title = document.createElement('div');
+	item_title.setAttribute('class', 'item-title');
+	item_title.setAttribute('data-itemID', toAdd['_id']);
+	item_title.setAttribute('onClick', "getItem(this)");		
+	var item_title_text = document.createElement('div');
+	item_title_text.setAttribute('class', 'item-title-text');
+	item_title_text.innerHTML = toAdd['title'];
+	item_title.appendChild(item_title_text);
+	item.appendChild(item_title);
+
+	var item_location = document.createElement('div');
+	item_location.setAttribute('class', 'item-location');
+	item_location.setAttribute('data-itemID', toAdd['_id']);
+	item_location.setAttribute('onClick', "getItem(this)");		
+	var item_location_text = document.createElement('div');
+	item_location_text.setAttribute('class', 'item-title-text');
+	item_location_text.innerHTML = toAdd['location'];
+	item_location.appendChild(item_location_text);
+	item.appendChild(item_location);
+
+	var item_price = document.createElement('div');
+	item_price.setAttribute('class', 'item-location');
+	item_price.setAttribute('data-itemID', toAdd['_id']);
+	item_price.setAttribute('onClick', "getItem(this)");		
+	var item_price_text = document.createElement('div');
+	item_price_text.setAttribute('class', 'item-price-text');
+	item_price_text.innerHTML = '$' + toAdd['maxBid'];
+	item_price.appendChild(item_price_text);
+	item.appendChild(item_price);
+
+	var item_frame = document.getElementsByClassName('item-frame')[0].appendChild(item);
 }
 
 function getAllItems() {
-	const Url = 'http://localhost:9000/item/';
 
-	$.ajax({
-		url: Url,
-		type: "GET",
-		dataType: 'JSON',
-		success: function(result) {
-			displayItems(result);
-		},
-		error: function(error) {
-			console.log('Error: ' + error);
-		}
-	})
+	var search_results = JSON.parse(sessionStorage.getItem('search_results'));
+	
+
+	for (var i = 0; i < search_results.length; i++) {
+		const Url = 'http://localhost:9000/item/' + search_results[i];
+		
+		$.ajax({
+			url: Url,
+			type: "GET",
+			dataType: 'JSON',
+			success: function(result) {
+				displayItems(result);
+			},
+			error: function(error) {
+				console.log('Error: ' + error);
+			}
+		})
+	}
+
 }
 
 function onLoadFunction() {

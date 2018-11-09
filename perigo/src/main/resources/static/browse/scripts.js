@@ -3,13 +3,12 @@ function searchResults(event) {
         event.preventDefault(); 
 
     	var query = document.getElementById("search").value;
-        console.log(query);
     	const GetItemUrl = 'http://localhost:9000/search/' + query;
     	$.ajax({
     		url: GetItemUrl,
     		type: 'GET',
-    		success: function(result) {
-    			sessionStorage.setItem('search_results', result);
+    		success: function(result) {    			
+    			sessionStorage.setItem('search_results', JSON.stringify(result));
     			window.location.href = '/search_results/search.html';
     		}
     	}) 
@@ -311,7 +310,8 @@ function displayItems(items) {
 	var userObjectId = sessionStorage.getItem('objectId');
 	for (var i = 0; i < items.length; i++) {
 		var item = document.createElement('div');
-
+		item.setAttribute('class', 'item');
+		
 		var isSavedState = false;
 		var usersWatching = items[i]['usersWatching'];
 		for (var j = 0; j < usersWatching.length; j++) {
