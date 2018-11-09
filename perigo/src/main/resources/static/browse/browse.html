@@ -3,7 +3,7 @@
 	<head>
 		<title>Browse</title>
 	</head>
-	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,12 +13,34 @@
 	<link rel="stylesheet" type="text/css" href="signin.css" />
 	<script src="signin.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript">
+
+		window.setInterval(function() {
+			$("item-title").each(function( index ) {
+				var textContainer = this;
+
+				console.log("here");
+				var width = textContainer.scrollWidth;
+
+				let i = 0
+				while (i < width) {
+					setTimeout(textContainer.scrollTo(i, 0), 1000)
+					i++;
+				}
+			});
+		}, 10);
+
+		window.addEventListener("load", () => {
+			
+		});
+
+	</script>
 	<body onload="return onLoadFunction();">
 		<div id="modal" onClick="hideSignIn()"></div>
 		<div id="sign-in">
 			<div id="headerText">Log In</div>
 			<div id="forgotText">Forgot Password</div>
-			<img src=./icon.png id="iconSign">
+			<img src="../images/icon.png" id="iconSign">
 			<form name="sign-up" id="sign-up">
 				<div id="usernameContainer">
 					<input type="text" name="username" id="username" placeholder="username">
@@ -40,7 +62,7 @@
 		</div>
 		<div id="outerContainer">
 			<div class="header">
-				<div class="icon"><img class="icon-image" src="./icon.png"/></div>
+				<div class="icon"><img class="icon-image" src="../images/icon.png"/></div>
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame">
 					<div id="saved" class="header-text" onClick="showSavedItems()">Saved</div>
