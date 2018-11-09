@@ -10,7 +10,7 @@ function searchResults(event) {
     		type: 'GET',
     		success: function(result) {
     			sessionStorage.setItem('search_results', result);
-    			window.location.href = 'http:localhost:9000/search_results/search.html';
+    			window.location.href = '/search_results/search.html';
     		}
     	}) 
     }
