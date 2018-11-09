@@ -1,3 +1,21 @@
+function searchResults(event) {
+    if(event.keyCode === 13){
+        event.preventDefault(); 
+
+    	var query = document.getElementById("search").value;
+    	const GetItemUrl = 'http://localhost:9000/search/' + query;
+    	$.ajax({
+    		url: GetItemUrl,
+    		type: 'GET',
+    		success: function(result) {    			
+    			sessionStorage.setItem('search_results', JSON.stringify(result));
+    			window.location.href = '/search_results/search.html';
+    		}
+    	}) 
+    }
+}
+
+
 function checkCookie() {
 	var value = $.cookie("login_cookie");
 	var accountDiv = document.getElementById("account");
