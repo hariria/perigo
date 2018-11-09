@@ -38,7 +38,7 @@ body{
 }
 
 .title-text{
-	font-family: Avenir Next;
+  font-family: Avenir Next;
   font-size: 35px;
   font-weight: bold;
   color: #4D4D4D;
@@ -228,8 +228,15 @@ tr:hover {
   max-width: 1525px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
   margin: 0 auto;
+}
+
+#browse-frame{
+  justify-content: space-evenly;
+}
+
+#account-frame{
+  justify-content: space-between;
 }
 
 .item{
@@ -288,6 +295,7 @@ tr:hover {
 .item-title{
 	height: 27px;
 	width: 325px;
+  overflow: hidden
 }
 
 .item-title:hover{
