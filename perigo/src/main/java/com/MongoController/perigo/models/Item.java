@@ -36,13 +36,15 @@ public class Item {
 	
 	public List<UserWatching> usersWatching;
 
+	public List<String> keywords;
+
 	public Item() {
 		
 	}
 	
 	public Item(ObjectId _id, String title, String description, String condition, boolean forSale,
 			ObjectId userSellingItem, ObjectId highestBidder, int endForSaleDate, int startForSaleDate, double maxBid,
-			String image, String location, List<UserWatching> usersWatching) {
+			String image, String location, List<UserWatching> usersWatching, List<String> keywords) {
 		super();
 		this._id = _id;
 		this.title = title;
@@ -57,6 +59,7 @@ public class Item {
 		this.image = image;
 		this.location = location;
 		this.usersWatching = usersWatching;
+		this.keywords = keywords;
 	}
 
 	public ObjectId get_id() {
@@ -164,6 +167,12 @@ public class Item {
 	}
 	
 	
+	public List<String> getKeywords() {
+		return keywords;
+	}
 
+	public void setKeywords(List<String> keywords) {
+		this.keywords = keywords;
+	}
 
 }
