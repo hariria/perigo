@@ -31,7 +31,6 @@ function checkCookie() {
 		sessionStorage.setItem("objectId", value);
 		
 		document.getElementById('sign_in').style.display = 'none';
-
 	}
 	
 	aTag.setAttribute('style', 'text-decoration: none; color: inherit;')
@@ -86,7 +85,6 @@ function clickedHeart(element){
 	}
 
 	var elementID = element.getAttribute("data-itemID");
-
 
 	if(element.getAttribute('saved') === 'true'){
 		element.innerHTML = "<i class='far fa-heart'></i>";
@@ -191,9 +189,6 @@ function unsaveItem(element){
 	i_temp.setAttribute('class', 'far fa-heart');
 	heart.innerHTML = "";
 	heart.appendChild(i_temp);
-
-
-
 };
 
 function generateSavedItems(result) {
@@ -262,6 +257,7 @@ function showSavedItems(){
 
 	var table = document.getElementById("saved-items");
 	if (table.style.display === "block") {
+		document.getElementById("saved-items").style.minWidth = "0px";
 		$('#saved-items').animate({width: "0px"}, 500);
 		setTimeout(function(){
 			table.style.display = "none";
@@ -288,6 +284,10 @@ function showSavedItems(){
 
 
 		$('#saved-items').animate({width: "400px"}, 500);
+		setTimeout(function(){
+			document.getElementById("saved-items").style.minWidth = "250px";
+		},500);
+		
 	}
 };
 

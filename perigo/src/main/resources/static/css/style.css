@@ -140,7 +140,6 @@ body{
 .saved-items{
   height: 70vh;
   width: 0px;
-  min-width: 250px;
   display: none;
   float: right;
   
