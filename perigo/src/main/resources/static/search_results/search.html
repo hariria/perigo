@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Browse</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="scripts.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="signin.css" />
+	<script src="signin.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript">
+
+		window.setInterval(function() {
+			$("item-title").each(function( index ) {
+				var textContainer = this;
+
+				console.log("here");
+				var width = textContainer.scrollWidth;
+
+				let i = 0
+				while (i < width) {
+					setTimeout(textContainer.scrollTo(i, 0), 1000)
+					i++;
+				}
+			});
+		}, 10);
+
+		window.addEventListener("load", () => {
+			
+		});
+
+	</script>
+	<body onload="return onLoadFunction();">
+		<div id="modal" onClick="hideSignIn()"></div>
+		<div id="sign-in">
+			<div id="headerText">Log In</div>
+			<div id="forgotText">Forgot Password</div>
+			<img src="../images/icon.png" id="iconSign">
+			<form name="sign-up" id="sign-up">
+				<div id="usernameContainer">
+					<input type="text" name="username" id="username" placeholder="username">
+					<input type="text" name="email" id="email" placeholder="email">
+				</div>
+				<div id="usernameError"></div>
+				<div id="passwordContainer"><input type="password" name="password" id="password" placeholder="password"></div>
+				<div id="passwordError"></div>
+				<div id="linkContainer">
+					<label id="rememberContainer">remember me<input type="checkbox"><span class="checkmark"></span></label>
+					<div id="forgotPassword" onClick="forgotPassword()">forgot password?</div>
+				</div>
+			</form>
+			<div id="buttons">
+				<button id="submit" onclick="verify()">SUBMIT</button>
+				<button id="forgotPasswordButton" onclick="emailLink()">EMAIL ME</button>
+			</div>
+			<a id="signUpText" href="../signup/signup.html">click here to sign up for perigo</a>
+		</div>
+		<div id="outerContainer">
+			<div class="header">
+				<div class="icon"><img class="icon-image" src="../images/icon.png"/></div>
+				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
+				<div class="header-frame">
+					<div id="saved" class="header-text" onClick="showSavedItems()">Saved</div>
+					<div id="sign_in" class="header-text" onClick="showSignIn()">Sign In</div>
+					<div class="header-text" id="account"></div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="main-frame">
+					<div class="browser-bar">
+						<div class="browser-text"><div class="title-text">Browse</div></div>
+					</div>
+					<div class="inner-frame">
+						<div class="item-frame" id="browse-frame">
+						</div>
+						<div class="saved-items" id="saved-items">
+							<div class="saved-title">Saved Items</div>
+							<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
+							<table id="saved-table">
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
