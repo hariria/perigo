@@ -261,7 +261,7 @@ function showSavedItems(){
 		$('#saved-items').animate({width: "0px"}, 500);
 		setTimeout(function(){
 			table.style.display = "none";
-		},450);
+		},500);
 	} else {
 
 		document.getElementById("saved-table").innerHTML = "";
