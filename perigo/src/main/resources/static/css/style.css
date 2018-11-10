@@ -346,14 +346,23 @@ tr:hover {
     background-color: white;
     cursor: pointer;
     margin-top: 25px;
+    transition: all .5s;
 }
 
 .sign-out-button:hover{
     background-color: #CD5C5C;
+    color: white!important;
+    border: white solid 1px!important;
 }
 
+#sign-out-text{
+    text-decoration: none;
+    color: #494949;
+}
+
+
 #sign-out-text:hover{
-    color: white;
+    color: white!important;
 }
 
 .footer{
