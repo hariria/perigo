@@ -1,8 +1,8 @@
 # Perigo
 
 <br><br><br><br>
-<div style="text-align:center;">
-    ![perigo icon](v1/frontend/illustrations/icons/perigoIcon.png)
+<div style="display: flex; align-items:center; justify-content: center; width: 100%;">
+    <img align="center" src="v1/frontend/illustrations/icons/perigoIcon.png" alt="perigoIcon">
 </div>
 <br><br><br><br>
 
