@@ -367,7 +367,7 @@ function displayItems(items) {
 		item.appendChild(item_location);
 
 		var item_price = document.createElement('div');
-		item_price.setAttribute('class', 'item-location');
+		item_price.setAttribute('class', 'item-price');
 		item_price.setAttribute('data-itemID', items[i]['_id']);
 		item_price.setAttribute('onClick', "getItem(this)");		
 		var item_price_text = document.createElement('div');
