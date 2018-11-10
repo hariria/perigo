@@ -18,7 +18,7 @@ Presentation Date: 11/15/2018
 
 
 Links to Documents:
-------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 High Level Requirements: https://docs.google.com/document/d/1iFInGGf06WdbDbuE15wqX-gwuqo8J4-BMCG4d56e9JY/edit?usp=sharing
 Technical Requirements: https://docs.google.com/document/d/1k5LNKwsFLH3JwzCH7t_O1L4-iVFQUPufDbQIjUGse4Q/edit?usp=sharing
 Detailed Design: https://docs.google.com/document/d/1dzsl7geJ-CH_xycHSa8U8ReR_r_WIeC_UQuhe30odMk/edit?usp=sharing
@@ -26,7 +26,7 @@ Testing Document: https://docs.google.com/document/d/1qEOquENsZaDWt0DQnCkqBVIPKp
 
 
 Summary:
-------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 As mentioned in the high-level requirements we created this project, Perigo is a web interface meant to help facilitate the buying and
 selling of goods online. Members who have an account with the site are able to add listings and view listings. Individuals that are not
 members are able to view listings but not add.
