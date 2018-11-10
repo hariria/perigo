@@ -151,6 +151,7 @@ function clickedHeart(element){
 
 				var td2 = document.createElement('td');
 				var table_price_text = document.createElement('div');
+				table_price_text.setAttribute('class', 'table-price-text');
 				table_price_text.innerHTML = '$' + result['maxBid'];
 				td2.appendChild(table_price_text);
 				tr.appendChild(td2);
