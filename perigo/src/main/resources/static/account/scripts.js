@@ -278,6 +278,9 @@ function unsaveItem(element){
 	console.log(elementID);
 };
 
+function goToBrowse(){
+	window.location.href = "../browse/browse.html";
+}
 
 $(window).scroll(function() {
 	var windowpos = $(window).scrollTop();

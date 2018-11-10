@@ -396,6 +396,10 @@ function getAllItems() {
 	})
 }
 
+function goToBrowse(){
+	window.location.reload();
+};
+
 function onLoadFunction() {
 	checkCookie();
 	getAllItems();

@@ -406,6 +406,10 @@ function getAllItems() {
 
 }
 
+function goToBrowse(){
+	window.location.href = "../browse/browse.html";
+}
+
 function onLoadFunction() {
 	checkCookie();
 	getAllItems();
