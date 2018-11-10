@@ -361,7 +361,7 @@ function displayItems(items) {
 		item_location.setAttribute('data-itemID', items[i]['_id']);
 		item_location.setAttribute('onClick', "getItem(this)");		
 		var item_location_text = document.createElement('div');
-		item_location_text.setAttribute('class', 'item-title-text');
+		item_location_text.setAttribute('class', 'item-location-text');
 		item_location_text.innerHTML = items[i]['location'];
 		item_location.appendChild(item_location_text);
 		item.appendChild(item_location);
