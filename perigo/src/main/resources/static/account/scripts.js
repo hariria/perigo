@@ -11,7 +11,7 @@ function signOut() {
 
 function retrieveUserInfo() {
 	const Url = 'http://localhost:9000/user/' + sessionStorage.getItem('objectId');
-	
+
 	$.ajax({
 		url: Url,
 		type: "GET",
@@ -23,7 +23,7 @@ function retrieveUserInfo() {
 			var location = result['location'];
 			var zipCode = result['zipCode'];
 			var rating = result['userRating'];
-						
+
 			document.getElementById('email-address').innerHTML = email;
 			document.getElementById('firstName-field').innerHTML = firstName;
 			document.getElementById('lastName-field').innerHTML = lastName;
@@ -76,7 +76,7 @@ function generateSavedItem(item) {
 		var item_title = document.createElement('div');
 		item_title.setAttribute('class', 'item-title');
 		item_title.setAttribute('data-itemID', item['_id']);
-		item_title.setAttribute('onClick', "getItem(this)");		
+		item_title.setAttribute('onClick', "getItem(this)");
 		var item_title_text = document.createElement('div');
 		item_title_text.setAttribute('class', 'item-title-text');
 		item_title_text.innerHTML = item['title'];
@@ -86,7 +86,7 @@ function generateSavedItem(item) {
 		var item_location = document.createElement('div');
 		item_location.setAttribute('class', 'item-location');
 		item_location.setAttribute('data-itemID', item['_id']);
-		item_location.setAttribute('onClick', "getItem(this)");		
+		item_location.setAttribute('onClick', "getItem(this)");
 		var item_location_text = document.createElement('div');
 		item_location_text.setAttribute('class', 'item-title-text');
 		item_location_text.innerHTML = item['location'];
@@ -96,7 +96,7 @@ function generateSavedItem(item) {
 		var item_price = document.createElement('div');
 		item_price.setAttribute('class', 'item-location');
 		item_price.setAttribute('data-itemID', item['_id']);
-		item_price.setAttribute('onClick', "getItem(this)");		
+		item_price.setAttribute('onClick', "getItem(this)");
 		var item_price_text = document.createElement('div');
 		item_price_text.setAttribute('class', 'item-price-text');
 		item_price_text.innerHTML = '$' + item['maxBid'];
@@ -124,7 +124,7 @@ function generateListing(item) {
 	var item_title = document.createElement('div');
 	item_title.setAttribute('class', 'item-title');
 	item_title.setAttribute('data-itemID', item['_id']);
-	item_title.setAttribute('onClick', "getItem(this)");		
+	item_title.setAttribute('onClick', "getItem(this)");
 	var item_title_text = document.createElement('div');
 	item_title_text.setAttribute('class', 'item-title-text');
 	item_title_text.innerHTML = item['title'];
@@ -134,7 +134,7 @@ function generateListing(item) {
 	var item_location = document.createElement('div');
 	item_location.setAttribute('class', 'item-location');
 	item_location.setAttribute('data-itemID', item['_id']);
-	item_location.setAttribute('onClick', "getItem(this)");		
+	item_location.setAttribute('onClick', "getItem(this)");
 	var item_location_text = document.createElement('div');
 	item_location_text.setAttribute('class', 'item-title-text');
 	item_location_text.innerHTML = item['location'];
@@ -144,14 +144,14 @@ function generateListing(item) {
 	var item_price = document.createElement('div');
 	item_price.setAttribute('class', 'item-location');
 	item_price.setAttribute('data-itemID', item['_id']);
-	item_price.setAttribute('onClick', "getItem(this)");		
+	item_price.setAttribute('onClick', "getItem(this)");
 	var item_price_text = document.createElement('div');
 	item_price_text.setAttribute('class', 'item-price-text');
 	item_price_text.innerHTML = '$' + item['maxBid'];
 	item_price.appendChild(item_price_text);
 	toAdd.appendChild(item_price);
 
-	
+
 	var item_frame = document.getElementsByClassName('item-frame')[0].appendChild(toAdd);
 
 }
@@ -164,14 +164,14 @@ function showListings() {
 
 	for (var i = 0; i < itemsForSale.length; i++) {
 		const Url = 'http://localhost:9000/item/' + itemsForSale[i]['itemId'];
-		
+
 		$.ajax({
 			url: Url,
 			type: "GET",
 			dataType: 'JSON',
 			success: function(result) {
 				generateListing(result);
-				
+
 			},
 			error: function(error) {
 				console.log('Error: ' + error);
@@ -182,7 +182,7 @@ function showListings() {
 
 function showSavedItems() {
 	const Url = 'http://localhost:9000/user/' + sessionStorage.getItem('objectId');
-	
+
 	$.ajax({
 		url: Url,
 		type: "GET",
@@ -196,7 +196,7 @@ function showSavedItems() {
 					dataType: 'JSON',
 					success: function(result) {
 						generateSavedItem(result);
-						
+
 					},
 					error: function(error) {
 						console.log('Error: ' + error);
@@ -220,7 +220,7 @@ function removeSavedItem(elementID) {
 		contentType:'application/json',
 		data: JSON.stringify({'itemId' : elementID}),
 		success: function(result) {
-			
+
 		},
 		error: function(error) {
 			console.log(error);
@@ -282,7 +282,7 @@ function resetSavedItems(){
 		        Array.from(document.getElementsByClassName('saved-item')).forEach(v => {
 		            v.style.display = "none";
 		            removeSavedItem(v.getAttribute("data-itemID"))
-		        });  
+		        });
 			}
 
 		})
@@ -293,21 +293,33 @@ function addAListing(){
     window.location.href = './newListing.html';
 }
 
+
 function previewFile() {
 
     var preview = document.createElement("div");
     var image = document.createElement("img");
-    var str = '<i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i>';
+    // var str = '<i class="fas fa-times" style="color: #CD5C5C;" data-itemID="1" onClick="unsaveItem(this)"></i>';
     var icon = document.createElement("i");
+
 
     icon.classList.add('fas');
     icon.style.zIndex = "10";
     icon.classList.add('fa-times');
-    icon.style.color = "#949494";
+    icon.style.color = "#CD5C5C";
     icon.setAttribute('data-itemID', "1");
     icon.onclick = unsaveItem(icon);
+    icon.style.position = "absolute";
+    icon.style.right = "10px";
+    icon.style.top = "30px";
+    icon.style.cursor = "pointer";
+    icon.onclick = function (){
+        var parent = this.parentNode;
+        parent.outerHTML = "";
+    }
 
     preview.appendChild(image);
+    preview.classList.add('picture-item');
+    preview.style.position = "relative";
     preview.appendChild(icon);
     image.classList.add('uploaded-image');
     document.getElementById("picture-container").prepend(preview);
@@ -338,27 +350,27 @@ var newLocation = null;
 var newZip = null;
 
 $(function() {
-	
+
 	$( "#location-field" ).blur(function() {
 		newLocation = document.getElementById('location-field').innerHTML;
 		console.log(newLocation);
 	});
 	$( "#zip-field" ).blur(function() {
 		newZip = document.getElementById('zip-field').innerHTML;
-		console.log(newZip);	
+		console.log(newZip);
 	});
 });
 
 $(window).bind('beforeunload', function(){
 	if (newLocation != null || newZip != null) {
-		var toTransfer = 
+		var toTransfer =
 			{
 				'location' : newLocation,
 				'zipCode' : newZip
 			}
-		
+
 		const Url = 'http://localhost:9000/user/contenteditable/' + sessionStorage.getItem('objectId');
-		
+
 		$.ajax({
 			url: Url,
 			type: "PUT",
