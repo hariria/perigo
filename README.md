@@ -1,7 +1,7 @@
 # Perigo
 
 <br><br><br><br>
-<div align="center">
+<div style="text-align:center;">
     ![perigo icon](v1/frontend/illustrations/icons/perigoIcon.png)
 </div>
 <br><br><br><br>
