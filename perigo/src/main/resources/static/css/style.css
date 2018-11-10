@@ -84,7 +84,7 @@ body{
   float: right;
   margin-right: 50px;
   width: 300px;
-  
+
   display: flex;
   justify-content: space-between;
 }
@@ -142,7 +142,7 @@ body{
   width: 0px;
   display: none;
   float: right;
-  
+
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -179,7 +179,7 @@ td {
   overflow: hidden;
 }
 
-.table-item-text { 
+.table-item-text {
   font-family: 'Avenir Next';
   font-weight: 200;
   font-size: 16px;
@@ -189,14 +189,14 @@ td {
   cursor: pointer;
 }
 
-.table-price-text {  
+.table-price-text {
   font-family: 'Avenir Next Italic';
   font-weight: normal;
   font-size: 16px;
 }
 
-/* third column */ 
-td:first-child + td + td { 
+/* third column */
+td:first-child + td + td {
   min-width: 20px;
   cursor: pointer;
 }
@@ -266,6 +266,7 @@ tr:hover {
     align-items: center;
     flex-direction: column;
     z-index: 4;
+    transition: all .5s;
 }
 
 .new-item:hover{
@@ -341,9 +342,18 @@ tr:hover {
     justify-content: center;
     align-items: center;
     margin-left: 60px;
-    background-color: #F8CBCA;
+    border: #CD5C5C solid 1px;
+    background-color: white;
     cursor: pointer;
     margin-top: 25px;
+}
+
+.sign-out-button:hover{
+    background-color: #CD5C5C;
+}
+
+#sign-out-text:hover{
+    color: white;
 }
 
 .footer{
@@ -356,11 +366,11 @@ tr:hover {
 body::-webkit-scrollbar {
   width: 10px;
 }
- 
+
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
- 
+
 body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
@@ -371,14 +381,14 @@ body::-webkit-scrollbar-thumb {
   margin: 8px 0;
   height: 65px;
   width: 100%;
- 
+
   box-sizing: border-box;
   border: 3px solid #ccc;
   border-radius: 4px;
   transition: 0.5s;
   outline: none;
   position: absolute;
-    
+
   font-size: 20px;
   font-family: Avenir Next;
   color: #4D4D4D;
@@ -396,13 +406,33 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
 }
 
+.fas:hover{
+    color: #CD5C5C;
+}
+
+.fa-times:hover{
+    color: #CD5C5C;
+}
+
 .listing-input{
     border: none;
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 30px;
     margin-left: 60px;
     border-bottom: 1px solid #494949;
     padding: 10px;
+    opacity: 1;
+}
+
+#new-listing-submit{
+    cursor: pointer;
+    transition: all .5s;
+}
+
+#new-listing-submit:hover{
+    background: #CD5C5C;
+    color: white!important;
+    border: 1px solid white!important;
 }
 
 .listing-input::placeholder{
@@ -411,6 +441,13 @@ body::-webkit-scrollbar-thumb {
 
 #upload-image{
     margin-left: 60px;
+}
+
+.radio-input{
+    padding-bottom: 10px;
+    margin-left: 60px;
+    opacity: 1;
+    margin-top: 10px;
 }
 
 .uploaded-image{
@@ -433,6 +470,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #picture-container{
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
