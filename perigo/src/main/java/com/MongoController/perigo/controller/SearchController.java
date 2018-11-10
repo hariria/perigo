@@ -55,7 +55,7 @@ public class SearchController {
 				
 				if (title.toLowerCase().contains(i.toLowerCase())) {
 					setOfItems.add(objectId);
-					break;
+					continue;
 				}
 
 				

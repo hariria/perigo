@@ -5,6 +5,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: Avenir Next;
 }
 
 #outerContainer{
@@ -107,6 +108,12 @@ body{
 	 border-radius: 25px;
 	 margin-right: 10px;
 	 margin-bottom: 40px;
+     font-size: 16px;
+     font-family: Avenir Next;
+     padding-left: 10px;
+     padding-right: 10px;
+     padding-top: 2px;
+     padding-bottom: 2px;
 }
 
 .pic-button {
@@ -210,16 +217,24 @@ hr {
 }
 
 #seller {
-	position:absolute;
-	margin:8px;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width:95%;
+	position: absolute;
+    display: flex;
+	margin: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 95%;
 }
 
-.seller-pic {
-	display: block;
-	margin-left: 10px;
+#seller-info{
+    display: flex;
+    flex-direction: row;
+
 }
+
+#seller-pic{
+    width: 30px;
+}
+
+
 .seller-info {
 	position:absolute;
 	display: block;
@@ -318,7 +333,7 @@ hr {
 	padding: 0;
 	background: none;
 	border: none;
-	
+
 }
 
 #purchase input[type=submit] {
@@ -377,7 +392,7 @@ textarea{
 
 
 }
-.pos{
+#saved-message-frame{
 	margin-top:0;
 	padding-top:0;
 	position:fixed;
@@ -387,6 +402,9 @@ textarea{
     overflow-y: scroll;
     max-width: 100%;
     overflow-x: hidden;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .saved-title{
