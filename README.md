@@ -1,9 +1,9 @@
 # Perigo
 
 <br><br><br><br>
-<p align="center">
+<div align="center">
     ![perigo icon](v1/frontend/illustrations/icons/perigoIcon.png)
-</p>
+</div>
 <br><br><br><br>
 
 
