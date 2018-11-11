@@ -170,7 +170,6 @@ public class Item {
 		this.usersWatching = usersWatching;
 	}
 	
-	
 	public List<String> getKeywords() {
 		return keywords;
 	}

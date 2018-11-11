@@ -315,10 +315,12 @@ function displayItems(items) {
 		
 		var isSavedState = false;
 		var usersWatching = items[i]['usersWatching'];
-		for (var j = 0; j < usersWatching.length; j++) {
-			if (usersWatching[j]['userWatchingId'] == userObjectId) {
-				isSavedState = true;
-				break;
+		if (usersWatching != null) {
+			for (var j = 0; j < usersWatching.length; j++) {
+				if (usersWatching[j]['userWatchingId'] == userObjectId) {
+					isSavedState = true;
+					break;
+				}
 			}
 		}
 
@@ -343,7 +345,8 @@ function displayItems(items) {
 		item_image.setAttribute('onClick', "getItem(this)");
 		var image = document.createElement('img');
 		image.setAttribute('class', "item-image-pic");
-		image.setAttribute('src', items[i]['image']);
+		image.setAttribute('src', items[i]['images'][0]);
+		console.log(items[i]['images'][0]);
 		item_image.appendChild(image);
 		item.appendChild(item_image);
 

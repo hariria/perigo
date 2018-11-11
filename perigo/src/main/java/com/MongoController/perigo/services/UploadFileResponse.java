@@ -4,14 +4,24 @@ public class UploadFileResponse {
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
+    private String filePath;
     private long size;
 
-    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size) {
+    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size, String filePath) {
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.size = size;
+        this.filePath = filePath;
     }
+    
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 
 	public String getFileName() {
 		return fileName;

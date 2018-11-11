@@ -20,7 +20,7 @@ import com.MongoController.perigo.exceptions.MyFileNotFoundException;
 @Service
 public class FileStorageService {
 
-    private final Path fileStorageLocation;
+    public final Path fileStorageLocation;
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
@@ -34,7 +34,15 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    
+    
+    public String getFileStorageLocation() {
+		return fileStorageLocation.toString();
+	}
+
+
+
+	public String storeFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 

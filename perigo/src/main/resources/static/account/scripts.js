@@ -7,30 +7,32 @@ function formSubmission() {
 	var keywords = document.getElementsByName('keywords')[0].value.split(',');
 	var zipCode = document.getElementsByName('zipcode')[0].value;
 	var price = document.getElementsByName('price')[0].value;
+	var location = sessionStorage.getItem('location');
 	
+	var formData = new FormData();
 	var images = [];
-	
 	for (var i = 0; i < imagesToSend.length; i++) {
-		images.push(imagesToSend[i].name);
-	
-		var formData = new FormData();
-		formData.append('file', imagesToSend[i]);
-
-		
-    	$.ajax({
-    		url: 'http://localhost:9000/uploadFile',
-    	    type: 'post',
-    	    data: formData,
-    	    contentType: false,
-    	    processData: false,
-    	    success: function(data) {
-    	    }
-    	})
-	
+		formData.append('files', imagesToSend[i]);
+		images.push('http://localhost:9000/item_images/' + imagesToSend[i].name);
 	}
-
-	var currentDateTime = new Date().getTime();
 	
+	$.ajax({
+		url: 'http://localhost:9000/uploadMultipleFiles',
+	    type: 'post',
+	    data: formData,
+	    contentType: false,
+	    processData: false,
+	    success: function(data) {
+	    	console.log('Images uploaded succesfully!');
+	    },
+		error: function(error) {
+			console.log('Error in uploading images');
+		}
+	})
+	
+	
+	var currentDateTime = new Date().getTime();
+	    	
 	var toSendJson = 
 		{
 			'title' : title,
@@ -43,30 +45,37 @@ function formSubmission() {
 			'endForSaleDate' : currentDateTime + 604800000,
 			'userSellingItem' : sessionStorage.getItem('objectId'),
 			'maxBid' : price,
+			'location' : location
 		}
-	
-	console.log(toSendJson);
-	
+	    	    	    	
 	$.ajax({
 		url: 'http://localhost:9000/item/',
 		type: 'POST',
 		contentType:'application/json',
 		data : JSON.stringify(toSendJson),
 		success : function(result) {
-			console.log(result);
+
+			// Routine to add to user listing
+			$.ajax({
+				url: 'http://localhost:9000/user/addnewlisting/' + sessionStorage.getItem('objectId'),
+				type: 'PUT',
+				data: JSON.stringify({'itemId' : result['_id']}),
+			    contentType: "application/json",
+				error: function(onError) {
+					console.log(onError);
+				}
+			})
+		
 		},
 		error: function(error) {
 			console.log(error);
 		}
 		
 	})
+
 	
 	
 	window.location.href = "/account/account.html";
-	
-	
-	
-	
 	
 }
 
@@ -142,8 +151,6 @@ function retrieveUserInfo() {
 			document.getElementById('zip-field').innerHTML = zipCode;
 			document.getElementById('rating-field').innerHTML = rating;
 
-			console.log('before');
-			console.log(JSON.stringify(result));
 			sessionStorage.setItem('user', JSON.stringify(result));
 			showListings();
 
@@ -180,7 +187,7 @@ function generateSavedItem(item) {
 		item_image.setAttribute('onClick', "getItem(this)");
 		var image = document.createElement('img');
 		image.setAttribute('class', "item-image-pic");
-		image.setAttribute('src', item['image']);
+		image.setAttribute('src', item['images'][0]);
 		item_image.appendChild(image);
 		toAdd.appendChild(item_image);
 
@@ -228,7 +235,7 @@ function generateListing(item) {
 	item_image.setAttribute('onClick', "getItem(this)");
 	var image = document.createElement('img');
 	image.setAttribute('class', "item-image-pic");
-	image.setAttribute('src', item['image']);
+	image.setAttribute('src', item['images'][0]);
 	item_image.appendChild(image);
 	toAdd.appendChild(item_image);
 
@@ -268,9 +275,7 @@ function generateListing(item) {
 }
 
 function showListings() {
-	console.log('after');
-	console.log(sessionStorage.getItem('objectId'));
-	console.log((sessionStorage.getItem('user')));
+
 	var itemsForSale = JSON.parse(sessionStorage.getItem('user'))['sellingItems'];
 
 	for (var i = 0; i < itemsForSale.length; i++) {
@@ -424,6 +429,9 @@ function pushFileToGlobal(old_file) {
 	myNewFile = new File([old_file], newFileName, {type: old_file.type});
 
 	imagesToSend.push(myNewFile);
+	
+	console.log(imagesToSend);
+	
 	return myNewFile;
 }
 
@@ -490,10 +498,21 @@ function getCityState(){
     zip = document.getElementById('zipcode').value
     zip = zip.toString();
     console.log("Zip: " + zip);
-    var geoInfo = $.getJSON("http://www.geonames.org/postalCodeLookupJSON?&country=DE&callback=?", {postalcode: zip }, function(response) {
-		console.log(response);
-	});
-    // console.log(geoInfo);
+    
+    const Url = "http://api.geonames.org/postalCodeLookupJSON?country=US&username=perigo&postalcode=" + zip;
+    console.log(Url);
+	$.ajax({
+		url: Url,
+		type: "GET",
+		  dataType: 'jsonp',
+		success: function(result) {
+			var city = result['postalcodes'][0]['placeName'] + ", " + result['postalcodes'][0]['adminCode1'];
+			sessionStorage.setItem('location', city);
+		},
+		error: function(error) {
+			console.log('Error: ' + error);
+		}
+	})
 }
 
 var newLocation = null;
