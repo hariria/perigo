@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Product Page</title>
+		<!--<meta name="google-signin-client_id" content="58684548257-9sudakl3qmrjgmao6bukgldrt5f0dt3k.apps.googleusercontent.com">
+		-->
+		<meta name="google-signin-client_id" content="985517029062-ef87d8i7vor0tb09ibg2qr678noe90du.apps.googleusercontent.com">
+		<meta name="google-signin-scope" content="profile email">
+	</head>
+
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="bs.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="bootstrap.js"></script>
+		<script src="bs.js"></script>
+	
+
+	<body>
+		<div id="outerContainer">
+			<div class="header">
+				<div class="icon"><img class="icon-image" src="../illustrations/icons/perigoIcon.png"/></div>
+				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
+				<div class="header-frame" id="header-frame">
+					<div class="header-text" onClick="showSavedItems()">Saved</div>
+					<div class="header-text">Sign In</div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="main-frame">
+					<div id="saved-message-frame">
+						<div id="seller">
+							<div id ="top">
+								<div id="seller-info">
+	                                <div id="">
+	                                <img id="profile-pic" width="30px" height="70px" src="./pic/Andrew.jpg">
+	                                    <div id="seller-contact">
+	                                        <h5 id="seller-name">Jaboy Jamal</h5>
+	        								<h6 id="location">Palo Alto, Ca</h6>
+	                                    </div>
+	                                </div>
+	                                
+	                                <br>
+	                                <hr>
+								</div>
+								<button id="button" onclick="show()">Message</button>
+	
+								<div class="bt">
+									<div id="temp">
+										<form>
+										  <input id ="input-name" type="text" name="subject" placeholder="Subject..."><br>
+										  <textarea name="message" rows="10" cols="30" placeholder="Message Content..."></textarea>
+										  <input id ="input-email" type="text" name="email" placeholder="Your Email...">
+										  <input id ="input-submit" type="submit" value="Submit">
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="saved-items" id="saved-items">
+								<div class="saved-title">Saved Items</div>
+								<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
+								<table id="saved-table">
+									<tr>
+										<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-basic">
+							<div class = "category">
+								<button type="button">Lorem</button>
+								<button type="button">Ipsum</button>
+								<button type="button">dolor</button>
+								<button type="button">sit</button>
+								<button type="button">amat</button>
+							</div>
+
+							<h1>Product Name</h1>
+							<h2>$100.00</h2>
+							
+					
+						<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+						  <!-- Indicators -->
+						  <ol class="carousel-indicators">
+						    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						    <li data-target="#myCarousel" data-slide-to="1"></li>
+						
+						  </ol>
+						
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner">
+						    <div class="item active">
+						      <img src="./pic/product.jpg" alt="Los Angeles">
+						    </div>
+						
+						    <div class="item">
+						      <img src="./pic/asdf.jpg" alt="Chicago">
+						    </div>
+						
+						  </div>
+						
+						  <!-- Left and right controls -->
+						  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left"></span>
+						    <span class="sr-only">Previous</span>
+						  </a>
+						  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right"></span>
+						    <span class="sr-only">Next</span>
+						  </a>
+						</div>
+						
+							<div id = "purchase">
+							<button class="bid-button">Bid</button>
+							<hr>
+
+							<div id="bid-now">
+								<p>Current Price: $100.00</p>
+								<p>End Date: November 8, 2018 5pm</p>
+								<p id ="p-inline">Time Left:</p><p id="demo"></p>
+								<form>
+									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00"><br>
+									<input class ="bid-submit" type="submit" value="Submit Bid">
+								</form>
+							</div>
+
+							<div id="buy-now">
+								asdf
+							</div>
+						</div>
+
+						<div class="product-description">
+							<h1>Description</h1>
+							<hr>
+							<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+							Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+							amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+							amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare
+							sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis
+			  				tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus,
+			  				neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat
+							volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+							<div class = "description-specific">
+								<div class = "condition">
+									<h3>Condition</h3>
+									<h4>Used</h4>
+								</div>
+								<div class = "Location">
+									<h3>Location</h3>
+									<h4>Palo Alto, CA</h4>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="product-map">
+							<h1>Map</h1>
+							<hr>
+							<img src="./pic/maps.jpg">
+						</div>
+
+					</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
