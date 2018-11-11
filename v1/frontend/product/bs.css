@@ -102,19 +102,26 @@ body{
 }
 
 .category button {
-   text-align: center;
-   color: black;
-   background: #D3D3D3;
-   border-radius: 25px;
-   margin-right: 10px;
-   margin-bottom: 40px;
-     font-size: 16px;
-     font-family: Avenir Next;
-     padding-left: 10px;
-     padding-right: 10px;
-     padding-top: 2px;
-     padding-bottom: 2px;
-   outline: none;
+  text-align: center;
+  color: black;
+  background: #D3D3D3;
+  border-radius: 25px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  font-size: 16px;
+  font-family: Avenir Next;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: 2px solid #808080;
+  transition: all .5s;
+}
+
+.category button:hover{
+  color: white;
+  background: #757575;
+  border: 2px solid #757575;
 }
 
 .pic-button {
@@ -265,15 +272,23 @@ hr {
   margin-top:30px;
 }
 #seller #button {
-   color: white;
-   background:rgb(244, 183, 182);
-   border-radius: 25px;
-   width: 80%;
-   margin-left: 10%;
-   height:40px;
-   margin-bottom: 30px;
-   font-family: Avenir Next;
-     font-size: 15px;
+  color: black;
+  background:rgb(255, 255, 255);
+  border-radius: 25px;
+  width: 80%;
+  margin-left: 10%;
+  height:40px;
+  margin-bottom: 30px;
+  font-family: Avenir Next;
+  font-size: 15px;
+  border: 2px solid #808080;
+  transition: all .5s;
+}
+
+#seller #button:hover{
+  color: white;
+  background:rgb(244, 183, 182);
+  border: 2px solid rgb(244, 183, 182);
 }
 
 .seller hr {
@@ -310,17 +325,26 @@ hr {
 
 .bt input[type=submit] {
   float:right;
-   margin:0;
-   padding:0;
-     color: black;
-   background:white;
-   border-radius: 25px;
-   border-color:grey;
-   width: 80%;
-   height:40px;
-   font-family: Avenir Next;
-     font-size: 15px;
+  margin:0;
+  padding:0;
+  color: black;
+  background:white;
+  border-radius: 25px;
+  border-color:grey;
+  width: 80%;
+  height:40px;
+  font-family: Avenir Next;
+  font-size: 15px;
+  border: 2px solid #808080;
+  transition: all .5s;
 }
+
+#input-submit:hover{
+  color: white;
+  background:rgb(244, 183, 182);
+  border: 2px solid rgb(244, 183, 182);
+}
+
 .bid-button {
   font-family: Avenir Next;
     font-size: 35px;
@@ -345,20 +369,30 @@ hr {
 }
 
 #purchase input[type=submit] {
-   position:relative;
-   top:-50px;
-   margin:0;
-   padding:0;
-     color: black;
-   background:white;
-   border-radius: 25px;
-   border-color:grey;
-   width: 30%;
-   float:right;
-   height:40px;
-   font-family: Avenir Next;
-     font-size: 15px;
+  position:relative;
+  top:-50px;
+  margin:0;
+  padding:0;
+   color: black;
+  background:white;
+  border-radius: 25px;
+  border-color:grey;
+  width: 30%;
+  float:right;
+  height:40px;
+  font-family: Avenir Next;
+  font-size: 15px;
+  border: 2px solid #808080;
+  transition: all .5s;
 }
+
+#purchase input[type=submit]:hover{
+
+  color: white;
+  background:rgb(244, 183, 182);
+  border: 2px solid rgb(244, 183, 182);
+}
+
 input[type=number] {
    border: 0;
      outline: 0;
@@ -575,7 +609,10 @@ body::-webkit-scrollbar-thumb {
 
 .bid-submit {
   width:500px;
+  transition: all .5s;
 }
+
+
 
 #buy-now{
   max-width:100%;
