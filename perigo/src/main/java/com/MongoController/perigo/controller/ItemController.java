@@ -1,5 +1,6 @@
 package com.MongoController.perigo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -57,6 +58,7 @@ public class ItemController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public Item createItem(@Valid @RequestBody Item item) {
 		item.set_id(ObjectId.get());
+		item.setUsersWatching(new ArrayList<UserWatching>());
 		repository.save(item);
 		return item;
 	}

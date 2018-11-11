@@ -153,6 +153,7 @@ function clickedHeart(element){
 
 				var td2 = document.createElement('td');
 				var table_price_text = document.createElement('div');
+				table_price_text.setAttribute('class', 'table-price-text');
 				table_price_text.innerHTML = '$' + result['maxBid'];
 				td2.appendChild(table_price_text);
 				tr.appendChild(td2);
@@ -262,10 +263,11 @@ function showSavedItems(){
 
 	var table = document.getElementById("saved-items");
 	if (table.style.display === "block") {
+		document.getElementById("saved-items").style.minWidth = "0px";
 		$('#saved-items').animate({width: "0px"}, 500);
 		setTimeout(function(){
 			table.style.display = "none";
-		},450);
+		},500);
 	} else {
 
 		document.getElementById("saved-table").innerHTML = "";
@@ -288,6 +290,9 @@ function showSavedItems(){
 
 
 		$('#saved-items').animate({width: "400px"}, 500);
+		setTimeout(function(){
+			document.getElementById("saved-items").style.minWidth = "250px";
+		},500);
 	}
 };
 
@@ -310,6 +315,7 @@ function displayItems(toAdd) {
 	var userObjectId = sessionStorage.getItem('objectId');
 
 	var item = document.createElement('div');
+	item.setAttribute('class', 'item');
 
 	var isSavedState = false;
 	var usersWatching = toAdd['usersWatching'];
@@ -360,13 +366,13 @@ function displayItems(toAdd) {
 	item_location.setAttribute('data-itemID', toAdd['_id']);
 	item_location.setAttribute('onClick', "getItem(this)");		
 	var item_location_text = document.createElement('div');
-	item_location_text.setAttribute('class', 'item-title-text');
+	item_location_text.setAttribute('class', 'item-location-text');
 	item_location_text.innerHTML = toAdd['location'];
 	item_location.appendChild(item_location_text);
 	item.appendChild(item_location);
 
 	var item_price = document.createElement('div');
-	item_price.setAttribute('class', 'item-location');
+	item_price.setAttribute('class', 'item-price');
 	item_price.setAttribute('data-itemID', toAdd['_id']);
 	item_price.setAttribute('onClick', "getItem(this)");		
 	var item_price_text = document.createElement('div');
@@ -399,6 +405,10 @@ function getAllItems() {
 		})
 	}
 
+}
+
+function goToBrowse(){
+	window.location.href = "../browse/browse.html";
 }
 
 function onLoadFunction() {

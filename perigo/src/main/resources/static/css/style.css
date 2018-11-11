@@ -239,7 +239,6 @@ tr:hover {
 }
 
 .item{
-	height: 300px;
   width: 325px;
   margin-left: 20px;
   margin-right: 20px;
@@ -293,9 +292,6 @@ tr:hover {
 }
 
 .item-title{
-	height: 27px;
-	width: 325px;
-  overflow: hidden
 }
 
 .item-title:hover{
@@ -380,6 +376,19 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+#saved-items::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+#saved-items::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#saved-items::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
