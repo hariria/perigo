@@ -613,7 +613,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-
 #buy-now{
   max-width:100%;
   display:none;
@@ -623,6 +622,10 @@ body::-webkit-scrollbar-thumb {
   max-width:100%;
 }
 
+.item-active, .item{
+  min-height: 400px;
+  height: 400px;
+}
 
 @font-face {
   font-family: 'Avenir Next';
