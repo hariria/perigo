@@ -61,15 +61,15 @@ function showSavedItems(){
     	},300);
     } else {
     	table.style.display = "block";
-        $('#saved-items').animate({width: "275px"}, 275);
+        $('#saved-items').animate({width: "312.5px"}, 275);
     }
     
     
 };
 
 function show(){
-    document.getElementById("seller").style.height = "650px";
-    document.getElementById("top").style.height = "650px";
+    document.getElementById("seller").style.height = "700px";
+    document.getElementById("top").style.height = "610px";
     document.getElementById("saved-items").style.marginTop = "30px"
     document.getElementById("button").style.display = "none";
 
@@ -81,7 +81,7 @@ function show(){
     	},450);
     } else {
     	table.style.display = "block";
-        $('#temp').animate({width: "311px"}, 500);
+        $('#temp').animate({width: "300px"}, 500);
     }
     
 };

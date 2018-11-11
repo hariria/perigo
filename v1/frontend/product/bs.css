@@ -97,140 +97,139 @@ body{
   position: relative;
   top: 50px;
   left: 150px;
-  width: calc(100% - 300px);
+  width: calc(100% - 150px);
   padding-bottom: 50px;
 }
 
 .category button {
-	 text-align: center;
-	 color: black;
-	 background: #D3D3D3;
-	 border-radius: 25px;
-	 margin-right: 10px;
-	 margin-bottom: 40px;
+   text-align: center;
+   color: black;
+   background: #D3D3D3;
+   border-radius: 25px;
+   margin-right: 10px;
+   margin-bottom: 40px;
      font-size: 16px;
      font-family: Avenir Next;
      padding-left: 10px;
      padding-right: 10px;
      padding-top: 2px;
      padding-bottom: 2px;
- 	 outline: none;
+   outline: none;
 }
 
 .pic-button {
-	display:flex;
-	justify-content: space-between;
-	padding-bottom:50px;
+  display:flex;
+  justify-content: space-between;
+  padding-bottom:50px;
 }
 .product {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
-	font-family: Avenir Next;
-  	font-size: 35px;
-  	font-weight: bold;
-  	color: #4D4D4D;
-	margin: 0;
-	padding: 0;
+  font-family: Avenir Next;
+    font-size: 35px;
+    font-weight: bold;
+    color: #4D4D4D;
+  margin: 0;
+  padding: 0;
 
 }
 h2 {
-	font-family: Avenir Next;
-  	font-size: 25px;
-  	font-weight: normal;
-  	color: #4D4D4D;
-	margin: 0;
-	padding: 0;
-	padding-bottom: 30px;
+  font-family: Avenir Next;
+    font-size: 25px;
+    font-weight: normal;
+    color: #4D4D4D;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 30px;
 }
 h3 {
-	font-family: Avenir Next;
-  	font-size: 15px;
-  	font-weight: bold;
-  	color: #4D4D4D;
-	margin: 0;
-	margin-top: 20px;
-	margin-right: 60px;
-	padding: 0;
+  font-family: Avenir Next;
+    font-size: 15px;
+    font-weight: bold;
+    color: #4D4D4D;
+  margin: 0;
+  margin-top: 20px;
+  margin-right: 60px;
+  padding: 0;
 
 }
 h4 {
-	font-family: Avenir Next;
-  	font-size: 15px;
-  	font-weight: normal;
-  	color: #4D4D4D;
-	margin: 0;
-	margin-right: 60px;
-	padding: 0;
-	padding-bottom: 60px;
+  font-family: Avenir Next;
+    font-size: 15px;
+    font-weight: normal;
+    color: #4D4D4D;
+  margin: 0;
+  margin-right: 60px;
+  padding: 0;
+  padding-bottom: 60px;
 
 }
 
 h5{
-	font-family: Avenir Next;
-  	font-size: 18px;
-  	font-weight: bold;
-  	color: #4D4D4D;
-	margin:0;
-	margin-top:45px;
+  font-family: Avenir Next;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4D4D4D;
+  margin:0;
+  margin-top:45px;
 }
 
 h6{
-	font-family: Avenir Next;
-  	font-size: 15px;
-  	font-weight: normal;
-  	color: #4D4D4D;
-	margin:0;
-	padding:0;
+  font-family: Avenir Next;
+    font-size: 15px;
+    font-weight: normal;
+    color: #4D4D4D;
+  margin:0;
+  padding:0;
 }
 p{
-	font-family: Avenir Next;
-	color: #4D4D4D;
+  font-family: Avenir Next;
+  color: #4D4D4D;
 
 }
 .product-basic {
-	max-width: 66%;
+  max-width: 66%;
 }
 .product img {
-	max-width: 100%;
+  max-width: 100%;
 }
 .product-description {
-	margin-top:30px;
-	max-width: 100%;
+  margin-top:30px;
+  max-width: 100%;
 }
 .product-map {
-	max-width: 100%;
-	margin-bottom:30px;
+  max-width: 100%;
+  margin-bottom:30px;
 }
 
 hr {
-	margin-top:20px;
-	margin-bottom: 30px;
+  margin-top:20px;
+  margin-bottom: 30px;
 }
 
 
 .description-specific {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #seller {
-	position: absolute;
-  height:650px;
-	margin: 8px;
+  margin: 8px;
   width: 95%;
   overflow-y:auto;
   overflow-x:hidden;
 }
 
 #top{
-	overflow-y: auto;
+  overflow-y: auto;
   overflow-x: hidden;
-	margin:5px;
-	border-radius: 4px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 10px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #seller-info{
@@ -239,8 +238,8 @@ hr {
 
 }
 #seller-info hr{
-	margin-top:10px;
-	width: 80%;
+  margin-top:10px;
+  width: 80%;
 }
 
 #seller-pic{
@@ -249,32 +248,32 @@ hr {
 
 
 .seller-info {
-	position:absolute;
-	display: block;
-	margin-top:15px;
-	margin-left: 120px;
-	margin-bottom:20px;
+  position:absolute;
+  display: block;
+  margin-top:15px;
+  margin-left: 120px;
+  margin-bottom:20px;
 }
 
 #seller img {
-	width: 70px;
-	border-radius: 50%;
-	display: inline-block;
-	float: left;
-	margin-right:30px;
-	margin-left:30px;
-	margin-top:30px;
+  width: 70px;
+  border-radius: 50%;
+  display: inline-block;
+  float: left;
+  margin-right:30px;
+  margin-left:30px;
+  margin-top:30px;
 }
 #seller #button {
-	 color: white;
-	 background:rgb(244, 183, 182);
-	 border-radius: 25px;
-	 width: 80%;
-	 margin-left: 10%;
-	 height:40px;
-	 margin-bottom: 30px;
-	 font-family: Avenir Next;
-  	 font-size: 15px;
+   color: white;
+   background:rgb(244, 183, 182);
+   border-radius: 25px;
+   width: 80%;
+   margin-left: 10%;
+   height:40px;
+   margin-bottom: 30px;
+   font-family: Avenir Next;
+     font-size: 15px;
 }
 
 .seller hr {
@@ -286,105 +285,104 @@ hr {
 }
 
 #temp {
-	display:none;
+  display:none;
 }
 
 
 #input-name {
-	position:absolute;
-	width: 80%;
-	margin-left:25px;
-	border:none;
+  position:absolute;
+  width: 80%;
+  margin-left:25px;
+  border:none;
 }
 
 #input-email {
-	margin-top:270px;
-	position:absolute;
-	width: 80%;
-	margin-left:25px;
-	border:none;
+  margin-top:270px;
+  position:absolute;
+  width: 80%;
+  margin-left:25px;
+  border:none;
 }
 #input-submit {
-	margin-top:360px;
-	position:absolute;
-	margin-left:8%;
+  position:absolute;
+  margin: 360px 16.5px 0px 16.5px
 }
 
 .bt input[type=submit] {
-	float:right;
-	 margin:0;
-	 padding:0;
+  float:right;
+   margin:0;
+   padding:0;
      color: black;
-	 background:white;
-	 border-radius: 25px;
-	 border-color:grey;
-	 width: 80%;
-	 height:40px;
-	 font-family: Avenir Next;
-  	 font-size: 15px;
+   background:white;
+   border-radius: 25px;
+   border-color:grey;
+   width: 80%;
+   height:40px;
+   font-family: Avenir Next;
+     font-size: 15px;
 }
 .bid-button {
-	font-family: Avenir Next;
-  	font-size: 35px;
-  	font-weight: bold;
-  	color: #4D4D4D;
-	margin: 0;
-	padding: 0;
-	background: none;
-	border: none;
+  font-family: Avenir Next;
+    font-size: 35px;
+    font-weight: bold;
+    color: #4D4D4D;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
 .buy-button{
-	font-family: Avenir Next;
-  	font-size: 35px;
-  	font-weight: bold;
-  	color: #4D4D4D;
-	margin: 0;
-	padding: 0;
-	background: none;
-	border: none;
+  font-family: Avenir Next;
+    font-size: 35px;
+    font-weight: bold;
+    color: #4D4D4D;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
 
 }
 
 #purchase input[type=submit] {
-	 position:relative;
-	 top:-50px;
-	 margin:0;
-	 padding:0;
+   position:relative;
+   top:-50px;
+   margin:0;
+   padding:0;
      color: black;
-	 background:white;
-	 border-radius: 25px;
-	 border-color:grey;
-	 width: 30%;
-	 float:right;
-	 height:40px;
-	 font-family: Avenir Next;
-  	 font-size: 15px;
+   background:white;
+   border-radius: 25px;
+   border-color:grey;
+   width: 30%;
+   float:right;
+   height:40px;
+   font-family: Avenir Next;
+     font-size: 15px;
 }
 input[type=number] {
-	 border: 0;
+   border: 0;
      outline: 0;
-  	 background: transparent;
-	 height: 40px;
-	font-family: Avenir Next;
-  	font-size: 25px;
-  	  color: #4D4D4D;
+     background: transparent;
+   height: 40px;
+  font-family: Avenir Next;
+    font-size: 25px;
+      color: #4D4D4D;
 }
 
 
 textarea{
-	position:absolute;
-	margin-top:40px;
-	margin-left:8%;
-	border-radius: 5px;
-	border-color:grey;
-	width:225px;
-	outline:none;
-	resize: none;
-	font-family: Avenir Next;
-  	font-size: 15px;
-  	 color: #4D4D4D;
-	
+  position:absolute;
+  margin-top: 40px;
+  margin-left: 25px;
+  border-radius: 5px;
+  border-color:grey;
+  width:262.5px;
+  outline:none;
+  resize: none;
+  font-family: Avenir Next;
+  font-size: 15px;
+  color: #4D4D4D;
+  
 }
 
 
@@ -398,48 +396,45 @@ textarea{
 }
 
 .saved-items{
- position:absolute;
-  margin-top: 30px;
-  margin-left:5px;
-  margin-right:5px;
-  margin-bottom:5px;
-  right: .5%;
-  height: 100%;
+  position:absolute;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  right: 10px;
+  height: 500px;
   width: 0px;
   display: none;
   float: right;
   border-radius: 4px;
-  overflow:hidden;
-  margin-bottom: 20px;
+  overflow-y: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #saved-message-frame{
-	margin-top:0;
-	padding-top:0;
-	position:fixed;
-	height:70%;
-	right: 10%;
+  margin-top:0;
+  padding-top:0;
+  position: absolute;
+  height: 100%;
+  right: 0px;
   width: 350px;
-  overflow-y: scroll;
-  max-width: 100%;
   overflow-x: hidden;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 #demo {
-	
+  
   font-size: 15px;
   margin-top: 0px;
   display:inline;
-	
+  
 }
 #p-inline{
-	margin:0;
-	padding:0;
-	margin-right:10px;
-	display:inline;
+  margin:0;
+  padding:0;
+  margin-right:10px;
+  display:inline;
 }
 
 .saved-title{
@@ -524,15 +519,15 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
-#seller::-webkit-scrollbar {
+#saved-items::-webkit-scrollbar {
   width: 10px;
 }
-
-#seller::-webkit-scrollbar-track {
+ 
+#saved-items::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-#seller::-webkit-scrollbar-thumb {
+#saved-items::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
@@ -564,31 +559,31 @@ body::-webkit-scrollbar-thumb {
 
 
 #bid-now {
-	margin-top:5px;
-	max-width: 100%;
+  margin-top:5px;
+  max-width: 100%;
 }
 .format{
-	display:inline;
-	margin:0;
-	padding:0;
+  display:inline;
+  margin:0;
+  padding:0;
 }
 
 .bid-h2 {
-	padding:0;
-	display: inline;
+  padding:0;
+  display: inline;
 }
 
 .bid-submit {
-	width:500px;
+  width:500px;
 }
 
 #buy-now{
-	max-width:100%;
-	display:none;
+  max-width:100%;
+  display:none;
 }
 #purchase{
-	margin-top:30px;
-	max-width:100%;
+  margin-top:30px;
+  max-width:100%;
 }
 
 
