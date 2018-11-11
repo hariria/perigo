@@ -151,6 +151,7 @@ function clickedHeart(element){
 
 				var td2 = document.createElement('td');
 				var table_price_text = document.createElement('div');
+				table_price_text.setAttribute('class', 'table-price-text');
 				table_price_text.innerHTML = '$' + result['maxBid'];
 				td2.appendChild(table_price_text);
 				tr.appendChild(td2);
@@ -367,7 +368,7 @@ function displayItems(items) {
 		item.appendChild(item_location);
 
 		var item_price = document.createElement('div');
-		item_price.setAttribute('class', 'item-location');
+		item_price.setAttribute('class', 'item-price');
 		item_price.setAttribute('data-itemID', items[i]['_id']);
 		item_price.setAttribute('onClick', "getItem(this)");		
 		var item_price_text = document.createElement('div');
@@ -395,6 +396,10 @@ function getAllItems() {
 		}
 	})
 }
+
+function goToBrowse(){
+	window.location.reload();
+};
 
 function onLoadFunction() {
 	checkCookie();
