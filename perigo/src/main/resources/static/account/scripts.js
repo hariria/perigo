@@ -1,3 +1,96 @@
+var imagesToSend = [];
+
+function formSubmission() {
+	var title = document.getElementsByName('title')[0].value;
+	var description = document.getElementsByName('description')[0].value;
+	var buyType = sessionStorage.getItem('buyType');
+	var keywords = document.getElementsByName('keywords')[0].value.split(',');
+	var zipCode = document.getElementsByName('zipcode')[0].value;
+	var price = document.getElementsByName('price')[0].value;
+	
+	var images = [];
+	
+	for (var i = 0; i < imagesToSend.length; i++) {
+		images.push(imagesToSend[i].name);
+	
+		var formData = new FormData();
+		formData.append('file', imagesToSend[i]);
+
+		
+    	$.ajax({
+    		url: 'http://localhost:9000/uploadFile',
+    	    type: 'post',
+    	    data: formData,
+    	    contentType: false,
+    	    processData: false,
+    	    success: function(data) {
+    	    }
+    	})
+	
+	}
+
+	var currentDateTime = new Date().getTime();
+	
+	var toSendJson = 
+		{
+			'title' : title,
+			'description' : description,
+			'buyType' : buyType,
+			'keywords' : keywords,
+			'zipCode' : zipCode,
+			'images' : images,
+			'startForSaleDate' : currentDateTime,
+			'endForSaleDate' : currentDateTime + 604800000,
+			'userSellingItem' : sessionStorage.getItem('objectId'),
+			'maxBid' : price,
+		}
+	
+	console.log(toSendJson);
+	
+	$.ajax({
+		url: 'http://localhost:9000/item/',
+		type: 'POST',
+		contentType:'application/json',
+		data : JSON.stringify(toSendJson),
+		success : function(result) {
+			console.log(result);
+		},
+		error: function(error) {
+			console.log(error);
+		}
+		
+	})
+	
+	
+	window.location.href = "/account/account.html";
+	
+	
+	
+	
+	
+}
+
+function handleClick(option) {
+	var clicked = option.value;
+	if (clicked === 'buy it now') {
+		swal({
+		    title: "Buy It Now",
+		    text: "This option will keep your item listed indefinitely at a fixed price",
+		    icon: "warning"
+		})	
+		sessionStorage.setItem('buyType', 'buyItNow');
+	}
+	else {
+		swal({
+		    title: "Auction",
+		    text: "This option will keep your item listed as an auction for exactly a week",
+		    icon: "warning"
+		})	
+		sessionStorage.setItem('buyType', 'auction');
+	}
+	
+}
+
 function searchResults(event) {
     if(event.keyCode === 13){
         event.preventDefault(); 
@@ -278,9 +371,6 @@ function unsaveItem(element){
 	console.log(elementID);
 };
 
-function goToBrowse(){
-	window.location.href = "../browse/browse.html";
-}
 
 $(window).scroll(function() {
 	var windowpos = $(window).scrollTop();
@@ -314,6 +404,38 @@ function addAListing(){
     window.location.href = './newListing.html';
 }
 
+function pushFileToGlobal(old_file) {
+	
+	var oldName = old_file.name.toLowerCase();
+	console.log(oldName);
+	var typeCheck = oldName.indexOf('.jpg');
+
+	var objectId = sessionStorage.getItem('objectId');
+
+	var newFileName = objectId + '_' + btoa(oldName);
+	if (typeCheck == '-1') {
+		newFileName += '.png';
+	}
+	
+	else {
+		newFileName += '.jpg';
+	}
+	
+	myNewFile = new File([old_file], newFileName, {type: old_file.type});
+
+	imagesToSend.push(myNewFile);
+	return myNewFile;
+}
+
+function deleteFromGlobal(filename) {
+	
+	for( var i = 0; i < imagesToSend.length; i++){ 
+		if ( imagesToSend[i].name === filename) {
+			imagesToSend.splice(i, 1); 
+		}
+	} 
+	
+}
 
 function previewFile() {
 
@@ -328,13 +450,15 @@ function previewFile() {
     icon.classList.add('fa-times');
     icon.style.color = "#CD5C5C";
     icon.setAttribute('data-itemID', "1");
-    icon.onclick = unsaveItem(icon);
     icon.style.position = "absolute";
     icon.style.right = "10px";
     icon.style.top = "30px";
     icon.style.cursor = "pointer";
     icon.onclick = function (){
         var parent = this.parentNode;
+        var fileNameAttribute = parent.getAttribute('newFileName');
+        
+        deleteFromGlobal(fileNameAttribute);
         parent.outerHTML = "";
     }
 
@@ -345,10 +469,15 @@ function previewFile() {
     image.classList.add('uploaded-image');
     document.getElementById("picture-container").prepend(preview);
     var file = document.querySelector('input[type=file]').files[0];
-    var reader = new FileReader();
+    
 
+    var newFile = pushFileToGlobal(file);
+
+    var reader = new FileReader();
     reader.addEventListener("load", function () {
         image.src = reader.result;
+        icon.parentNode.setAttribute('newFileName', newFile.name);
+        image.setAttribute('newFileName', newFile.name);
     }, false);
 
     if (file) {

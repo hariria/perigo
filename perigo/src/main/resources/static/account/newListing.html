@@ -9,6 +9,8 @@
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 	<body>
 		<div id="outerContainer">
 			<div class="header">
@@ -27,20 +29,23 @@
                         </div>
 					</div>
 					<div class="inner-frame">
-                        <form id="new-listing-form" action="" method="POST">
-                            <input class="listing-input" type="text" name="title" placeholder="Title of your listing...">
+                        <form onsubmit="formSubmission(); return false;" id="new-listing-form" method="POST">
+                            <input class="listing-input" type="text" name="title" placeholder="Title of your listing..." required> 
                             <div class="radio-input">
-                                <input class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="buy it now"> Fixed Price &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="bid"> Bid
+                                <input onclick="handleClick(this);" class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="buy it now" required> Buy It Now &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input onclick="handleClick(this);" class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="bid"> Auction
                             </div>
-                            <textarea class="listing-input" style="border:1px solid #494949; border-radius: 15px;" rows="8" cols="70" name="description" placeholder="Description up to 500 words..."></textarea>
-                            <input class="listing-input" type="text" name="keywords" placeholder="Up to 5 keywords separated by [,]">
+                            <textarea class="listing-input" style="border:1px solid #494949; border-radius: 15px;" rows="8" cols="70" name="description" placeholder="Description up to 500 words..." required></textarea>
+                            <input class="listing-input" type="text" name="keywords" placeholder="Up to 5 keywords separated by [,]" required>
                             <input class="listing-input" id="zipcode" type="number" name="zipcode" required pattern="[0-9]{5}" min="000000" max="99999" placeholder="Zip Code..." onblur="getCityState();">
-                            <input class="listing-input" type="number" name="price" placeholder="Price..." step=".01">
+                            
+                            <input class="listing-input" type="number" name="price" placeholder="Price..." step=".01" required>
+
+                            
                             <div id="picture-container">
                                 <div class="new-item" id="upload-image">
                                     Upload an image
-                                    <input type="file" name="myfile" multiple accept="image/jpeg, image/png" onchange="previewFile();">
+                                    <input type="file" name="myfile" multiple accept="image/jpeg, image/png" onchange="previewFile();" required>
                                 </div>
                             </div>
                             <input id="new-listing-submit" class="listing-input" style="border:1px solid #494949; border-radius: 15px; width: 100px; color: #494949;" type="submit" value="submit">

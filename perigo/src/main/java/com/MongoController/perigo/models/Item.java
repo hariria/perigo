@@ -21,17 +21,20 @@ public class Item {
 	public String condition;
 	public boolean forSale;
 	
+	public String buyType;
+	
 	@JsonSerialize(using = ToStringSerializer.class)
 	public ObjectId userSellingItem;
 	
 	@JsonSerialize(using = ToStringSerializer.class)
 	public ObjectId highestBidder;
 	
-	public int endForSaleDate;
+	public long endForSaleDate;
 
-	public int startForSaleDate;
+	public long startForSaleDate;
+	
 	public double maxBid;
-	public String image;
+	public List<String> images;
 	public String location;
 	
 	public List<UserWatching> usersWatching;
@@ -43,8 +46,8 @@ public class Item {
 	}
 	
 	public Item(ObjectId _id, String title, String description, String condition, boolean forSale,
-			ObjectId userSellingItem, ObjectId highestBidder, int endForSaleDate, int startForSaleDate, double maxBid,
-			String image, String location, List<UserWatching> usersWatching, List<String> keywords) {
+			ObjectId userSellingItem, ObjectId highestBidder, long endForSaleDate, long startForSaleDate, double maxBid,
+			List<String> images, String location, List<UserWatching> usersWatching, List<String> keywords, String buyType) {
 		super();
 		this._id = _id;
 		this.title = title;
@@ -56,10 +59,11 @@ public class Item {
 		this.endForSaleDate = endForSaleDate;
 		this.startForSaleDate = startForSaleDate;
 		this.maxBid = maxBid;
-		this.image = image;
+		this.images = images;
 		this.location = location;
 		this.usersWatching = usersWatching;
 		this.keywords = keywords;
+		this.buyType = buyType;
 	}
 
 	public ObjectId get_id() {
@@ -118,19 +122,19 @@ public class Item {
 		this.highestBidder = highestBidder;
 	}
 
-	public int getEndForSaleDate() {
+	public long getEndForSaleDate() {
 		return endForSaleDate;
 	}
 
-	public void setEndForSaleDate(int endForSaleDate) {
+	public void setEndForSaleDate(long endForSaleDate) {
 		this.endForSaleDate = endForSaleDate;
 	}
 
-	public int getStartForSaleDate() {
+	public long getStartForSaleDate() {
 		return startForSaleDate;
 	}
 
-	public void setStartForSaleDate(int startForSaleDate) {
+	public void setStartForSaleDate(long startForSaleDate) {
 		this.startForSaleDate = startForSaleDate;
 	}
 
@@ -142,12 +146,12 @@ public class Item {
 		this.maxBid = maxBid;
 	}
 
-	public String getImage() {
-		return image;
+	public List<String> getImages() {
+		return images;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImages(List<String> images) {
+		this.images = images;
 	}
 
 	public String getLocation() {
@@ -175,4 +179,11 @@ public class Item {
 		this.keywords = keywords;
 	}
 
+	public String getBuyType() {
+		return buyType;
+	}
+	
+	public void setBuyType(String buyType) {
+		this.buyType = buyType;
+	}
 }
