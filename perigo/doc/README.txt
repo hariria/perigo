@@ -1,20 +1,20 @@
 Project Name: Perigo
-
-Contributors:
-Andrew Hariri (hariria@usc.edu)
-Arthur Krut (akrut@usc.edu)
-Bhavin Shah (bhavints@usc.edu)
-Majed Jendi (jendi@usc.edu)
-Sung Bin Kim (sungbink@usc.edu)
-Zach Izzard (izzard@usc.edu)
-
-CP:
-Peijia Lu (peijialu@usc.edu)
-
 Class: 11:00AM Tuesday / Thursday
 Class: CSCI 201
 Section: 30254
 Presentation Date: 11/15/2018
+
+Contributors:
+    Andrew Hariri (hariria@usc.edu)
+    Arthur Krut (akrut@usc.edu)
+    Bhavin Shah (bhavints@usc.edu)
+    Majed Jendi (jendi@usc.edu)
+    Sung Bin Kim (sungbink@usc.edu)
+    Zach Izzard (izzard@usc.edu)
+
+CP:
+    Peijia Lu (peijialu@usc.edu)
+
 
 
 Links to Documents:
@@ -27,13 +27,19 @@ Testing Document: https://docs.google.com/document/d/1qEOquENsZaDWt0DQnCkqBVIPKp
 
 Summary:
 ----------------------------------------------------------------------------------------------------------------------------
-As mentioned in the high-level requirements we created this project, Perigo is a web interface meant to help facilitate the buying and
-selling of goods online. Members who have an account with the site are able to add listings and view listings. Individuals that are not
-members are able to view listings but not add.
+Perigo is a web interface meant to help facilitate the buying and selling of goods online.
 
-Sellers are able to have their items bid on for a week and the person who has the highest bid at the end is the winner of the auction.
-Buyers can bid on items or pay a fixed price, depending on the seller's preference. Both of these functionalities are supported in
-the site.
 
-People who are logged in to the site are able to keep a list of "saved items" that they can go back to if they want to revisit certain
-items they saw. This function works and can be seen on both the product and browse pages of the site.
+Nuances / What works and what doesn't:
+----------------------------------------------------------------------------------------------------------------------------
+Members who have an account with the site are able to add listings and view listings. Individuals that are not members are able to view listings but not add. This is INTENTIONAL. We implemented this so that we could make sure that we could store the items properly in the database and map them accordingly to a registered user.
+
+Sellers are able to have their items bid on for a week and the person who has the highest bid at the end is the winner of the auction. Buyers can bid on items or pay a fixed price, depending on the seller's preference. Both of these functionalities are supported in the site.
+
+People who are logged in to the site are able to keep a list of "saved items" that they can go back to if they want to revisit certain items they saw. This function works and can be seen on both the product and browse pages of the site.
+
+For networking, we used web sockets to provide realtime notifications on price bidding for an item. This works as planned.
+
+User sign in, creating a new account all works properly. Users can even create a new password if they forgot theirs, and our database will update and create a new hashed password.
+
+Users are able to message the owners of the listing via email. 

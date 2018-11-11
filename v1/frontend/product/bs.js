@@ -23,21 +23,25 @@ function unsaveItem(element){
 };
 
 function showSavedItems(){
+	
     var table = document.getElementById("saved-items");
     if (table.style.display === "block") {
-         $('#saved-items').animate({width: "0px"}, 285);
+         $('#saved-items').animate({width: "0px"}, 275);
          setTimeout(function(){
         	table.style.display = "none";
     	},300);
     } else {
     	table.style.display = "block";
-        $('#saved-items').animate({width: "285px"}, 285);
+        $('#saved-items').animate({width: "275px"}, 275);
     }
+    
+    
 };
 
 function show(){
     document.getElementById("seller").style.height = "650px";
-    document.getElementById("saved-items").style.marginTop = "530px"
+    document.getElementById("top").style.height = "100%";
+    document.getElementById("saved-items").style.marginTop = "30px"
     document.getElementById("button").style.display = "none";
 
     var table = document.getElementById("temp");
@@ -50,6 +54,7 @@ function show(){
     	table.style.display = "block";
         $('#temp').animate({width: "300px"}, 500);
     }
+    
 };
 
 
