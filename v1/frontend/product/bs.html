@@ -30,27 +30,30 @@
 				<div class="main-frame">
 					<div id="saved-message-frame">
 						<div id="seller">
-							<div id="seller-info">
-                                <div id="">
-                                    <img id="profile-pic" width="30px" height="50px" src="./pic/Andrew.jpg">
-                                    <div id="seller-contact">
-                                        <h5 id="seller-name">Jaboy Jamal</h5>
-        								<h6 id="location">Palo Alto, Ca</h6>
-                                    </div>
-                                </div>
-                                
-                                <br>
-                                <hr>
+							<div id ="top">
+								<div id="seller-info">
+	                                <div id="">
+	                                    < 	<img id="profile-pic" width="30px" height="70px" src="./pic/Andrew.jpg">
+	                                    <div id="seller-contact">
+	                                        <h5 id="seller-name">Jaboy Jamal</h5>
+	        								<h6 id="location">Palo Alto, Ca</h6>
+	                                    </div>
+	                                </div>
+	                                
+	                                <br>
+	                                <hr>
+								</div>
 								<button id="button" onclick="show()">Message</button>
-							</div>
-							<div class="bt">
-								<div id="temp">
-									<form>
-									  <input id ="input-name" type="text" name="subject" placeholder="Subject..."><br>
-									  <textarea name="message" rows="13" cols="30" placeholder="Message Content..."></textarea>
-									  <input id ="input-email" type="text" name="email" placeholder="Your Email...">
-									  <input id ="input-submit" type="submit" value="Submit">
-									</form>
+	
+								<div class="bt">
+									<div id="temp">
+										<form>
+										  <input id ="input-name" type="text" name="subject" placeholder="Subject..."><br>
+										  <textarea name="message" rows="10" cols="30" placeholder="Message Content..."></textarea>
+										  <input id ="input-email" type="text" name="email" placeholder="Your Email...">
+										  <input id ="input-submit" type="submit" value="Submit">
+										</form>
+									</div>
 								</div>
 							</div>
 							<div class="saved-items" id="saved-items">
@@ -72,6 +75,23 @@
 										<td><div class="table-price-text">$100</div></td>
 										<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
 									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									<tr>
+										<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
+										<td><div class="table-price-text">$100</div></td>
+										<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
+									</tr>
+									
+									
 								</table>
 							</div>
 						</div>

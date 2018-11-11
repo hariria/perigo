@@ -114,6 +114,7 @@ body{
      padding-right: 10px;
      padding-top: 2px;
      padding-bottom: 2px;
+ 	 outline: none;
 }
 
 .pic-button {
@@ -173,7 +174,7 @@ h5{
   	font-weight: bold;
   	color: #4D4D4D;
 	margin:0;
-	margin-top:20px;
+	margin-top:45px;
 }
 
 h6{
@@ -186,6 +187,7 @@ h6{
 }
 p{
 	font-family: Avenir Next;
+	color: #4D4D4D;
 
 }
 .product-basic {
@@ -207,10 +209,7 @@ hr {
 	margin-bottom: 30px;
 }
 
-.bt hr {
-	margin-top:120px;
-	width: 80%;
-}
+
 .description-specific {
 	display: flex;
 	flex-direction: row;
@@ -218,16 +217,28 @@ hr {
 
 #seller {
 	position: absolute;
-    display: flex;
+    height:650px;
 	margin: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 95%;
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
+
+#top{
+	margin:5px;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 
 #seller-info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
+}
+#seller-info hr{
+	margin-top:10px;
+	width: 80%;
 }
 
 #seller-pic{
@@ -250,7 +261,7 @@ hr {
 	float: left;
 	margin-right:30px;
 	margin-left:30px;
-	margin-top:15px;
+	margin-top:30px;
 }
 #seller #button {
 	 color: white;
@@ -263,11 +274,7 @@ hr {
 	 font-family: Avenir Next;
   	 font-size: 15px;
 }
-.bt {
-	display: block;
-	position:relative;
-	margin-top:60px;
-}
+
 .seller hr {
     height: 2px;
     border: 0;
@@ -297,7 +304,7 @@ hr {
 #input-submit {
 	margin-top:360px;
 	position:absolute;
-	margin-left:10%;
+	margin-left:8%;
 }
 
 .bt input[type=submit] {
@@ -364,11 +371,19 @@ input[type=number] {
 
 textarea{
 	position:absolute;
-	margin-top:70px;
-	margin-left:15%;
+	margin-top:40px;
+	margin-left:8%;
 	border-radius: 5px;
 	border-color:grey;
+	width:225px;
+	outline:none;
+	resize: none;
+	font-family: Avenir Next;
+  	font-size: 15px;
+  	 color: #4D4D4D;
+	
 }
+
 
 #seller input[type=text] {
   border: 0;
@@ -380,18 +395,21 @@ textarea{
 }
 
 .saved-items{
-
-  margin-top:20px;
-  right: 10%;
-  height: 90%;
+ position:absolute;
+  margin-top: 30px;
+  margin-left:5px;
+  margin-right:5px;
+  margin-bottom:5px;
+  right: .5%;
+  height: 100%;
   width: 0px;
   display: none;
   float: right;
   border-radius: 4px;
+  overflow:hidden;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-
 }
+
 #saved-message-frame{
 	margin-top:0;
 	padding-top:0;
@@ -539,6 +557,7 @@ body::-webkit-scrollbar-thumb {
 #purchase{
 	max-width:66%;
 }
+
 
 @font-face {
   font-family: 'Avenir Next';
