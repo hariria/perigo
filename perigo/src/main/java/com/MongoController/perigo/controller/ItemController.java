@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MongoController.perigo.models.Item;
+import com.MongoController.perigo.models.NewBid;
 import com.MongoController.perigo.models.UserWatching;
 import com.MongoController.perigo.repositories.ItemRepository;
 
@@ -54,7 +55,6 @@ public class ItemController {
 		repository.save(update);	
 	}
 	
-	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public Item createItem(@Valid @RequestBody Item item) {
 		item.set_id(ObjectId.get());
@@ -66,5 +66,12 @@ public class ItemController {
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public void deleteItem(@PathVariable ObjectId id) {
 		repository.delete(repository.findBy_id(id));
+	}
+	
+	@RequestMapping(value="/submitbid/{id}", method=RequestMethod.PUT)
+	public void submitNeWBid(@PathVariable("id") ObjectId id, @Valid @RequestBody NewBid bid) {
+		Item update = repository.findBy_id(id);
+		update.setMaxBid(bid.getBid());
+		repository.save(update);
 	}
 }

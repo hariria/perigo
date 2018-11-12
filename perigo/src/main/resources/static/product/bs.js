@@ -32,12 +32,14 @@ function loadUser(user) {
 	
 	document.getElementById('seller-name').innerHTML = name;
 	document.getElementById('location').innerHTML = user['location'];
+	
+	var image_path = user['image'];
 
+	document.getElementById('profile-pic').setAttribute('src', image_path);
 }
 
-function loadItem(item) {
-	console.log(item);
-	
+function loadItem(item) {	
+	sessionStorage.setItem('zipCode', item['zipCode']);
 	document.getElementById('product-name').innerHTML = item['title'];
 	document.getElementById('current-price-1').innerHTML = '$' + item['maxBid'] + '.00';
 	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + item['maxBid'] + '.00';
@@ -94,7 +96,6 @@ function onPageLoad() {
 			"cache-control": "no-cache",
 		},
 		success: function(result) {
-			console.log(result);
 			var userSelling = result['userSellingItem'];
 			$.ajax({
 				async : true,
@@ -181,4 +182,11 @@ function show(){
     
 };
 
+function submitBid() {
+	var objectId = sessionStorage.getItem('objectId');
+	var bidJson = {'bid' : document.getElementById('input-bid').value};
+	console.log(bidJson);
+
+	return false;
+}
 

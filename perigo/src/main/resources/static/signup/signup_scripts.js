@@ -206,7 +206,7 @@ function submit(){
 		'email' : email,
 		'location' : location,
 		'zipCode' : zipCode,
-		'image' : profile_image.name
+		'image' : 'http://localhost:9000/item_images/' + profile_image.name
 	};
 
 	var formData = new FormData();

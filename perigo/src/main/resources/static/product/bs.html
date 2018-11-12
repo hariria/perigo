@@ -19,7 +19,7 @@
 		function initMap(address) {
 
 			if(address === "" || address === null || address === undefined){
-				address = "90089"
+				address = sessionStorage.getItem('zipCode');
 			}
 
 			var map = new google.maps.Map(document.getElementById('map'), {
@@ -60,7 +60,7 @@
 							<div id ="top">
 								<div id="seller-info">
 	                                <div id="">
-	                                <img id="profile-pic" width="30px" height="70px" src="../images/andrew.jpg">
+	                                <img id="profile-pic" width="30px" height="70px">
 	                                    <div id="seller-contact">
 	                                        <h5 id="seller-name"></h5>
 	        								<h6 id="location"></h6>
@@ -163,9 +163,9 @@
 								<p id="current-price-2"></p>
 								<p id="end-date"></p>
 								<p id ="p-inline">Time Left:</p><p id="demo"></p>
-								<form>
-									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00"><br>
-									<input class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
+								<form id="bid-form">
+									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00" required><br>
+									<input onclick="submitBid(); " class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
 								</form>
 							</div>
 
