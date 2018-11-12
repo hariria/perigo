@@ -62,7 +62,7 @@ public class SearchController {
 				@SuppressWarnings("unchecked")
 				List<String> keywords = (List<String>) j.get("keywords");
 				for (String k : keywords) {
-					if (k.toLowerCase().equals(i.toLowerCase())) {
+					if (k.toLowerCase().replaceAll("\\s","").equals(i.toLowerCase())) {
 						setOfItems.add(objectId);
 						break;
 					}

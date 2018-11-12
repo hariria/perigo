@@ -347,7 +347,7 @@ function displayItems(toAdd) {
 	item_image.setAttribute('onClick', "getItem(this)");
 	var image = document.createElement('img');
 	image.setAttribute('class', "item-image-pic");
-	image.setAttribute('src', toAdd['image']);
+	image.setAttribute('src', toAdd['images'][0]);
 	item_image.appendChild(image);
 	item.appendChild(item_image);
 
