@@ -112,6 +112,16 @@ body{
   flex-direction: column;
 }
 
+#profile-pic{
+    margin-left: 60px;
+    margin-top: 30px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
 .browser-bar{
 	position: relative;
 	height: 75px;
@@ -370,7 +380,7 @@ tr:hover {
 body::-webkit-scrollbar {
   width: 10px;
 }
- 
+
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
@@ -383,7 +393,7 @@ body::-webkit-scrollbar-thumb {
 #saved-items::-webkit-scrollbar {
   width: 10px;
 }
- 
+
 #saved-items::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
@@ -429,6 +439,11 @@ body::-webkit-scrollbar-thumb {
 
 .fa-times:hover{
     color: #CD5C5C;
+}
+
+#price-container{
+    display: flex;
+    flex-direction: row;
 }
 
 .listing-input{
