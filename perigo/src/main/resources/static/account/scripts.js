@@ -8,14 +8,14 @@ function formSubmission() {
 	var zipCode = document.getElementsByName('zipcode')[0].value;
 	var price = document.getElementsByName('price')[0].value;
 	var location = sessionStorage.getItem('location');
-	
+
 	var formData = new FormData();
 	var images = [];
 	for (var i = 0; i < imagesToSend.length; i++) {
 		formData.append('files', imagesToSend[i]);
 		images.push('http://localhost:9000/item_images/' + imagesToSend[i].name);
 	}
-	
+
 	$.ajax({
 		url: 'http://localhost:9000/uploadMultipleFiles',
 	    type: 'post',
@@ -29,11 +29,11 @@ function formSubmission() {
 			console.log('Error in uploading images');
 		}
 	})
-	
-	
+
+
 	var currentDateTime = new Date().getTime();
-	    	
-	var toSendJson = 
+
+	var toSendJson =
 		{
 			'title' : title,
 			'description' : description,
@@ -47,7 +47,7 @@ function formSubmission() {
 			'maxBid' : price,
 			'location' : location
 		}
-	    	    	  
+
 	$.ajax({
 		url: 'http://localhost:9000/item/',
 		type: 'POST',
@@ -65,28 +65,30 @@ function formSubmission() {
 					console.log(onError);
 				}
 			})
-		
+
 		},
 		error: function(error) {
 			console.log(error);
 		}
-		
+
 	})
 
-	
-	
+
+
 	window.location.href = "/account/account.html";
-	
+
 }
 
 function handleClick(option) {
 	var clicked = option.value;
+    var price_field = document.getElementById('price-field');
 	if (clicked === 'buy it now') {
 		swal({
 		    title: "Buy It Now",
 		    text: "This option will keep your item listed indefinitely at a fixed price",
 		    icon: "warning"
-		})	
+		})
+        price_field.placeholder = "Buy it now price...";
 		sessionStorage.setItem('buyType', 'buyItNow');
 	}
 	else {
@@ -94,26 +96,27 @@ function handleClick(option) {
 		    title: "Auction",
 		    text: "This option will keep your item listed as an auction for exactly a week",
 		    icon: "warning"
-		})	
+		})
+        price_field.placeholder = "Starting bid price...";
 		sessionStorage.setItem('buyType', 'auction');
 	}
-	
+
 }
 
 function searchResults(event) {
     if(event.keyCode === 13){
-        event.preventDefault(); 
+        event.preventDefault();
 
     	var query = document.getElementById("search").value;
     	const GetItemUrl = 'http://localhost:9000/search/' + query;
     	$.ajax({
     		url: GetItemUrl,
     		type: 'GET',
-    		success: function(result) {    			
+    		success: function(result) {
     			sessionStorage.setItem('search_results', JSON.stringify(result));
     			window.location.href = '/search_results/search.html';
     		}
-    	}) 
+    	})
     }
 }
 
@@ -412,7 +415,7 @@ function addAListing(){
 }
 
 function pushFileToGlobal(old_file) {
-	
+
 	var oldName = old_file.name.toLowerCase();
 	console.log(oldName);
 	var typeCheck = oldName.indexOf('.jpg');
@@ -423,28 +426,28 @@ function pushFileToGlobal(old_file) {
 	if (typeCheck == '-1') {
 		newFileName += '.png';
 	}
-	
+
 	else {
 		newFileName += '.jpg';
 	}
-	
+
 	myNewFile = new File([old_file], newFileName, {type: old_file.type});
 
 	imagesToSend.push(myNewFile);
-	
+
 	console.log(imagesToSend);
-	
+
 	return myNewFile;
 }
 
 function deleteFromGlobal(filename) {
-	
-	for( var i = 0; i < imagesToSend.length; i++){ 
+
+	for( var i = 0; i < imagesToSend.length; i++){
 		if ( imagesToSend[i].name === filename) {
-			imagesToSend.splice(i, 1); 
+			imagesToSend.splice(i, 1);
 		}
-	} 
-	
+	}
+
 }
 
 function previewFile() {
@@ -467,7 +470,7 @@ function previewFile() {
     icon.onclick = function (){
         var parent = this.parentNode;
         var fileNameAttribute = parent.getAttribute('newFileName');
-        
+
         deleteFromGlobal(fileNameAttribute);
         parent.outerHTML = "";
     }
@@ -479,7 +482,7 @@ function previewFile() {
     image.classList.add('uploaded-image');
     document.getElementById("picture-container").prepend(preview);
     var file = document.querySelector('input[type=file]').files[0];
-    
+
 
     var newFile = pushFileToGlobal(file);
 
@@ -500,7 +503,7 @@ function getCityState(){
     zip = document.getElementById('zipcode').value
     zip = zip.toString();
     console.log("Zip: " + zip);
-    
+
     const Url = "http://api.geonames.org/postalCodeLookupJSON?country=US&username=perigo&postalcode=" + zip;
     console.log(Url);
 	$.ajax({
