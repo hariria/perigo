@@ -54,16 +54,13 @@ function formSubmission() {
 		contentType:'application/json',
 		data : JSON.stringify(toSendJson),
 		success : function(result) {
-
+			console.log(result['_id']);
 			// Routine to add to user listing
 			$.ajax({
 				url: 'http://localhost:9000/user/addnewlisting/' + sessionStorage.getItem('objectId'),
 				type: 'PUT',
 				data: JSON.stringify({'itemId' : result['_id']}),
 			    contentType: "application/json",
-				error: function(onError) {
-					console.log(onError);
-				}
 			})
 		
 		},
@@ -414,7 +411,6 @@ function addAListing(){
 function pushFileToGlobal(old_file) {
 	
 	var oldName = old_file.name.toLowerCase();
-	console.log(oldName);
 	var typeCheck = oldName.indexOf('.jpg');
 
 	var objectId = sessionStorage.getItem('objectId');
@@ -431,9 +427,7 @@ function pushFileToGlobal(old_file) {
 	myNewFile = new File([old_file], newFileName, {type: old_file.type});
 
 	imagesToSend.push(myNewFile);
-	
-	console.log(imagesToSend);
-	
+		
 	return myNewFile;
 }
 

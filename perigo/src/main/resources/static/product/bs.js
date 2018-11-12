@@ -1,5 +1,7 @@
 //Set the date we're counting down to
 var countDownDate = null;
+var currentMaxBid = 0;
+var itemId = "";
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -44,6 +46,8 @@ function loadItem(item) {
 	document.getElementById('current-price-1').innerHTML = '$' + item['maxBid'] + '.00';
 	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + item['maxBid'] + '.00';
 	
+	currentMaxBid = item['maxBid'];
+	
 	var endDate = item['endForSaleDate'];
 	countDownDate = new Date(endDate);
 	
@@ -83,7 +87,7 @@ function loadItem(item) {
 
 function onPageLoad() {
 	var parameters = new URLSearchParams(window.location.search);
-	var itemId = parameters.get('itemId');
+	itemId = parameters.get('itemId');
 
 	// Gets item information
 	$.ajax({
@@ -108,8 +112,9 @@ function onPageLoad() {
 				success : function(onSuccess) {
 					loadUser(onSuccess);
 					loadItem(result);
+					generateSavedItems(onSuccess);
+					checkCookie();
 				}
-
 
 			})
 			
@@ -185,9 +190,150 @@ function show(){
 
 function submitBid() {
 	var objectId = sessionStorage.getItem('objectId');
-	var bidJson = {'bid' : document.getElementById('input-bid').value};
-	console.log(bidJson);
-
-	return false;
+	
+	var bid = document.getElementById('input-bid').value;
+	
+	if (bid === "") {
+		swal("No Bid Entered", "Please enter a bid before submitting", "error");
+		return false;
+	}
+	
+	else if (bid <= currentMaxBid) {
+		swal("Invalid Bid", "Your bid is less than the current price", "error");
+		return false;
+	}
+	else {
+		var bidJson = {'bid' : bid};
+		console.log(bidJson);
+		$.ajax({
+			url: 'http://localhost:9000/item/submitbid/' + itemId,
+			type: "PUT",
+			contentType:'application/json',
+			data: JSON.stringify(bidJson),
+			success: function(result) {
+				console.log('success')
+				window.location.reload();
+			},
+			error: function(error) {
+				console.log('error');
+			}
+		})
+	}
 }
 
+function signInToBid() {
+	swal("Sign In", "You must be signed in to bid on this item", "error");
+}
+
+function checkCookie() {
+	var value = $.cookie("login_cookie");
+	var accountDiv = document.getElementById("account");
+	var aTag = document.createElement('a');
+	if (value == null || value == 'null') {
+		aTag.setAttribute('href', '/signup/signup.html');
+		aTag.innerHTML = 'Sign Up';
+		document.getElementById('bit-submit').setAttribute('onclick', 'signInToBid(); return false;');
+	}
+	else {
+		aTag.setAttribute('href', '/account/account.html');
+		aTag.innerHTML = 'Account';		
+	}
+
+	aTag.setAttribute('style', 'text-decoration: none; color: inherit;')
+	accountDiv.appendChild(aTag);
+}
+
+
+
+function generateSavedItems(result) {
+	var savedItems = result['savedItems'];
+	var userObjectId = sessionStorage.getItem("objectId");
+
+	for (var i = 0; i < savedItems.length; i++) {
+		const Url = 'http://localhost:9000/item/' + savedItems[i]['itemId'];
+		$.ajax({
+			url: Url,
+			type: "GET",
+			dataType: 'JSON',
+			success: function(result) {				
+
+				var tr = document.createElement('tr');
+				tr.setAttribute('id', result['_id']);
+
+				var td1 = document.createElement('td');
+				var table_item_text = document.createElement('div');
+				table_item_text.setAttribute('class', 'table-item-text');
+				table_item_text.setAttribute('data-itemID', result['_id']);
+				table_item_text.setAttribute('onClick', 'getItem(this)');
+				table_item_text.innerHTML = result['title'];
+				td1.appendChild(table_item_text);
+				tr.appendChild(td1);
+
+				var td2 = document.createElement('td');
+				var table_price_text = document.createElement('div');
+				table_price_text.setAttribute('class', 'table-price-text');
+				table_price_text.innerHTML = '$' + result['maxBid'];
+				td2.appendChild(table_price_text);
+				tr.appendChild(td2);
+
+				var td3 = document.createElement('td');
+				var i_class = document.createElement('i');				
+				i_class.setAttribute('class', 'fas fa-times');
+				i_class.setAttribute('style', 'color: #949494;');					
+				i_class.setAttribute('data-itemID', result['_id']);
+				i_class.setAttribute('onClick', 'unsaveItem(this)');
+				td3.appendChild(i_class);
+				tr.appendChild(td3);
+
+				document.getElementById('saved-table').appendChild(tr);
+
+			},
+			error: function(error) {
+				console.log('Error: ' + error);
+			}
+		})
+	}
+}
+
+function unsaveItem(element){
+	var elementID = element.getAttribute("data-itemID");
+	removeSavedItem(elementID);
+	removeRow(elementID);
+};
+
+
+function removeSavedItem(elementID) {
+	const UserUrl = 'http://localhost:9000/user/removesaveditem/' + sessionStorage.getItem('objectId');
+	$.ajax({
+		url: UserUrl,
+		type: "PUT",
+		contentType:'application/json',
+		data: JSON.stringify({'itemId' : elementID}),
+		success: function(result) {
+			
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
+
+	const ItemUrl = 'http://localhost:9000/item/removewatchinguser/' + elementID;
+	$.ajax({
+		url: ItemUrl,
+		type: "PUT",
+		contentType:'application/json',
+		data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
+
+		success: function(result) {
+
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
+}
+
+
+function removeRow(elementID){
+	document.getElementById(elementID).remove();
+}

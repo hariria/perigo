@@ -6,9 +6,11 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="bs.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 	<script src="bootstrap.js"></script>
 	<script src="bs.js"></script>
@@ -49,8 +51,10 @@
 				<div class="icon"><img class="icon-image" src="../images/icon.png"/></div>
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame" id="header-frame">
-					<div class="header-text" onClick="showSavedItems()">Saved</div>
-					<div class="header-text">Sign In</div>
+					<div id="saved" class="header-text" onClick="showSavedItems()">Saved</div>
+					<div class="header-text" id="account"></div>
+				<div class="header-text"
+					onclick="window.location.href = '/browse/browse.html'">Browse</div>
 				</div>
 			</div>
 			<div class="main">
@@ -87,37 +91,6 @@
 								<div class="saved-title">Saved Items</div>
 								<hr style="background-color: #E5E5E5; margin-bottom: 0px"/>
 								<table id="saved-table">
-									<tr>
-										<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
-										<td><div class="table-price-text">$100</div></td>
-										<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
-									</tr>
-									<tr>
-										<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
-										<td><div class="table-price-text">$100</div></td>
-										<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
-									</tr>
-									<tr>
-										<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
-										<td><div class="table-price-text">$100</div></td>
-										<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
-									</tr>
-									<tr>
-										<td><div class="table-item-text" data-itemID="1" onClick="getItem(this)">Lorem Ipsum</div></td>
-										<td><div class="table-price-text">$100</div></td>
-										<td><i class="fas fa-times" style="color: #949494;" data-itemID="1" onClick="unsaveItem(this)"></i></td>
-									</tr>
-									<tr>
-										<td><div class="table-item-text" data-itemID="2" onClick="getItem(this)">Lorem Ipsum</div></td>
-										<td><div class="table-price-text">$100</div></td>
-										<td><i class="fas fa-times" style="color: #949494;" data-itemID="2" onClick="unsaveItem(this)"></i></td>
-									</tr>
-									<tr>
-										<td><div class="table-item-text" data-itemID="3" onClick="getItem(this)">Lorem Ipsum</div></td>
-										<td><div class="table-price-text">$100</div></td>
-										<td><i class="fas fa-times" style="color: #949494;" data-itemID="3" onClick="unsaveItem(this)"></i></td>
-									</tr>
-									
 								</table>
 							</div>
 						</div>
@@ -164,8 +137,8 @@
 								<p id="end-date"></p>
 								<p id ="p-inline">Time Left:</p><p id="demo"></p>
 								<form id="bid-form">
-									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00" required><br>
-									<input onclick="submitBid(); " class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
+									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00"><br>
+									<input onclick="submitBid(); return false; " class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
 								</form>
 							</div>
 
