@@ -177,6 +177,8 @@ function clickedHeart(element){
 
 function getItem(element){
 	var elementID = element.getAttribute("data-itemID");
+	var url = "http://localhost:9000/product/bs.html?itemId=" + elementID;
+	window.location.href = url;
 };
 
 function unsaveItem(element){

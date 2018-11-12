@@ -368,7 +368,9 @@ function clickedHeart(element){
 
 function getItem(element){
 	var elementID = element.getAttribute("data-itemID");
-	console.log(elementID);
+	var url = "http://localhost:9000/product/bs.html?itemId=" + elementID;
+	console.log(url);
+	window.location.href = url;
 };
 
 function unsaveItem(element){
@@ -555,3 +557,7 @@ $(window).bind('beforeunload', function(){
 
 	}
 });
+
+function goToBrowse(){
+	window.location.href = "../browse/browse.html";
+}
