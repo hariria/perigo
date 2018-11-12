@@ -430,13 +430,9 @@ function pushFileToGlobal(old_file) {
 	myNewFile = new File([old_file], newFileName, {type: old_file.type});
 
 	imagesToSend.push(myNewFile);
-<<<<<<< HEAD
-		
-=======
+
 
 	console.log(imagesToSend);
-
->>>>>>> 6e7aad919741adf8e4778359a923a3f302143534
 	return myNewFile;
 }
 
