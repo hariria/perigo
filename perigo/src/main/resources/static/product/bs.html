@@ -11,13 +11,42 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<script src="bootstrap.js"></script>
-		<script src="bs.js"></script>
-	
+	<script src="bs.js"></script>
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsxvulwCSEYSCDonAHMCWYPjvbbGNU5XQ&callback=initMap">
+	</script>
+	<script type="text/javascript">
+		function initMap(address) {
+
+			if(address === "" || address === null || address === undefined){
+				address = "90089"
+			}
+
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 15,
+				center: {lat: 34.0220127, lng: -118.2892046}
+			});
+			var geocoder = new google.maps.Geocoder();
+
+			geocoder.geocode({'address': address}, function(results, status) {
+				if (status === 'OK') {
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+						map: map,
+						position: results[0].geometry.location
+					});
+				} else {
+					console.log('Geocode was not successful for the following reason: ' + status);
+
+				}
+			});
+      	}
+	</script>
 
 	<body onload="onPageLoad();">
 		<div id="outerContainer">
 			<div class="header">
-				<div class="icon"><img class="icon-image" src="../illustrations/icons/perigoIcon.png"/></div>
+				<div class="icon"><img class="icon-image" src="../images/icon.png"/></div>
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame" id="header-frame">
 					<div class="header-text" onClick="showSavedItems()">Saved</div>
@@ -31,7 +60,7 @@
 							<div id ="top">
 								<div id="seller-info">
 	                                <div id="">
-	                                <img id="profile-pic" width="30px" height="70px" src="./pic/Andrew.jpg">
+	                                <img id="profile-pic" width="30px" height="70px" src="../images/andrew.jpg">
 	                                    <div id="seller-contact">
 	                                        <h5 id="seller-name"></h5>
 	        								<h6 id="location"></h6>
@@ -162,6 +191,7 @@
 						<div class="product-map">
 							<h1>Map</h1>
 							<hr>
+							<div id="map"></div>
 						</div>
 
 					</div>

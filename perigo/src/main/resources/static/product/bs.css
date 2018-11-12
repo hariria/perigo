@@ -631,6 +631,11 @@ body::-webkit-scrollbar-thumb {
   max-width:100%;
 }
 
+#map{
+  width: 750px;
+  height: 500px;
+}
+
 .item-active, .item{
   min-height: 400px;
   height: 400px;
@@ -638,43 +643,43 @@ body::-webkit-scrollbar-thumb {
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("./fonts/AvenirNext-Regular.ttf");
+  src: url("../css/fonts/AvenirNext-Regular.ttf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("./fonts/AvenirNext-Medium.ttf");
+  src: url("../css/fonts/AvenirNext-Medium.ttf");
   font-weight: 200;
 }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("./fonts/AvenirNext-Bold.ttf");
+  src: url("../css/fonts/AvenirNext-Bold.ttf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: 'Avenir Next Italic';
-  src: url("./fonts/AvenirNext-UltraLightItalic.ttf");
+  src: url("../css/fonts/AvenirNext-UltraLightItalic.ttf");
   font-weight: lighter;
 }
 
 @font-face {
   font-family: 'Avenir Next Italic';
-  src: url("./fonts/AvenirNext-Italic.ttf");
+  src: url("../css/fonts/AvenirNext-Italic.ttf");
   font-weight: normal;
   font-style : normal;
 }
 
 @font-face {
   font-family: 'Avenir Next Italic';
-  src: url("./fonts/AvenirNext-MediumItalic.ttf");
+  src: url("../css/fonts/AvenirNext-MediumItalic.ttf");
   font-weight: 200;
 }
 
 @font-face {
   font-family: 'Avenir Next Italic';
-  src: url("./fonts/AvenirNext-BoldItalic.ttf");
+  src: url("../css/fonts/AvenirNext-BoldItalic.ttf");
   font-weight: bold;
 }
