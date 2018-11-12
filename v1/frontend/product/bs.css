@@ -622,9 +622,14 @@ body::-webkit-scrollbar-thumb {
   max-width:100%;
 }
 
-.item-active, .item{
-  min-height: 400px;
-  height: 400px;
+.carousel{
+  width: 750px;
+  height: 500px
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img{
+  height: 500px;
+  width: 750px;
 }
 
 @font-face {
