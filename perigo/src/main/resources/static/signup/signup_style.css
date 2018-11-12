@@ -2,7 +2,7 @@ body{
 	background: #f2f2f2
 }
 
-input {
+input{
     outline: none;
     border: none;
 }
@@ -37,11 +37,50 @@ input {
 }
 
 #icon{
-	padding-top: 50px;
-	align-self: center;
 	max-width:100px;
 	max-height: 100px;
-	padding-bottom: 75px;
+	text-align: center;
+}
+
+#icon-holder{
+	align-self: center;
+	padding-top: 50px;
+	height: 100px;
+	width: 100px;
+	padding-bottom: 50px;
+}
+
+#image-input-frame input[type=file]{
+    opacity: 0;
+    cursor: pointer;
+    height: 175px;
+    width: 175px;
+    position: absolute;
+}
+
+#image-input-frame{
+	height: 175px;
+    width: 175px;
+    text-align: center;
+    overflow: hidden;
+    flex: 0 1 calc(25% - 40px);
+    border: 2px dashed #adadad;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 4;
+    display: none;
+}
+
+#image-input-frame:hover{
+	transition: all .5s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+#profile-image{
+	display: none;
 }
 
 #usernameContainer, #passwordContainer{
@@ -112,6 +151,10 @@ input {
     color: #cc0000;
     top: 0px;
     padding: 5px 5px 0px 5px;
+}
+
+.redText{
+	color: #cc0000;
 }
 
 .redPlaceholder::-webkit-input-placeholder {

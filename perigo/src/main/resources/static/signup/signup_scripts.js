@@ -1,3 +1,34 @@
+var profile_image;
+function previewFile() {
+
+    var preview = document.createElement("div");
+    var image = document.createElement("img");
+
+    preview.appendChild(image);
+    preview.classList.add('picture-item');
+    preview.style.position = "relative";
+    image.classList.add('uploaded-image');
+    $('#image-container').html(preview);
+    var file = document.querySelector('input[type=file]').files[0];
+
+    document.getElementById("image-input-frame").style.border = "0px dashed #adadad";
+
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+        image.src = reader.result;
+        icon.parentNode.setAttribute('newFileName', file.name);
+        image.setAttribute('newFileName', file.name);
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+    
+    //Sets the profile image
+    //TOD: ENCODE THIS THE CORRECT WAY AND MAKE SURE THIS ACTUALLY SAVES THE IMAGE
+    profile_image = file;
+}
+
 function next(){
 
 	var username = document.getElementById('username').value;
@@ -25,14 +56,28 @@ function next(){
 	document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("passwordContainer").style.borderBottom = "2px solid #adadad";
 
+	$("#icon").fadeOut(250);
 	setTimeout(function(){
+		
 		$('#main-container').animate({width: "500px"}, 500);
+		$('#icon-holder').animate({width: "175px"}, 500);
+		$('#icon-holder').animate({height: "175px"}, 500);
+		
 		
 		setTimeout(function(){
-			$('#main-container').animate({height: "925px"}, 500); 
+			$('#main-container').animate({height: "1000px"}, 500); 
 			$('#sectionTwo').animate({height: "300px"}, 500); 
+			
+			$("#image-input-frame").delay(400).fadeIn();
+			$("#profile-image").delay(400).fadeIn();
 
 			setTimeout(function(){
+				$("#image-input-frame").css("display", "flex");
+			}, 400);
+
+
+			setTimeout(function(){
+				
 				$("#firstNameContainer").delay(250).fadeIn();
 				$("#lastNameContainer").delay(250).fadeIn();
 
@@ -43,7 +88,10 @@ function next(){
 				$("#next").fadeOut();
 
 				setTimeout(function(){
+
 					$("#next").hide();
+
+					
 				}, 250);
 
 				setTimeout(function(){
@@ -107,6 +155,11 @@ function submit(){
 		invalid = true;
 	}
 
+	if(profile_image === null || profile_image === undefined || profile_image === ""){
+		$('#upload-text').addClass('redText');
+		document.getElementById("image-input-frame").style.border = "2px solid #cc0000";
+	}
+
 	if(invalid){
 		return;
 	}
@@ -118,6 +171,7 @@ function submit(){
 	$('#email').removeClass('redPlaceholder');
 	$('#location').removeClass('redPlaceholder');
 	$('#zipCode').removeClass('redPlaceholder');
+	$('#upload-text').removeClass('redText');
 	document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("passwordContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("firstNameContainer").style.borderBottom = "2px solid #adadad";
@@ -125,6 +179,7 @@ function submit(){
 	document.getElementById("emailContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("locationContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("zipContainer").style.borderBottom = "2px solid #adadad";
+	document.getElementById("image-input-frame").style.border = "2px solid #adadad";
 
 
 	var userToTransfer = {

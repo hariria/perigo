@@ -15,7 +15,14 @@
 	<body>
 		<div id="main-container">
 			<div id="header">Welcome</div>
-			<img src="../images/icon.png" id="icon">
+			<div id="icon-holder">
+				<img src="../images/icon.png" id="icon">
+				<div id="image-input-frame">
+					<div id="image-container"></div>
+					<p id="upload-text">upload profile picture</p>
+					<input type="file" name="image" id="profile-image" multiple="" accept="image/jpeg, image/png" onchange="previewFile()">
+				</div>
+			</div>
 			<form name="sign-up" id="sign-up">
 				<div id="usernameContainer"><input type="text" name="username" id="username" placeholder="username"></div>
 				<div id="usernameError"></div>
