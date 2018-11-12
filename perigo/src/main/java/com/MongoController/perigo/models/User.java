@@ -29,6 +29,7 @@ public class User implements Serializable {
 	public int userRating;
 	public List<SavedItem> savedItems;
 	public List<SavedItem> sellingItems;
+	public String image;
 	
 	public User() {
 
@@ -120,6 +121,14 @@ public class User implements Serializable {
 
 	public void setSavedItems(List<SavedItem> savedItems) {
 		this.savedItems = savedItems;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

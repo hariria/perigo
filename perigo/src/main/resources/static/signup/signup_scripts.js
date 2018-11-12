@@ -1,4 +1,5 @@
 var profile_image;
+
 function previewFile() {
 
     var preview = document.createElement("div");
@@ -26,7 +27,22 @@ function previewFile() {
     
     //Sets the profile image
     //TOD: ENCODE THIS THE CORRECT WAY AND MAKE SURE THIS ACTUALLY SAVES THE IMAGE
-    profile_image = file;
+    
+	var oldName = file.name.toLowerCase();
+	var typeCheck = oldName.indexOf('.jpg');
+
+	var newFileName = btoa(oldName);
+	if (typeCheck == '-1') {
+		newFileName += '.png';
+	}
+	
+	else {
+		newFileName += '.jpg';
+	}
+	
+	myNewFile = new File([file], newFileName, {type: file.type});
+    
+    profile_image = myNewFile;
 }
 
 function next(){
@@ -181,7 +197,7 @@ function submit(){
 	document.getElementById("zipContainer").style.borderBottom = "2px solid #adadad";
 	document.getElementById("image-input-frame").style.border = "2px solid #adadad";
 
-
+	
 	var userToTransfer = {
 		'firstName' : firstName,
 		'lastName' : lastName,
@@ -189,9 +205,13 @@ function submit(){
 		'password' : password,
 		'email' : email,
 		'location' : location,
-		'zipCode' : zipCode
+		'zipCode' : zipCode,
+		'image' : profile_image.name
 	};
 
+	var formData = new FormData();
+	formData.append('file', profile_image);
+	
 	const Url = 'http://localhost:9000/user/signup';
 
 	$.ajax({
@@ -201,17 +221,34 @@ function submit(){
 
 		data: JSON.stringify(userToTransfer),
 		success: function(result) {	
+			
+			$.ajax({
+				url: 'http://localhost:9000/uploadFile',
+			    type: 'post',
+			    data: formData,
+			    contentType: false,
+			    processData: false,
+			    success: function(data) {
+			    	console.log('Images uploaded succesfully!');
+					document.cookie = 'login_cookie='+result+';path=/';
+					
+					swal({
+					    title: "Account created!",
+					    text: "Your perigo account has been created!",
+					    icon: "success"
+					}).then(function() {
+					    window.location = window.location.href = 'http://localhost:9000/browse/browse.html';
+					});
+					
+			    },
+				error: function(error) {
+					console.log('Error in uploading images');
+				}
+			})
+			
+			
+			
 
-			
-			document.cookie = 'login_cookie='+result+';path=/';
-			
-			swal({
-			    title: "Account created!",
-			    text: "Your perigo account has been created!",
-			    icon: "success"
-			}).then(function() {
-			    window.location = window.location.href = 'http://localhost:9000/browse/browse.html';
-			});
 		
 		},
 		error: function(error){
@@ -231,6 +268,8 @@ function submit(){
 			
 		}
 	})
+	
+	
 }
 
 

@@ -140,7 +140,7 @@ public class UserController {
 		userToAdd.setSellingItems(new ArrayList<SavedItem>());
 		userToAdd.setUsername(userToTransfer.getUsername());
 		userToAdd.setHash(hash(userToTransfer.getPassword()));
-		
+		userToAdd.setImage(userToTransfer.getImage());
 		repository.save(userToAdd);
 		
 		return new ResponseEntity<>(userToAdd.get_id().toHexString(), HttpStatus.OK);

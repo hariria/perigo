@@ -47,7 +47,7 @@ function formSubmission() {
 			'maxBid' : price,
 			'location' : location
 		}
-	    	    	    	
+	    	    	  
 	$.ajax({
 		url: 'http://localhost:9000/item/',
 		type: 'POST',

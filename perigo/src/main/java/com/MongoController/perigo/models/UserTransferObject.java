@@ -8,6 +8,7 @@ public class UserTransferObject {
 	private String email;
 	private String location;
 	private String zipCode;
+	private String image;
 
 	public UserTransferObject(String firstName, String lastName, String username, String password, String email,
 			String location, String zipCode) {
@@ -20,6 +21,16 @@ public class UserTransferObject {
 		this.location = location;
 		this.zipCode = zipCode;
 	}
+
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 
 	public String getFirstName() {
 		return firstName;

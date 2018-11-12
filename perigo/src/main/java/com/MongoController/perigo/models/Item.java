@@ -19,6 +19,7 @@ public class Item {
 	public String title;
 	public String description;
 	public String condition;
+	public int zipCode;
 	public boolean forSale;
 	
 	public String buyType;
@@ -64,6 +65,15 @@ public class Item {
 		this.usersWatching = usersWatching;
 		this.keywords = keywords;
 		this.buyType = buyType;
+	}
+
+	
+	public int getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(int zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public ObjectId get_id() {
