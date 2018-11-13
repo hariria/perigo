@@ -238,7 +238,23 @@ function sendEmail() {
 		}
 	})
 	
-	
+	closeMessageTab();
+}
+
+function closeMessageTab(){
+
+	document.getElementById("seller").style.height = "265px";
+	document.getElementById("top").style.height = "230px";
+	document.getElementById("saved-items").style.marginTop = "15px"
+	document.getElementById("button").style.display = "block";
+	$('#temp').animate({width: "0px"}, 0);
+	document.getElementById("temp").style.display = "none";
+
+	swal("Message Sent", "Your message was sent to " + sellerName, "success");
+
+	document.getElementById("input-name").value = "";
+	document.getElementById("email-message").value = "";
+	document.getElementById("input-email").value = "";
 }
 
 function show(){
