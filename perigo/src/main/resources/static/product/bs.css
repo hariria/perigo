@@ -609,6 +609,12 @@ body::-webkit-scrollbar-thumb {
   margin-top:5px;
   max-width: 100%;
 }
+
+#local-user-listing {
+  margin-top:5px;
+  max-width: 100%;
+}
+
 .format{
   display:inline;
   margin:0;
@@ -632,6 +638,45 @@ body::-webkit-scrollbar-thumb {
   top: 0px;
 }
 
+#editListing{
+  position: relative;
+  margin-right: 10px;
+  color: black;
+  background: white;
+  border-radius: 25px;
+  border-color: grey;
+  width: 30%;
+  height: 40px;
+  font-family: Avenir Next;
+  font-size: 15px;
+  border: 2px solid #808080;
+  transition: all .5s;
+}
+
+#deleteListing{
+  position: relative;
+  color: white;
+  background: #f15a57;
+  border-radius: 25px;
+  border: 2px solid #f15a57;
+  width: 30%;
+  height: 40px;
+  font-family: Avenir Next;
+  font-size: 15px;
+  transition: all .5s;
+}
+
+#editListing:hover{
+  color: white;
+  background:rgb(244, 183, 182);
+  border: 2px solid rgb(255, 190, 190);
+}
+
+#deleteListing:hover{
+  color: white;
+  background: #c04845;
+  border: 2px solid #c04845;
+}
 
 #buy-now{
   max-width:100%;
