@@ -613,6 +613,7 @@ body::-webkit-scrollbar-thumb {
 #local-user-listing {
   margin-top:5px;
   max-width: 100%;
+  display: none;
 }
 
 .format{
