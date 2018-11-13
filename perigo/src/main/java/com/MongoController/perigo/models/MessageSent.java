@@ -36,7 +36,5 @@ public class MessageSent {
 	}
 	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
-	}
-	
-	
+	}	
 }

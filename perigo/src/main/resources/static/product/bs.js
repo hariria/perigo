@@ -51,7 +51,7 @@ function loadUser(user) {
 	console.log(sessionStorage.getItem('objectId'));
 	if (user['_id'] === sessionStorage.getItem('objectId')) {
 		document.getElementById('bid-now').style.display = "None";
-		
+		document.getElementById('local-user-listing').style.display="Block";
 	}
 }
 
@@ -94,6 +94,7 @@ function loadItem(item) {
 	for (var i = 0; i < keywords.length; i++) {
 		var button = document.createElement('button');
 		button.setAttribute('type', 'button');
+		button.setAttribute('onclick', 'clickKeyword(this)');
 		button.innerHTML = keywords[i];
 		category.appendChild(button);
 	}
