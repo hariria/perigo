@@ -14,5 +14,6 @@ public class AlertService {
     
     public void executeAsynchronously() {
         taskExecutor.execute(new AlertThread());
+        taskExecutor.execute(new RemoveExpiredThread());
     }
 }
