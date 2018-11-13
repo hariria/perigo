@@ -70,9 +70,9 @@ public class ItemController {
 	
 	@RequestMapping(value="/submitbid/{id}", method=RequestMethod.PUT)
 	public void submitNewBid(@PathVariable("id") ObjectId id, @Valid @RequestBody NewBid bid) {
-		System.out.println(bid.getBid());
 		Item update = repository.findBy_id(id);
 		update.setMaxBid(bid.getBid());
+		update.setHighestBidder(bid.getHighestBidder());
 		repository.save(update);
 	}
 }
