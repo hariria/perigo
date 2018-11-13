@@ -216,7 +216,33 @@ function sendEmail() {
 	var content = document.getElementById('email-message').value; 
 	var sender = document.getElementById('input-email').value;
 	var receiver = sellerEmail;
-		
+	var invalid = false;
+
+	if(subject === null || subject === ""){
+		$('#input-name').addClass('redPlaceholder');
+		invalid = true;
+	}
+
+	if(content === null || content ===  ""){
+		$('#email-message').addClass('redPlaceholder');
+		invalid = true;
+	}
+
+	if(sender === null || sender ===  ""){
+		$('#input-email').addClass('redPlaceholder');
+		invalid = true;
+	}
+
+	if(invalid){
+		console.log("Invalid");
+		return;
+	}
+
+	//Remove red placeholder text after passing non-null check
+	$('#input-name').removeClass('redPlaceholder');
+	$('#email-message').removeClass('redPlaceholder');
+	$('#input-email').removeClass('redPlaceholder');
+
 	var emailJson = 
 		{
 			'subject' : subject,
@@ -244,8 +270,8 @@ function sendEmail() {
 
 function closeMessageTab(){
 
-	document.getElementById("seller").style.height = "265px";
-	document.getElementById("top").style.height = "230px";
+	document.getElementById("seller").style.height = "270px";
+	document.getElementById("top").style.height = "235px";
 	document.getElementById("saved-items").style.marginTop = "15px"
 	document.getElementById("button").style.display = "block";
 	$('#temp').animate({width: "0px"}, 0);
@@ -428,4 +454,8 @@ function removeSavedItem(elementID) {
 
 function removeRow(elementID){
 	document.getElementById(elementID).remove();
+}
+
+function goToBrowse(){
+	window.location.href = "../browse/browse.html";
 }

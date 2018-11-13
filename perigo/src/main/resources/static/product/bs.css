@@ -237,6 +237,7 @@ hr {
 }
 
 #seller {
+  height: 270px;
   margin: 8px;
   width: 95%;
   overflow-y:auto;
@@ -244,6 +245,7 @@ hr {
 }
 
 #top{
+  height: 235px;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 10px;
@@ -696,6 +698,10 @@ body::-webkit-scrollbar-thumb {
 .item-active, .item{
   min-height: 400px;
   height: 400px;
+}
+
+.redPlaceholder::-webkit-input-placeholder {
+    color: #cc0000;
 }
 
 @font-face {
