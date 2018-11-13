@@ -1,3 +1,6 @@
+
+// You need to have all the following code for using sockets on other pages
+
 var stompClient = null;
 
 function setConnected(connected) {
@@ -17,9 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/user/queue/bidalerts', function (alert) {
+        	// Here's where you display notifications in your div
         	showNotification(alert.body);
         });
         stompClient.subscribe('/user/queue/pricealerts', function (alert) {
+        	// This is only necessary on the product page, it updates the price of the item
         	document.getElementById('current-price-1').innerHTML = '$' + alert.body + '.00';
         	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + alert.body + '.00';
         });    
