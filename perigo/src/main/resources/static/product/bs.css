@@ -615,14 +615,21 @@ body::-webkit-scrollbar-thumb {
   padding:0;
 }
 
+#bid-form{
+	display: flex;
+	flex-direction: column;
+}
+
 .bid-h2 {
   padding:0;
   display: inline;
 }
 
-.bid-submit {
+.bit-submit {
   width:500px;
   transition: all .5s;
+  margin-top: 30px;
+  top: 0px;
 }
 
 

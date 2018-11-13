@@ -133,12 +133,18 @@
 							<hr>
 
 							<div id="bid-now">
-								<p id="current-price-2"></p>
+								<h2>Time</h2>
 								<p id="end-date"></p>
 								<p id ="p-inline">Time Left:</p><p id="demo"></p>
 								<form id="bid-form">
-									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00"><br>
-									<input onclick="submitBid(); return false; " class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
+									<h2 style="margin-top: 30px;">Price</h2>
+									<p id="current-price-2"></p>
+									<div>
+										<h2 class = "bid-h2">Enter Price: $</h2> 
+										<input id ="input-bid" type="number" name="bid" placeholder="00">
+									</div>
+									<br>
+									<input onclick="submitBid(); return false;" style="top: 0px;" class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
 								</form>
 							</div>
 

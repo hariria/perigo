@@ -43,7 +43,6 @@ function loadUser(user) {
 	console.log(user['_id']);
 	console.log(sessionStorage.getItem('objectId'));
 	if (user['_id'] === sessionStorage.getItem('objectId')) {
-		console.log('in here');
 		document.getElementById('bid-now').style.display = "None";
 		
 	}
