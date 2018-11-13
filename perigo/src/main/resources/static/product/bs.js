@@ -3,6 +3,7 @@ var countDownDate = null;
 var currentMaxBid = 0;
 var itemId = "";
 var sellerEmail = "";
+var sellerName = "";
 
 // Update the count down every 1 second
 function timeSet() {
@@ -39,6 +40,7 @@ function loadUser(user) {
 	document.getElementById('location').innerHTML = user['location'];
 	
 	sellerEmail = user['email'];
+	sellerName = name;
 	
 	var image_path = user['image'];
 
@@ -213,15 +215,28 @@ function sendEmail() {
 	var content = document.getElementById('email-message').value; 
 	var sender = document.getElementById('input-email').value;
 	var receiver = sellerEmail;
-	
+		
 	var emailJson = 
 		{
 			'subject' : subject,
 			'content' : content,
 			'sender' : sender,
-			'receiver' : receiver
+			'receiver' : receiver,
+			'sellerName' : sellerName
 		}
 	
+	$.ajax({
+		url : 'http://localhost:9000/sendmessage',
+		method : 'post',
+		data : JSON.stringify(emailJson),
+		contentType:'application/json',
+		success: function(success) {
+			
+		},
+		error: function(error) {
+
+		}
+	})
 	
 	
 }
