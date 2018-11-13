@@ -219,12 +219,16 @@ hr {
 
 .carousel{
   width: 750px;
-  height: 500px
+  height: 400px
 }
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img{
-  height: 500px;
-  width: 750px;
+  height: 400px;
+  width: 750px; 
+  background-repeat: no-repeat;
+  object-fit: cover;
+  /* max-width: 100%;
+  max-height: 100%; */
 }
 
 .description-specific {

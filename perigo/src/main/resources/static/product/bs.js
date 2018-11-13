@@ -38,6 +38,15 @@ function loadUser(user) {
 	var image_path = user['image'];
 
 	document.getElementById('profile-pic').setAttribute('src', image_path);
+	
+	
+	console.log(user['_id']);
+	console.log(sessionStorage.getItem('objectId'));
+	if (user['_id'] === sessionStorage.getItem('objectId')) {
+		console.log('in here');
+		document.getElementById('bid-now').style.display = "None";
+		
+	}
 }
 
 function loadItem(item) {	
@@ -203,7 +212,10 @@ function submitBid() {
 		return false;
 	}
 	else {
-		var bidJson = {'bid' : bid};
+		var bidJson = {
+			'bid' : bid,
+			'highestBidder' : sessionStorage.getItem('objectId')
+		};
 		console.log(bidJson);
 		$.ajax({
 			url: 'http://localhost:9000/item/submitbid/' + itemId,
