@@ -17,6 +17,7 @@ import com.MongoController.perigo.models.Item;
 import com.MongoController.perigo.models.NewBid;
 import com.MongoController.perigo.models.UserWatching;
 import com.MongoController.perigo.repositories.ItemRepository;
+import com.MongoController.perigo.sockets.ServerSocket;
 
 @RestController
 @RequestMapping("/item")
@@ -71,8 +72,16 @@ public class ItemController {
 	@RequestMapping(value="/submitbid/{id}", method=RequestMethod.PUT)
 	public void submitNewBid(@PathVariable("id") ObjectId id, @Valid @RequestBody NewBid bid) {
 		Item update = repository.findBy_id(id);
+		
+		// Notify old bidder they've been outbid
+		ServerSocket.AddOutBidUser(update.getHighestBidder().toString(), update.getTitle());
+		
 		update.setMaxBid(bid.getBid());
 		update.setHighestBidder(bid.getHighestBidder());
+		
+		// Send price update to all sockets
+		ServerSocket.AddUpdatedItem(update.get_id().toString(), (double)bid.getBid());
+		
 		repository.save(update);
 	}
 }
