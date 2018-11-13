@@ -25,11 +25,17 @@
 	<script type="text/javascript">
 		function clickKeyword(element){
 			var keyword = element.innerHTML;
-			console.log(keyword);
+			const GetItemUrl = 'http://localhost:9000/search/' + keyword;
+			$.ajax({
+				url: GetItemUrl,
+				type: 'GET',
+				success: function(result) {    			
+					sessionStorage.setItem('search_results', JSON.stringify(result));
+					window.location.href = '/search_results/search.html';
+				}
+			}) 
 		}
-
 	</script>
-
 	<body onload="onPageLoad();">
 		<div id="outerContainer">
 			<div class="header">
