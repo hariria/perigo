@@ -1,7 +1,10 @@
 package com.MongoController.perigo.sockets;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Set;
 
 import org.bson.types.ObjectId;
@@ -10,7 +13,14 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.client.RestTemplate;
 
+import com.MongoController.perigo.models.Item;
+import com.MongoController.perigo.models.UserWatching;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 
@@ -68,7 +78,39 @@ public class AlertController {
     			}
     			
     		}
-    		
+    		  		
+	        String url = "http://localhost:9000/item/" + item;
+	        RestTemplate restTemplate = new RestTemplate();
+	        String responseEntity = restTemplate.getForObject(url, String.class);
+	        ObjectMapper objectMapper = new ObjectMapper();
+			Item allItems = null;
+			try {
+				allItems = objectMapper.readValue(responseEntity, new TypeReference<Item>(){});
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+    		List<UserWatching> usersWatchingItem = allItems.getUsersWatching();
+			Double newPrice = updatedItems.get(item);
+			
+	        for (UserWatching user : usersWatchingItem) {
+	        	Collection<StompPrincipal> usersWatchingSockets = sessionMap.get(user.getUserWatchingId().toString());
+    			for (StompPrincipal stp : usersWatchingSockets) {
+    				//System.out.print(stp.getItem());   
+					//System.out.println(item);
+    				String message = "NEW BID HAS BEEN PLACED ON " + allItems.getTitle() + " FOR $" + newPrice.intValue() + ".00";
+ 					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/bidalerts", message);
+				
+    			}
+	        }
+	            		
     		ServerSocket.ClearUpdatedItem(item, updatedItems.get(item));
    
     	}
