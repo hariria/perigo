@@ -143,14 +143,16 @@ function retrieveUserInfo() {
 			var location = result['location'];
 			var zipCode = result['zipCode'];
 			var rating = result['userRating'];
-
+			var image = result['image'];
+			
 			document.getElementById('email-address').innerHTML = email;
 			document.getElementById('firstName-field').innerHTML = firstName;
 			document.getElementById('lastName-field').innerHTML = lastName;
 			document.getElementById('location-field').innerHTML = location;
 			document.getElementById('zip-field').innerHTML = zipCode;
 			document.getElementById('rating-field').innerHTML = rating;
-
+			document.getElementById('profile-pic').setAttribute('src', image);
+			
 			sessionStorage.setItem('user', JSON.stringify(result));
 			showListings();
 
