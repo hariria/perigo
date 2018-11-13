@@ -77,7 +77,7 @@ public class AlertThread implements Runnable {
 	        for (Item item : allItems) {
 	        	long time = System.currentTimeMillis();
 	        	long diff = item.getEndForSaleDate();
-	        	if (time - diff < 600000) {
+	        	if (diff - time < 600000) {
 	        		List<UserWatching> usersWatchingItem = item.getUsersWatching();
 	        		String itemName = item.getTitle();
 	        		itemsNeedAlerting.put(itemName, usersWatchingItem);
