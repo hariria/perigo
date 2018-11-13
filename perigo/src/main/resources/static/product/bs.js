@@ -2,6 +2,7 @@
 var countDownDate = null;
 var currentMaxBid = 0;
 var itemId = "";
+var sellerEmail = "";
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -34,6 +35,8 @@ function loadUser(user) {
 	
 	document.getElementById('seller-name').innerHTML = name;
 	document.getElementById('location').innerHTML = user['location'];
+	
+	sellerEmail = user['email'];
 	
 	var image_path = user['image'];
 
@@ -92,6 +95,30 @@ function loadItem(item) {
 	}
 }
 
+function initMap() {
+
+	var address = sessionStorage.getItem('zipCode');
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 15,
+		center: {lat: 34.0220127, lng: -118.2892046}
+	});
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({'address': address}, function(results, status) {
+		if (status === 'OK') {
+			map.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: map,
+				position: results[0].geometry.location
+			});
+		} else {
+			console.log('Geocode was not successful for the following reason: ' + status);
+
+		}
+	});
+	}
+
 
 function onPageLoad() {
 	var parameters = new URLSearchParams(window.location.search);
@@ -122,6 +149,7 @@ function onPageLoad() {
 					loadItem(result);
 					generateSavedItems(onSuccess);
 					checkCookie();
+					initMap();
 				}
 
 			})
@@ -176,6 +204,24 @@ function showSavedItems(){
     
     
 };
+
+function sendEmail() {
+	var subject = document.getElementById('input-name').value;
+	var content = document.getElementById('email-message').value; 
+	var sender = document.getElementById('input-email').value;
+	var receiver = sellerEmail;
+	
+	var emailJson = 
+		{
+			'subject' : subject,
+			'content' : content,
+			'sender' : sender,
+			'receiver' : receiver
+		}
+	
+	
+	
+}
 
 function show(){
     document.getElementById("seller").style.height = "700px";
