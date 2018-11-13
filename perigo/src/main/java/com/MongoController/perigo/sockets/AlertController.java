@@ -48,7 +48,7 @@ public class AlertController {
     	}
 	}
     
-    @Scheduled(fixedRate = 20000)
+    @Scheduled(fixedRate = 2000)
     public void updatePrice() {
     	Hashtable<String, Double> updatedItems = ServerSocket.GetItemsNeedUpdating();
    
