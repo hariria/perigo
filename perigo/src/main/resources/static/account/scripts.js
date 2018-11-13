@@ -418,7 +418,7 @@ function pushFileToGlobal(old_file) {
 
 	var objectId = sessionStorage.getItem('objectId');
 
-	var newFileName = objectId + '_' + btoa(oldName);
+	var newFileName = objectId + '_' + oldName;
 	if (typeCheck == '-1') {
 		newFileName += '.png';
 	}
@@ -431,8 +431,6 @@ function pushFileToGlobal(old_file) {
 
 	imagesToSend.push(myNewFile);
 
-
-	console.log(imagesToSend);
 	return myNewFile;
 }
 

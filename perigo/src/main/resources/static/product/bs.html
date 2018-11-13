@@ -17,33 +17,6 @@
 	<script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsxvulwCSEYSCDonAHMCWYPjvbbGNU5XQ&callback=initMap">
 	</script>
-	<script type="text/javascript">
-		function initMap(address) {
-
-			if(address === "" || address === null || address === undefined){
-				address = sessionStorage.getItem('zipCode');
-			}
-
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 15,
-				center: {lat: 34.0220127, lng: -118.2892046}
-			});
-			var geocoder = new google.maps.Geocoder();
-
-			geocoder.geocode({'address': address}, function(results, status) {
-				if (status === 'OK') {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-						map: map,
-						position: results[0].geometry.location
-					});
-				} else {
-					console.log('Geocode was not successful for the following reason: ' + status);
-
-				}
-			});
-      	}
-	</script>
 
 	<body onload="onPageLoad();">
 		<div id="outerContainer">
@@ -79,10 +52,10 @@
 								<div class="bt">
 									<div id="temp">
 										<form>
-										  <input id ="input-name" type="text" name="subject" placeholder="Subject..."><br>
-										  <textarea name="message" rows="10" cols="30" placeholder="Message Content..."></textarea>
-										  <input id ="input-email" type="text" name="email" placeholder="Your Email...">
-										  <input id ="input-submit" type="submit" value="Submit">
+										  <input id ="input-name" type="text" name="subject" placeholder="Subject..." required><br>
+										  <textarea id="email-message" name="message" rows="10" cols="30" placeholder="Message Content..." required></textarea>
+										  <input id ="input-email" type="text" name="email" placeholder="Your Email..." required>
+										  <input id ="input-submit" onclick="sendEmail(); return false;" type="submit" value="Submit">
 										</form>
 									</div>
 								</div>
