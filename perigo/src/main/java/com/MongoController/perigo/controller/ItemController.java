@@ -72,7 +72,7 @@ public class ItemController {
 	@RequestMapping(value="/submitbid/{id}", method=RequestMethod.PUT)
 	public void submitNewBid(@PathVariable("id") ObjectId id, @Valid @RequestBody NewBid bid) {
 		Item update = repository.findBy_id(id);
-		
+		System.out.println(bid.getBid());
 		// Notify old bidder they've been outbid
 		ServerSocket.AddOutBidUser(update.getHighestBidder().toString(), update.getTitle());
 		

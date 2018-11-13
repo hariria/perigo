@@ -1,4 +1,4 @@
-var profile_image;
+var profile_image = null;
 
 function previewFile() {
 
@@ -174,6 +174,7 @@ function submit(){
 	if(profile_image === null || profile_image === undefined || profile_image === ""){
 		$('#upload-text').addClass('redText');
 		document.getElementById("image-input-frame").style.border = "2px solid #cc0000";
+		invalid = true;
 	}
 
 	if(invalid){
