@@ -54,14 +54,14 @@ public class AlertController {
    
     	//System.out.print(outbidUserItems.size());
     	for (String item : updatedItems.keySet()) {
-    		System.out.println(item);
+    		//System.out.println(item);
     		Multimap<String, StompPrincipal> sessionMap = ServerSocket.getSessionMap();
     		for (String user : sessionMap.keySet()) {
     			Collection<StompPrincipal> userSockets = sessionMap.get(user);
     			for (StompPrincipal stp : userSockets) {
-    				System.out.print(stp.getItem());
+    				//System.out.print(stp.getItem());
     				if (stp.getItem().equals(item)) {    
-    					System.out.println(item);
+    					//System.out.println(item);
     					Double newPrice = updatedItems.get(item);
     					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/pricealerts", newPrice.intValue());
     				}
