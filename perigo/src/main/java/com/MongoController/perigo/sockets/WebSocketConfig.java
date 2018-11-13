@@ -42,7 +42,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             	final StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
                 String token = accessor.getFirstNativeHeader("name");
                 String item = accessor.getFirstNativeHeader("item");             
-                System.out.println(token);
                 if (token != null) {
                 	if (ServerSocket.anyOrphansLeft()) {
                 		StompPrincipal stp = ServerSocket.getOrphan();
