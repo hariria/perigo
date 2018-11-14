@@ -95,11 +95,14 @@ function emailLink(){
 		method : 'post',
 		data : email,
 	})
-	swal('Email Sent!', 
-		 'Please check your email for further instructions. It may take up to a minute for you to receive it.', 
-		  'success')
-	location.reload(); 
-		
+
+	swal({
+        title: "Email Sent!",
+        text: "Please check your email for further instructions. It may take up to a minute for you to receive it.",
+        type: "success"
+    }).then(function() {
+	    location.reload();
+	});
 }
 
 
@@ -118,8 +121,6 @@ function forgotPassword(){
 		$('#buttons').animate({height: "0px"}, 0);
 		$("#forgotPasswordButton").fadeIn();
 	}, 550);
-	
-	
 }
 
 function verify() {

@@ -81,7 +81,7 @@ function handleClick() {
 	swal({
 		title: "Auction",
 		text: "Your item will be listed for exactly for exactly a week",
-		icon: "warning"
+		type: "warning"
 	})
 	price_field.placeholder = "Starting bid price...";
 
@@ -381,12 +381,11 @@ function resetSavedItems(){
 	swal({
 		  title: "Are you sure?",
 		  text: "Once deleted, you will not be able to recover your saved items",
-		  icon: "warning",
-		  buttons: true,
-		  dangerMode: true,
+		  type: "warning",
+		  showCancelButton: true,
 		})
 		.then((willDelete) => {
-			if (willDelete) {
+			if (willDelete.value) {
 		        var savedItems = document.getElementsByClassName("saved-item");
 		        Array.from(document.getElementsByClassName('saved-item')).forEach(v => {
 		            v.style.display = "none";

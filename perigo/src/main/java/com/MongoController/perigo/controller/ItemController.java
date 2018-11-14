@@ -86,10 +86,11 @@ public class ItemController {
 	@RequestMapping(value="/submitbid/{id}", method=RequestMethod.PUT)
 	public void submitNewBid(@PathVariable("id") ObjectId id, @Valid @RequestBody NewBid bid) {
 		Item update = repository.findBy_id(id);
+		
 		// Notify old bidder they've been outbid
-		
-		
-		if (update.getHighestBidder() != null) ServerSocket.AddOutBidUser(update.getHighestBidder().toString(), update.getTitle());
+		if (update.getHighestBidder() != null && !(update.getHighestBidder().toString().equals(bid.getHighestBidder().toString()))) {
+			ServerSocket.AddOutBidUser(update.getHighestBidder().toString(), update.getTitle());
+		}
 		
 		// Person who just got outbid shouldn't get a notification that the
 		// price has changed (duplicate notification)
