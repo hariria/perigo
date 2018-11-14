@@ -11,7 +11,7 @@
 	<script src="scripts.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-	<body>
+	<body onload="newListingPageLoad()">
 		<div id="outerContainer">
 			<div class="header">
 				<div class="icon" onClick="goToBrowse()"><img class="icon-image" src="../images/icon.png"/></div>
@@ -32,9 +32,9 @@
                         <form onsubmit="formSubmission(); return false;" id="new-listing-form" method="POST" ENCTYPE="multipart/form-data">
                             <input class="listing-input" type="text" name="title" placeholder="Title of your listing..." required>
                             <div class="radio-input">
-                                <input onclick="handleClick(this);" class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="buy it now" required> Buy It Now &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                                 <input onclick="handleClick(this);" class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="buy it now" required> Buy It Now &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input onclick="handleClick(this);" class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="bid"> Auction
-                            </div>
+ -->                            </div>
                             <textarea class="listing-input" style="border:1px solid #494949; border-radius: 15px;" rows="8" cols="70" name="description" placeholder="Description up to 500 words..." required></textarea>
                             <input class="listing-input" type="text" name="keywords" placeholder="Up to 5 keywords separated by [,]" required>
                             <input class="listing-input" id="zipcode" type="number" name="zipcode" required pattern="[0-9]{5}" min="000000" max="99999" placeholder="Zip Code..." onblur="getCityState();">
