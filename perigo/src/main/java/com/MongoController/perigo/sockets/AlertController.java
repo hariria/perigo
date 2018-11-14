@@ -51,7 +51,7 @@ public class AlertController {
 		    		String message = "You have been outbid on: ";
 	    			message += (item + ", ");		    		
 		    		message = message.substring(0, message.length() - 2);
-		    		messagingTemplate.convertAndSendToUser(user.getName(), "/queue/bidalerts", message);
+		    		messagingTemplate.convertAndSendToUser(user.getName(), "/queue/bidalerts", message);	    		
 	    		}
     			
 	    		ServerSocket.ClearOutbidUserItem(outbidUser, item);
@@ -65,21 +65,7 @@ public class AlertController {
     	
     	//System.out.print(outbidUserItems.size());
     	for (String item : updatedItems.keySet()) {
-    		//System.out.println(item);
-    		Multimap<String, StompPrincipal> sessionMap = ServerSocket.getSessionMap();
-    		for (String user : sessionMap.keySet()) {
-    			Collection<StompPrincipal> userSockets = sessionMap.get(user);
-    			for (StompPrincipal stp : userSockets) {
-    				//System.out.print(stp.getItem());
-    				if (stp.getItem().equals(item)) {    
-    					//System.out.println(item);
-    					Double newPrice = updatedItems.get(item);
-    					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/pricealerts", newPrice.intValue());
-    				}
-    			}
-    			
-    		}
-    		  		
+    		
 	        String url = "http://localhost:9000/item/" + item;
 	        RestTemplate restTemplate = new RestTemplate();
 	        String responseEntity = restTemplate.getForObject(url, String.class);
@@ -97,6 +83,26 @@ public class AlertController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+    		//System.out.println(item);
+    		Multimap<String, StompPrincipal> sessionMap = ServerSocket.getSessionMap();
+    		for (String user : sessionMap.keySet()) {
+    			Collection<StompPrincipal> userSockets = sessionMap.get(user);
+    			for (StompPrincipal stp : userSockets) {
+    				//System.out.print(stp.getItem());
+    				if (stp.getItem().equals(item)) {    
+    					//System.out.println(item);
+    					Double newPrice = updatedItems.get(item);
+    					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/pricealerts", newPrice.intValue());
+    					if (allItems != null) {
+    						messagingTemplate.convertAndSend("/queue/browsePriceAlerts", allItems.get_id().toString() + "-" + newPrice.intValue());
+    					}
+    				}
+    			}
+    			
+    		}
+    		  		
+
 		
     		List<UserWatching> usersWatchingItem = allItems.getUsersWatching();
 			Double newPrice = updatedItems.get(item);
@@ -111,7 +117,6 @@ public class AlertController {
 							//System.out.println(item);
 		    				String message = "New bid has been placed on " + allItems.getTitle() + " for $" + newPrice.intValue() + ".00";
 		 					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/bidalerts", message);
-						
 		    			}
 	        		} else {
 	        			user.setRecentBidder(false);
