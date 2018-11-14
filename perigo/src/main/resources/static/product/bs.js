@@ -282,7 +282,11 @@ function closeMessageTab(){
 	$('#temp').animate({width: "0px"}, 0);
 	document.getElementById("temp").style.display = "none";
 
-	swal("Message Sent", "Your message was sent to " + sellerName, "success");
+	swal({
+	  type: 'success',
+	  title: 'Message Sent...',
+	  text: "Your message was sent to " + sellerName
+	})
 
 	document.getElementById("input-name").value = "";
 	document.getElementById("email-message").value = "";
@@ -314,12 +318,20 @@ function submitBid() {
 	var bid = document.getElementById('input-bid').value;
 	
 	if (bid === "") {
-		swal("No Bid Entered", "Please enter a bid before submitting", "error");
+		swal({
+		  type: 'error',
+		  title: 'No Bid Entered',
+		  text: "Please enter a bid before submitting"
+		})
 		return false;
 	}
 	
 	else if (bid <= currentMaxBid) {
-		swal("Invalid Bid", "Your bid is less than the current price", "error");
+		swal({
+		  type: 'error',
+		  title: 'Invalid Bid',
+		  text: "Your bid is less than the current price"
+		});
 		return false;
 	}
 	else {
@@ -345,7 +357,11 @@ function submitBid() {
 }
 
 function signInToBid() {
-	swal("Sign In", "You must be signed in to bid on this item", "error");
+	swal({
+	  type: 'error',
+	  title: 'Sign In',
+	  text: "You must be signed in to bid on this item"
+	})
 }
 
 function checkCookie() {
@@ -496,12 +512,11 @@ function deleteListing() {
 	swal({
 		  title: "Are you sure?",
 		  text: "Once deleted, you will not be able to recover this item",
-		  icon: "warning",
-		  buttons: true,
-		  dangerMode: true,
+		  type: "warning",
+		  showCancelButton: true,
 		})
 		.then((willDelete) => {
-			if (willDelete) {
+			if (willDelete.value) {
 				console.log('Deleting: ' + itemId);
 				$.ajax({
 					url: 'http://localhost:9000/item/' + itemId,
@@ -509,9 +524,7 @@ function deleteListing() {
 				})
 				window.location.href = '/account/account.html';
 			}
-		})
-
-	
+		})		
 }
 
 function editListing() {

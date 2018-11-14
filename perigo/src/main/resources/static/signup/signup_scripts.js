@@ -236,7 +236,7 @@ function submit(){
 					swal({
 					    title: "Account created!",
 					    text: "Your perigo account has been created!",
-					    icon: "success"
+					    type: "success"
 					}).then(function() {
 					    window.location = window.location.href = 'http://localhost:9000/browse/browse.html';
 					});

@@ -80,7 +80,7 @@ function clickedHeart(element){
 		swal({
 		    title: "User not signed in",
 		    text: "Please sign in to save items!",
-		    icon: "error"
+		    type: "error"
 		})
 		return;
 	}
@@ -257,7 +257,7 @@ function showSavedItems(){
 		swal({
 		    title: "User not signed in",
 		    text: "Please sign in to view your saved items!",
-		    icon: "error"
+		    type: "error"
 		})
 		return;
 	}

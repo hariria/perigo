@@ -45,19 +45,10 @@ function disconnect() {
 function showNotification(message) {
 
     swal({
-       toast: true,
-       position: 'top-end',
-       timer: 5000,
-       title: message,
-       type: 'info' 
-    });
-
-    /*
-    swal({
-        title: 'Alert!',
-        text: message,
-        type: 'info',
-        timer: 3000
-    });
-    */
+        toast: true,
+        position: 'top-end',
+        timer: 5000,
+        title: message,
+        type: 'info' 
+     });
 }
