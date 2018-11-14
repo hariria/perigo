@@ -459,3 +459,30 @@ function removeRow(elementID){
 function goToBrowse(){
 	window.location.href = "../browse/browse.html";
 }
+
+function clickKeyword(element){
+	var keyword = element.innerHTML;
+	const GetItemUrl = 'http://localhost:9000/search/' + keyword;
+	$.ajax({
+		url: GetItemUrl,
+		type: 'GET',
+		success: function(result) {    			
+			sessionStorage.setItem('search_results', JSON.stringify(result));
+			window.location.href = '/search_results/search.html';
+		}
+	}) 
+};
+
+$(document).ready(function(){
+	$("#input-name").focus(function(){
+		$('#input-name').removeClass('redPlaceholder');
+	});
+
+	$("#email-message").focus(function(){
+		$('#email-message').removeClass('redPlaceholder');
+	});
+
+	$("#input-email").focus(function(){
+		$('#input-email').removeClass('redPlaceholder');
+	});
+});
