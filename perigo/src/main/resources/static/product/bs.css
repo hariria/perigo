@@ -146,11 +146,10 @@ h1 {
 h2 {
   font-family: Avenir Next;
     font-size: 25px;
-    font-weight: normal;
+    font-weight: bold;
     color: #4D4D4D;
   margin: 0;
   padding: 0;
-  padding-bottom: 30px;
 }
 h3 {
   font-family: Avenir Next;
@@ -213,8 +212,8 @@ p{
 }
 
 hr {
-  margin-top:20px;
-  margin-bottom: 30px;
+  margin-top:10px;
+  margin-bottom: 20px;
 }
 
 .carousel{
@@ -472,13 +471,19 @@ textarea{
   display: flex;
   flex-direction: column;
 }
-#demo {
-  
-  font-size: 15px;
-  margin-top: 0px;
+#demo{
+  font-size: 20px;
+  margin-top: 5px;
   display:inline;
-  
+  padding-left: 10px;  
 }
+
+#current-price-2, #current-price-3 {
+  font-size: 20px;
+  margin-top: 5px;
+  padding-left: 10px;  
+}
+
 #p-inline{
   margin:0;
   padding:0;

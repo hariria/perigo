@@ -110,15 +110,17 @@
 							<button class="bid-button">Bid</button>
 							<hr>
 
-							<div id="bid-now">
-								<h2>Time</h2>
-								<p id="end-date"></p>
-								<p id ="p-inline">Time Left:</p><p id="demo"></p>
+							<h2 style="display: inline">Time Remaining:</h2><p id="demo"></p>
+							<p id="end-date"></p>
+
+							<div id="bid-now">								
 								<form id="bid-form">
-									<h2 style="margin-top: 30px;">Price</h2>
-									<p id="current-price-2"></p>
-									<div>
-										<h2 class = "bid-h2">Enter Price: $</h2> 
+									<div style="display: flex; flex-direction: row; margin-top: 30px;">
+										<h2 style="display: inline;">Current Price:</h2><p id="current-price-2"></p>
+									</div>
+									
+									<div style="padding-top: 20px;">
+										<h2 class = "bid-h2">Enter a bid: <p sty<p style="font-weight: normal; display: inline;">$</p></h2> 
 										<input id ="input-bid" type="number" name="bid" placeholder="00">
 									</div>
 									<br>
@@ -127,8 +129,9 @@
 							</div>
 
 							<div id="local-user-listing">
-								<h2 style="margin-top: 30px; padding-bottom:0px">Price</h2>
-								<p id="current-price-3"></p>
+								<div style="display: flex; flex-direction: row; margin-top: 30px;">
+									<h2 style="padding-bottom:0px">Current Price:</h2><p id="current-price-3"></p>
+								</div>
 								<button id="editListing" onClick="editListing();">Edit Listing</button>
 								<button id="deleteListing" onClick="deleteListing();">Delete Listing</button>
 							</div>
