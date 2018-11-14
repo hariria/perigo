@@ -56,6 +56,20 @@ public class ItemController {
 		repository.save(update);	
 	}
 	
+	@RequestMapping(value="/editlisting/{id}", method=RequestMethod.PUT)
+	public Item editItem(@PathVariable("id") ObjectId id, @Valid @RequestBody Item newInfo) {
+		Item toChange = repository.findBy_id(id);
+		toChange.setTitle(newInfo.title);
+		toChange.setDescription(newInfo.description);
+		toChange.setLocation(newInfo.location);
+		toChange.setZipCode(newInfo.zipCode);
+		toChange.setKeywords(newInfo.keywords);
+		
+		repository.save(toChange);
+		
+		return toChange;
+	}
+	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public Item createItem(@Valid @RequestBody Item item) {
 		item.set_id(ObjectId.get());
