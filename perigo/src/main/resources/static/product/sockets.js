@@ -43,11 +43,16 @@ function disconnect() {
 
 //timer
 function showNotification(message) {
-    swal({
-         title: "Alert!",
-         text: message,
-         type: "info",
-         timer: 2000,
-         toast: true
+
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+    toast({
+      type: 'info',
+      title: message
     });
 }
