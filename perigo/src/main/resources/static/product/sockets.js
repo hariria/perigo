@@ -50,6 +50,14 @@ function showNotification(message) {
        timer: 5000,
        title: message,
        type: 'info' 
+    });
 
-    })
+    /*
+    swal({
+        title: 'Alert!',
+        text: message,
+        type: 'info',
+        timer: 3000
+    });
+    */
 }
