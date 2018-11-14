@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         stompClient.subscribe('/user/queue/pricealerts', function (alert) {
         	// This is only necessary on the product page, it updates the price of the item
         	document.getElementById('current-price-1').innerHTML = '$' + alert.body + '.00';
-        	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + alert.body + '.00';
+        	document.getElementById('current-price-2').innerHTML = '$' + alert.body + '.00';
+        	document.getElementById('current-price-3').innerHTML = '$' + alert.body + '.00';
         });  
         stompClient.subscribe('/queue/browsePriceAlerts', function (alert) {
         	// This is only necessary on the browse page
