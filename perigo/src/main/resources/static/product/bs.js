@@ -490,3 +490,30 @@ $(document).ready(function(){
 		$('#input-email').removeClass('redPlaceholder');
 	});
 });
+
+function deleteListing() {	
+	swal({
+		  title: "Are you sure?",
+		  text: "Once deleted, you will not be able to recover this item",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				console.log('Deleting: ' + itemId);
+				$.ajax({
+					url: 'http://localhost:9000/item/' + itemId,
+					method: 'delete',
+				})
+				window.location.href = '/account/account.html';
+			}
+		})
+
+	
+}
+
+function editListing() {
+	sessionStorage.setItem('itemToEdit', itemId);
+	window.location.href = '/edit_listing/editListing.html';
+}
