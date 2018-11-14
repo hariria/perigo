@@ -6,8 +6,14 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="bs.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.0/dist/sweetalert2.all.min.js"></script>
 
+	<script src="sockets.js"></script>
+	<script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -17,38 +23,10 @@
 	<script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsxvulwCSEYSCDonAHMCWYPjvbbGNU5XQ&callback=initMap">
 	</script>
-	<script type="text/javascript">
-		function initMap(address) {
-
-			if(address === "" || address === null || address === undefined){
-				address = sessionStorage.getItem('zipCode');
-			}
-
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 15,
-				center: {lat: 34.0220127, lng: -118.2892046}
-			});
-			var geocoder = new google.maps.Geocoder();
-
-			geocoder.geocode({'address': address}, function(results, status) {
-				if (status === 'OK') {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-						map: map,
-						position: results[0].geometry.location
-					});
-				} else {
-					console.log('Geocode was not successful for the following reason: ' + status);
-
-				}
-			});
-      	}
-	</script>
-
 	<body onload="onPageLoad();">
 		<div id="outerContainer">
 			<div class="header">
-				<div class="icon"><img class="icon-image" src="../images/icon.png"/></div>
+				<div class="icon" onClick="goToBrowse()"><img class="icon-image" src="../images/icon.png"/></div>
 				<div class="search-bar"><input type="text" id="search" name="search" placeholder="Search..."></div>
 				<div class="header-frame" id="header-frame">
 					<div id="saved" class="header-text" onClick="showSavedItems()">Saved</div>
@@ -79,10 +57,10 @@
 								<div class="bt">
 									<div id="temp">
 										<form>
-										  <input id ="input-name" type="text" name="subject" placeholder="Subject..."><br>
-										  <textarea name="message" rows="10" cols="30" placeholder="Message Content..."></textarea>
-										  <input id ="input-email" type="text" name="email" placeholder="Your Email...">
-										  <input id ="input-submit" type="submit" value="Submit">
+										  <input id ="input-name" type="text" name="subject" placeholder="Subject..." required><br>
+										  <textarea id="email-message" name="message" rows="10" cols="30" placeholder="Message Content..." required></textarea>
+										  <input id ="input-email" type="text" name="email" placeholder="Your Email..." required>
+										  <input id ="input-submit" onclick="sendEmail(); return false;" type="submit" value="Submit">
 										</form>
 									</div>
 								</div>
@@ -133,13 +111,26 @@
 							<hr>
 
 							<div id="bid-now">
-								<p id="current-price-2"></p>
+								<h2>Time</h2>
 								<p id="end-date"></p>
 								<p id ="p-inline">Time Left:</p><p id="demo"></p>
 								<form id="bid-form">
-									<h2 class = "bid-h2">Enter Price: $</h2> <input id ="input-bid" type="number" name="bid" placeholder="00"><br>
-									<input onclick="submitBid(); return false; " class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
+									<h2 style="margin-top: 30px;">Price</h2>
+									<p id="current-price-2"></p>
+									<div>
+										<h2 class = "bid-h2">Enter Price: $</h2> 
+										<input id ="input-bid" type="number" name="bid" placeholder="00">
+									</div>
+									<br>
+									<input onclick="submitBid(); return false;" style="top: 0px;" class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
 								</form>
+							</div>
+
+							<div id="local-user-listing">
+								<h2 style="margin-top: 30px; padding-bottom:0px">Price</h2>
+								<p id="current-price-3"></p>
+								<button id="editListing" onClick="editListing();">Edit Listing</button>
+								<button id="deleteListing" onClick="deleteListing();">Delete Listing</button>
 							</div>
 
 							<div id="buy-now">

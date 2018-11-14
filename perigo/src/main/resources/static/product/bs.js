@@ -2,32 +2,36 @@
 var countDownDate = null;
 var currentMaxBid = 0;
 var itemId = "";
+var sellerEmail = "";
+var sellerName = "";
 
 // Update the count down every 1 second
-var x = setInterval(function() {
-
-    // Get todays date and time
-    var now = new Date().getTime();
-    
-    // Find the distance between now and the count down date
-    var distance = countDownDate - now;
-    
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    // Output the result in an element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-    
-    // If the count down is over, write some text 
-    if (distance < 0) {
-    	clearInterval(x);
-    	document.getElementById("demo").innerHTML = "EXPIRED";
-    }
-}, 1000);
+function timeSet() {
+	var x = setInterval(function() {
+	
+	    // Get todays date and time
+	    var now = new Date().getTime();
+	    
+	    // Find the distance between now and the count down date
+	    var distance = countDownDate - now;
+	    
+	    // Time calculations for days, hours, minutes and seconds
+	    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	    
+	    // Output the result in an element with id="demo"
+	    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+	    + minutes + "m " + seconds + "s ";
+	    
+	    // If the count down is over, write some text 
+	    if (distance < 0) {
+	    	clearInterval(x);
+	    	document.getElementById("demo").innerHTML = "EXPIRED";
+	    }
+	}, 1000);
+}
 
 function loadUser(user) {
 	var name = user['firstName'] + " " + user['lastName'];
@@ -35,9 +39,20 @@ function loadUser(user) {
 	document.getElementById('seller-name').innerHTML = name;
 	document.getElementById('location').innerHTML = user['location'];
 	
+	sellerEmail = user['email'];
+	sellerName = name;
+	
 	var image_path = user['image'];
 
 	document.getElementById('profile-pic').setAttribute('src', image_path);
+	
+	
+	console.log(user['_id']);
+	console.log(sessionStorage.getItem('objectId'));
+	if (user['_id'] === sessionStorage.getItem('objectId')) {
+		document.getElementById('bid-now').style.display = "None";
+		document.getElementById('local-user-listing').style.display="Block";
+	}
 }
 
 function loadItem(item) {	
@@ -45,7 +60,8 @@ function loadItem(item) {
 	document.getElementById('product-name').innerHTML = item['title'];
 	document.getElementById('current-price-1').innerHTML = '$' + item['maxBid'] + '.00';
 	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + item['maxBid'] + '.00';
-	
+	document.getElementById('current-price-3').innerHTML = 'Current Price: $' + item['maxBid'] + '.00';
+
 	currentMaxBid = item['maxBid'];
 	
 	var endDate = item['endForSaleDate'];
@@ -79,10 +95,39 @@ function loadItem(item) {
 	for (var i = 0; i < keywords.length; i++) {
 		var button = document.createElement('button');
 		button.setAttribute('type', 'button');
+		button.setAttribute('onclick', 'clickKeyword(this)');
 		button.innerHTML = keywords[i];
 		category.appendChild(button);
 	}
 }
+
+function initMap() {
+
+	var address = sessionStorage.getItem('zipCode');
+	address = "" + address; //force it to a string
+	
+	while(address.length < 5){
+		address = "0" + address;
+	}
+	
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 15
+	});
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({'address': address}, function(results, status) {
+		if (status === 'OK') {
+			map.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: map,
+				position: results[0].geometry.location
+			});
+		} else {
+			console.log('Geocode was not successful for the following reason: ' + status);
+
+		}
+	});
+	}
 
 
 function onPageLoad() {
@@ -114,6 +159,8 @@ function onPageLoad() {
 					loadItem(result);
 					generateSavedItems(onSuccess);
 					checkCookie();
+					initMap();
+					timeSet();
 				}
 
 			})
@@ -169,6 +216,79 @@ function showSavedItems(){
     
 };
 
+function sendEmail() {
+	var subject = document.getElementById('input-name').value;
+	var content = document.getElementById('email-message').value; 
+	var sender = document.getElementById('input-email').value;
+	var receiver = sellerEmail;
+	var invalid = false;
+
+	if(subject === null || subject === ""){
+		$('#input-name').addClass('redPlaceholder');
+		invalid = true;
+	}
+
+	if(content === null || content ===  ""){
+		$('#email-message').addClass('redPlaceholder');
+		invalid = true;
+	}
+
+	if(sender === null || sender ===  ""){
+		$('#input-email').addClass('redPlaceholder');
+		invalid = true;
+	}
+
+	if(invalid){
+		console.log("Invalid");
+		return;
+	}
+
+	//Remove red placeholder text after passing non-null check
+	$('#input-name').removeClass('redPlaceholder');
+	$('#email-message').removeClass('redPlaceholder');
+	$('#input-email').removeClass('redPlaceholder');
+
+	var emailJson = 
+		{
+			'subject' : subject,
+			'content' : content,
+			'sender' : sender,
+			'receiver' : receiver,
+			'sellerName' : sellerName
+		}
+	
+	$.ajax({
+		url : 'http://localhost:9000/sendmessage',
+		method : 'post',
+		data : JSON.stringify(emailJson),
+		contentType:'application/json',
+		success: function(success) {
+			
+		},
+		error: function(error) {
+
+		}
+	})
+	
+	closeMessageTab();
+}
+
+function closeMessageTab(){
+
+	document.getElementById("seller").style.height = "270px";
+	document.getElementById("top").style.height = "235px";
+	document.getElementById("saved-items").style.marginTop = "15px"
+	document.getElementById("button").style.display = "block";
+	$('#temp').animate({width: "0px"}, 0);
+	document.getElementById("temp").style.display = "none";
+
+	swal("Message Sent", "Your message was sent to " + sellerName, "success");
+
+	document.getElementById("input-name").value = "";
+	document.getElementById("email-message").value = "";
+	document.getElementById("input-email").value = "";
+}
+
 function show(){
     document.getElementById("seller").style.height = "700px";
     document.getElementById("top").style.height = "610px";
@@ -203,7 +323,10 @@ function submitBid() {
 		return false;
 	}
 	else {
-		var bidJson = {'bid' : bid};
+		var bidJson = {
+			'bid' : bid,
+			'highestBidder' : sessionStorage.getItem('objectId')
+		};
 		console.log(bidJson);
 		$.ajax({
 			url: 'http://localhost:9000/item/submitbid/' + itemId,
@@ -336,4 +459,62 @@ function removeSavedItem(elementID) {
 
 function removeRow(elementID){
 	document.getElementById(elementID).remove();
+}
+
+function goToBrowse(){
+	window.location.href = "../browse/browse.html";
+}
+
+function clickKeyword(element){
+	var keyword = element.innerHTML;
+	const GetItemUrl = 'http://localhost:9000/search/' + keyword;
+	$.ajax({
+		url: GetItemUrl,
+		type: 'GET',
+		success: function(result) {    			
+			sessionStorage.setItem('search_results', JSON.stringify(result));
+			window.location.href = '/search_results/search.html';
+		}
+	}) 
+};
+
+$(document).ready(function(){
+	$("#input-name").focus(function(){
+		$('#input-name').removeClass('redPlaceholder');
+	});
+
+	$("#email-message").focus(function(){
+		$('#email-message').removeClass('redPlaceholder');
+	});
+
+	$("#input-email").focus(function(){
+		$('#input-email').removeClass('redPlaceholder');
+	});
+});
+
+function deleteListing() {	
+	swal({
+		  title: "Are you sure?",
+		  text: "Once deleted, you will not be able to recover this item",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				console.log('Deleting: ' + itemId);
+				$.ajax({
+					url: 'http://localhost:9000/item/' + itemId,
+					method: 'delete',
+				})
+				window.location.href = '/account/account.html';
+			}
+		})
+
+	
+}
+
+function editListing() {
+	sessionStorage.setItem('itemToEdit', itemId);
+	window.location.href = '/edit_listing/editListing.html';
 }

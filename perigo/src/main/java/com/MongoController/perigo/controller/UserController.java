@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.MongoController.perigo.UpdatableBCrypt;
 import com.MongoController.perigo.models.ContentEditable;
 import com.MongoController.perigo.models.LoginTransferObject;
+import com.MongoController.perigo.models.ResetUser;
 import com.MongoController.perigo.models.SavedItem;
 import com.MongoController.perigo.models.User;
 import com.MongoController.perigo.models.UserTransferObject;
@@ -171,5 +172,14 @@ public class UserController {
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public void deleteUser(@PathVariable ObjectId id) {
 		repository.delete(repository.findBy_id(id));
+	}
+	
+	
+	
+	@RequestMapping(value="/resetpassword", method=RequestMethod.POST)
+	public void resetUserPassword(@Valid @RequestBody ResetUser userToReset) {
+		User user = repository.findBy_id(userToReset.getId());
+		user.setHash(hash(userToReset.getPassword()));
+		repository.save(user);
 	}
 }

@@ -17,6 +17,7 @@ import com.MongoController.perigo.models.Item;
 import com.MongoController.perigo.models.NewBid;
 import com.MongoController.perigo.models.UserWatching;
 import com.MongoController.perigo.repositories.ItemRepository;
+import com.MongoController.perigo.sockets.ServerSocket;
 
 @RestController
 @RequestMapping("/item")
@@ -70,9 +71,29 @@ public class ItemController {
 	
 	@RequestMapping(value="/submitbid/{id}", method=RequestMethod.PUT)
 	public void submitNewBid(@PathVariable("id") ObjectId id, @Valid @RequestBody NewBid bid) {
-		System.out.println(bid.getBid());
 		Item update = repository.findBy_id(id);
+		// Notify old bidder they've been outbid
+		
+		
+		if (update.getHighestBidder() != null) ServerSocket.AddOutBidUser(update.getHighestBidder().toString(), update.getTitle());
+		
+		// Person who just got outbid shouldn't get a notification that the
+		// price has changed (duplicate notification)
+		List<UserWatching> usersWatching = update.getUsersWatching();
+		for (UserWatching user : usersWatching) {
+			if (user.getUserWatchingId().equals(update.getHighestBidder())) {
+				user.setRecentBidder(true);
+			}
+		}
+		update.setUsersWatching(usersWatching);		
+		
+		
 		update.setMaxBid(bid.getBid());
+		update.setHighestBidder(bid.getHighestBidder());
+		
+		// Send price update to all sockets
+		ServerSocket.AddUpdatedItem(update.get_id().toString(), (double)bid.getBid());
+		
 		repository.save(update);
 	}
 }

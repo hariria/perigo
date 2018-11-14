@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload</title>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-storage.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCKuSvfoFNq-3SWfPKtK23p0NvZKjjtsLA",
+        authDomain: "pergio-cs201.firebaseapp.com",
+        databaseURL: "https://pergio-cs201.firebaseio.com",
+        projectId: "pergio-cs201",
+        storageBucket: "pergio-cs201.appspot.com",
+        messagingSenderId: "648614633297"
+      };
+      firebase.initializeApp(config);
+
+      const storageService = firebase.storage();
+      const storageRef = storageService.ref();
+    </script>
+    <!-- ALL OTHER TAGS GO BELOW -->
+
+    <script type="text/javascript">
+      function uploadFile(){
+        var file = document.getElementById("fileUploader").files[0];
+        const uploadTask = storageRef.child(`images/${file.name}`).put(file); //create a child directory called images, and place the file inside this directory
+        uploadTask.on('state_changed', (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+        }, (error) => {
+          // Handle unsuccessful uploads
+          console.log(error);
+        }, () => {
+           // Do something once upload is complete
+           console.log('success');
+        });
+      }
+
+      function loadImage(){
+        let image = storageRef.child('images/IMG_0678.jpg');
+        console.log(image);
+
+        image.getMetadata().then(function(metadata) {
+          document.getElementById('imageHolder').src = metadata.downloadURLs[0]
+        }).catch(function(error) { /*error handling*/ });    
+      }
+
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <div id="filesubmit">
+      <input type="file" class="file-select" id="fileUploader" accept="image/*"/>
+      <button class="file-submit" onClick="uploadFile();">SUBMIT</button>
+    </div>
+
+    <div>
+      <button onClick="loadImage();">Load in sample image</button>
+      <img id="imageHolder"></div>
+   
+  </body>
+</html>
