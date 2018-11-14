@@ -77,6 +77,17 @@ public class ItemController {
 		
 		if (update.getHighestBidder() != null) ServerSocket.AddOutBidUser(update.getHighestBidder().toString(), update.getTitle());
 		
+		// Person who just got outbid shouldn't get a notification that the
+		// price has changed (duplicate notification)
+		List<UserWatching> usersWatching = update.getUsersWatching();
+		for (UserWatching user : usersWatching) {
+			if (user.getUserWatchingId().equals(update.getHighestBidder())) {
+				user.setRecentBidder(true);
+			}
+		}
+		update.setUsersWatching(usersWatching);		
+		
+		
 		update.setMaxBid(bid.getBid());
 		update.setHighestBidder(bid.getHighestBidder());
 		

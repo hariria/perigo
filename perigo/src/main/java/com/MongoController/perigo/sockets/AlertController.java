@@ -37,7 +37,7 @@ public class AlertController {
     	this.messagingTemplate = messagingTemplate;
     }
     
-    @Scheduled(fixedRate = 20000)
+    @Scheduled(fixedRate = 2000)
     public void alertBidder() {
     	SetMultimap<String, String> outbidUserItems = ServerSocket.GetOutBidUsers();
    
@@ -45,23 +45,24 @@ public class AlertController {
     	for (String outbidUser : outbidUserItems.keySet()) {
     		Set<StompPrincipal> outbidUserSessions = ServerSocket.GetPrincipal(outbidUser);
     		Set<String> outbidItems = outbidUserItems.get(outbidUser);
-    		
-	    	for (StompPrincipal user : outbidUserSessions) {
-	    		String message = "YOU HAVE BEEN OUTBID ON: ";
-	    		for (String item : outbidItems) {
-	    			message += (item + ", ");
-		    		ServerSocket.ClearOutbidUserItem(outbidUser, item);
+
+    		for (String item : outbidItems) {
+    			for (StompPrincipal user : outbidUserSessions) {
+		    		String message = "You have been outbid on: ";
+	    			message += (item + ", ");		    		
+		    		message = message.substring(0, message.length() - 2);
+		    		messagingTemplate.convertAndSendToUser(user.getName(), "/queue/bidalerts", message);
 	    		}
-	    		message = message.substring(0, message.length() - 2);
-	    		messagingTemplate.convertAndSendToUser(user.getName(), "/queue/bidalerts", message);
-	    	}
+    			
+	    		ServerSocket.ClearOutbidUserItem(outbidUser, item);
+    		}
     	}
 	}
     
     @Scheduled(fixedRate = 2000)
     public void updatePrice() {
     	Hashtable<String, Double> updatedItems = ServerSocket.GetItemsNeedUpdating();
-   
+    	
     	//System.out.print(outbidUserItems.size());
     	for (String item : updatedItems.keySet()) {
     		//System.out.println(item);
@@ -101,16 +102,26 @@ public class AlertController {
 			Double newPrice = updatedItems.get(item);
 			
 	        for (UserWatching user : usersWatchingItem) {
-	        	Collection<StompPrincipal> usersWatchingSockets = sessionMap.get(user.getUserWatchingId().toString());
-    			for (StompPrincipal stp : usersWatchingSockets) {
-    				//System.out.print(stp.getItem());   
-					//System.out.println(item);
-    				String message = "NEW BID HAS BEEN PLACED ON " + allItems.getTitle() + " FOR $" + newPrice.intValue() + ".00";
- 					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/bidalerts", message);
-				
-    			}
+	        	
+	        	if (!user.getUserWatchingId().toString().equals(allItems.getHighestBidder().toString())) {
+	        		if (!user.getRecentBidder()) {
+	        			Collection<StompPrincipal> usersWatchingSockets = sessionMap.get(user.getUserWatchingId().toString());
+		    			for (StompPrincipal stp : usersWatchingSockets) {
+		    				//System.out.print(stp.getItem());   
+							//System.out.println(item);
+		    				String message = "New bid has been placed on " + allItems.getTitle() + " for $" + newPrice.intValue() + ".00";
+		 					messagingTemplate.convertAndSendToUser(stp.getName(), "/queue/bidalerts", message);
+						
+		    			}
+	        		} else {
+	        			user.setRecentBidder(false);
+	        		}
+	        	}
 	        }
-	            		
+	        
+	        allItems.setUsersWatching(usersWatchingItem);
+	        url = "http://localhost:9000/item/" + allItems.get_id();
+	        restTemplate.put(url, allItems);   	
     		ServerSocket.ClearUpdatedItem(item, updatedItems.get(item));
    
     	}
@@ -119,7 +130,7 @@ public class AlertController {
     @Scheduled(fixedRate = 20000)
 	public void sendReply() {   
     	for (StompPrincipal user : ServerSocket.getNotifyQueue().keySet()) {
-    		String message = "BIDDING FOR THE FOLLOWING ITEMS WILL CLOSE IN 5 MINUTES: ";
+    		String message = "Bidding for the following items will end in 10 minutes: ";
     		for (String item : ServerSocket.getNotifyItems(user)) {
     			message += (item + ", ");
     		}
