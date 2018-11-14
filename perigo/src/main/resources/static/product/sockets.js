@@ -47,6 +47,6 @@ function showNotification(message) {
          title: "Alert!",
          text: message,
          type: "info",
-         timer: 3000
+         timer: 2000
     });
 }
