@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
+        //HAPPENS ON ALL PAGES
         stompClient.subscribe('/user/queue/bidalerts', function (alert) {
         	// Here's where you display notifications in your div
         	showNotification(alert.body);
@@ -40,5 +41,12 @@ function disconnect() {
 }
 
 function showNotification(message) {
-    $("#notification").append("<tr><td>" + message + "</td></tr>");
+
+    swal(
+      'Alert!',
+      message,
+      'info'
+    );
+
+    //$("#notification").append("<tr><td>" + message + "</td></tr>");
 }
