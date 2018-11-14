@@ -34,7 +34,21 @@
 					window.location.href = '/search_results/search.html';
 				}
 			}) 
-		}
+		};
+
+		$(document).ready(function(){
+			$("#input-name").focus(function(){
+				$('#input-name').removeClass('redPlaceholder');
+			});
+
+			$("#email-message").focus(function(){
+				$('#email-message').removeClass('redPlaceholder');
+			});
+
+			$("#input-email").focus(function(){
+				$('#input-email').removeClass('redPlaceholder');
+			});
+		});
 	</script>
 	<body onload="onPageLoad();">
 		<div id="outerContainer">
