@@ -3,7 +3,7 @@ var imagesToSend = [];
 function formSubmission() {
 	var title = document.getElementsByName('title')[0].value;
 	var description = document.getElementsByName('description')[0].value;
-	var buyType = sessionStorage.getItem('buyType');
+	var buyType = 'auction';
 	var keywords = document.getElementsByName('keywords')[0].value.split(',');
 	var zipCode = document.getElementsByName('zipcode')[0].value;
 	var price = document.getElementsByName('price')[0].value;
@@ -76,27 +76,14 @@ function formSubmission() {
 
 }
 
-function handleClick(option) {
-	var clicked = option.value;
-    var price_field = document.getElementById('price-field');
-	if (clicked === 'buy it now') {
-		swal({
-		    title: "Buy It Now",
-		    text: "This option will keep your item listed indefinitely at a fixed price",
-		    icon: "warning"
-		})
-        price_field.placeholder = "Buy it now price...";
-		sessionStorage.setItem('buyType', 'buyItNow');
-	}
-	else {
-		swal({
-		    title: "Auction",
-		    text: "This option will keep your item listed as an auction for exactly a week",
-		    icon: "warning"
-		})
-        price_field.placeholder = "Starting bid price...";
-		sessionStorage.setItem('buyType', 'auction');
-	}
+function handleClick() {
+	var price_field = document.getElementById('price-field');
+	swal({
+		title: "Auction",
+		text: "Your item will be listed for exactly for exactly a week",
+		icon: "warning"
+	})
+	price_field.placeholder = "Starting bid price...";
 
 }
 
@@ -117,6 +104,9 @@ function searchResults(event) {
     }
 }
 
+function newListingPageLoad() {
+	handleClick();
+}
 
 function onload() {
 	retrieveUserInfo()
@@ -150,7 +140,6 @@ function retrieveUserInfo() {
 			document.getElementById('lastName-field').innerHTML = lastName;
 			document.getElementById('location-field').innerHTML = location;
 			document.getElementById('zip-field').innerHTML = zipCode;
-			document.getElementById('rating-field').innerHTML = rating;
 			document.getElementById('profile-pic').setAttribute('src', image);
 			
 			sessionStorage.setItem('user', JSON.stringify(result));

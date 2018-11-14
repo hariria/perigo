@@ -59,8 +59,8 @@ function loadItem(item) {
 	sessionStorage.setItem('zipCode', item['zipCode']);
 	document.getElementById('product-name').innerHTML = item['title'];
 	document.getElementById('current-price-1').innerHTML = '$' + item['maxBid'] + '.00';
-	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + item['maxBid'] + '.00';
-	document.getElementById('current-price-3').innerHTML = 'Current Price: $' + item['maxBid'] + '.00';
+	document.getElementById('current-price-2').innerHTML = '$' + item['maxBid'] + '.00';
+	document.getElementById('current-price-3').innerHTML = '$' + item['maxBid'] + '.00';
 
 	currentMaxBid = item['maxBid'];
 	

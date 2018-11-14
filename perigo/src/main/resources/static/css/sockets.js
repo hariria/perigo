@@ -28,7 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
         	// This is only necessary on the product page, it updates the price of the item
         	document.getElementById('current-price-1').innerHTML = '$' + alert.body + '.00';
         	document.getElementById('current-price-2').innerHTML = 'Current Price: $' + alert.body + '.00';
-        });    
+        });  
+        stompClient.subscribe('/queue/browsePriceAlerts', function (alert) {
+        	// This is only necessary on the browse page
+        	var priceUpdate = alert.body;
+        	var res = priceUpdate.split("-");
+        	if (document.querySelectorAll('[data-itemid="' + res[0] + '"]')[4] != null) {
+        		document.querySelectorAll('[data-itemid="' + res[0] + '"]')[4].innerText = "$" + res[1];
+        	}        	
+        });
     });
 }, false);
 
@@ -45,19 +53,10 @@ function disconnect() {
 function showNotification(message) {
 
     swal({
-       toast: true,
-       position: 'top-end',
-       timer: 5000,
-       title: message,
-       type: 'info' 
-    });
-
-    /*
-    swal({
-        title: 'Alert!',
-        text: message,
-        type: 'info',
-        timer: 3000
-    });
-    */
+        toast: true,
+        position: 'top-end',
+        timer: 5000,
+        title: message,
+        type: 'info' 
+     });
 }
