@@ -103,10 +103,14 @@ function loadItem(item) {
 function initMap() {
 
 	var address = sessionStorage.getItem('zipCode');
-
+	address = "" + address; //force it to a string
+	
+	while(address.length < 5){
+		address = "0" + address;
+	}
+	
 	var map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 15,
-		center: {lat: 34.0220127, lng: -118.2892046}
+		zoom: 15
 	});
 	var geocoder = new google.maps.Geocoder();
 
