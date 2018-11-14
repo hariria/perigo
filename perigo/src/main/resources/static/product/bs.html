@@ -7,7 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="bs.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 	<script src="sockets.js"></script>
 	<script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
@@ -72,28 +71,21 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="product">
 						<div class="product-basic">
 							<div class = "category">
 							</div>
-
 							<h1 id="product-name"></h1>
 							<h2 id="current-price-1"></h2>
-							
-					
 						<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
 						  <!-- Indicators -->
 						  <ol class="carousel-indicators">
 						    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 						    <li data-target="#myCarousel" data-slide-to="1"></li>
-						
 						  </ol>
-						
 						  <!-- Wrapper for slides -->
 						  <div class="carousel-inner">						
 						  </div>
-						
 						  <!-- Left and right controls -->
 						  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
 						    <span class="glyphicon glyphicon-chevron-left"></span>
@@ -103,21 +95,17 @@
 						    <span class="glyphicon glyphicon-chevron-right"></span>
 						    <span class="sr-only">Next</span>
 						  </a>
-						</div>
-						
+						</div>		
 							<div id = "purchase">
 							<button class="bid-button">Bid</button>
 							<hr>
-
 							<h2 style="display: inline">Time Remaining:</h2><p id="demo"></p>
 							<p id="end-date"></p>
-
 							<div id="bid-now">								
 								<form id="bid-form">
 									<div style="display: flex; flex-direction: row; margin-top: 30px;">
 										<h2 style="display: inline;">Current Price:</h2><p id="current-price-2"></p>
-									</div>
-									
+									</div>	
 									<div style="padding-top: 20px;">
 										<h2 class = "bid-h2">Enter a bid: <p sty<p style="font-weight: normal; display: inline;">$</p></h2> 
 										<input id ="input-bid" type="number" name="bid" placeholder="00">
@@ -126,7 +114,6 @@
 									<input onclick="submitBid(); return false;" style="top: 0px;" class ="bid-submit" id="bit-submit" type="submit" value="Submit Bid">
 								</form>
 							</div>
-
 							<div id="local-user-listing">
 								<div style="display: flex; flex-direction: row; margin-top: 30px;">
 									<h2 style="padding-bottom:0px">Current Price:</h2><p id="current-price-3"></p>
@@ -134,34 +121,26 @@
 								<button id="editListing" onClick="editListing();">Edit Listing</button>
 								<button id="deleteListing" onClick="deleteListing();">Delete Listing</button>
 							</div>
-
-							<div id="buy-now">
-								
+							<div id="buy-now">	
 							</div>
 						</div>
-
 						<div class="product-description">
 							<h1>Description</h1>
 							<hr>
 							<p id="product-description-text"></p>
-
 							<div class = "description-specific">
 								<div class = "Location">
 									<h3>Location</h3>
 									<h4 id="location-text"></h4>
 								</div>
 							</div>
-
 						</div>
-
 						<div class="product-map">
 							<h1>Map</h1>
 							<hr>
 							<div id="map"></div>
 						</div>
-
 					</div>
-
 					</div>
 				</div>
 			</div>
