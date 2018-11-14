@@ -40,13 +40,13 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+
+//timer
 function showNotification(message) {
-
-    swal(
-      'Alert!',
-      message,
-      'info'
-    );
-
-    //$("#notification").append("<tr><td>" + message + "</td></tr>");
+    swal({
+         title: "Alert!",
+         text: message,
+         type: "info",
+         timer: 3000
+    });
 }
