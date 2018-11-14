@@ -30,6 +30,7 @@ public class User implements Serializable {
 	public List<SavedItem> savedItems;
 	public List<SavedItem> sellingItems;
 	public String image;
+	public String forgotPasswordEncryption;
 	
 	public User() {
 
@@ -130,9 +131,14 @@ public class User implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
 
+	public String getForgotPasswordEncryption() {
+		return forgotPasswordEncryption;
+	}
+
+	public void setForgotPasswordEncryption(String forgotPasswordEncryption) {
+		this.forgotPasswordEncryption = forgotPasswordEncryption;
+	}
 	
 
 }

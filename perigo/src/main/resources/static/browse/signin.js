@@ -88,7 +88,18 @@ function emailLink(){
 	document.getElementById("usernameContainer").style.borderBottom = "2px solid #adadad";
 
 	console.log(email);
-	/* TODO: INSERT BACKEND CALL TO SEND EMAIL */
+
+	$.ajax({
+		url: 'http://localhost:9000/forgotpassword',
+		contentType:'application/json',
+		method : 'post',
+		data : email,
+	})
+	swal('Email Sent!', 
+		 'Please check your email for further instructions. It may take up to a minute for you to receive it.', 
+		  'success')
+	location.reload(); 
+		
 }
 
 
@@ -107,6 +118,8 @@ function forgotPassword(){
 		$('#buttons').animate({height: "0px"}, 0);
 		$("#forgotPasswordButton").fadeIn();
 	}, 550);
+	
+	
 }
 
 function verify() {
