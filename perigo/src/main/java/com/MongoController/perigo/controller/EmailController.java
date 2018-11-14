@@ -168,7 +168,7 @@ public class EmailController {
 			   
 			   content = "Congratulations! <br>"
 					   + "The following item you was sold: " + itemName + "<br>"
-					   + "Please reach out to " + highestBidderEmail + " to arrange pickup <br>";
+					   + "Please reach out to " + highestBidderEmail + " to arrange pickup. <br>";
 		   }
 		   else {
 			   msg.setSubject("Item Not Sold");
@@ -177,7 +177,7 @@ public class EmailController {
 
 			   
 			   content = "The following item was not sold: " + itemName + "<br>"
-					   + "If you are still interested in selling the item, please relist it on Perigo <br>";
+					   + "If you are still interested in selling the item, please relist it on Perigo. <br>";
 			   
 		   }
 
