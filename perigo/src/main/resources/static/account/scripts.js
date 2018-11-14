@@ -140,7 +140,6 @@ function retrieveUserInfo() {
 			document.getElementById('lastName-field').innerHTML = lastName;
 			document.getElementById('location-field').innerHTML = location;
 			document.getElementById('zip-field').innerHTML = zipCode;
-			document.getElementById('rating-field').innerHTML = rating;
 			document.getElementById('profile-pic').setAttribute('src', image);
 			
 			sessionStorage.setItem('user', JSON.stringify(result));
