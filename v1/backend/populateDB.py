@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
 from pprint import pprint
-import datetime
+import time
 
 items = []
 users = []
@@ -18,10 +18,11 @@ def parseJSON():
 
 		for i in range(len(items)):
 
-			currentTime = int(datetime.datetime.now().strftime("%s")) * 1000 
+			currentTime = int(time.time()) * 1000
+			week = 7 * 24 * 60 * 60 * 1000 
 
 			items[i]['startForSaleDate'] = currentTime
-			items[i]['endForSaleDate'] = currentTime + 604800000
+			items[i]['endForSaleDate'] = currentTime + week
 			items[i]['_id'] = ObjectId()
 
 			items[i]['userSellingItem'] = users[i]['_id']

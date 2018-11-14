@@ -531,6 +531,14 @@ function deleteListing() {
 				$.ajax({
 					url: 'http://localhost:9000/item/' + itemId,
 					method: 'delete',
+					success: function(response) {
+						$.ajax({
+							url: 'http://localhost:9000/user/removelisting/' + sessionStorage.getItem('objectId'),
+							type: "PUT",
+							contentType:'application/json',
+							data: JSON.stringify({'itemId' : itemId}),
+						})
+					}
 				})
 				window.location.href = '/account/account.html';
 			}
