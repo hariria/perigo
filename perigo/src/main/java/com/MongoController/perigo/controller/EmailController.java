@@ -37,7 +37,7 @@ public class EmailController {
 	
 	@RequestMapping(value="/biddingcomplete", method=RequestMethod.POST)
 	public void sendBiddingCompleteMsg(@Valid @RequestBody BiddingComplete msg) throws AddressException, MessagingException {
-		sendEmailtoHighestBidder(msg.highestBidderEmail, msg.itemName);
+		if(msg.highestBidderEmail != null) sendEmailtoHighestBidder(msg.highestBidderEmail, msg.itemName);
 		sendEmailtoSeller(msg.sellerEmail, msg.highestBidderEmail, msg.itemName);
 	}
 		

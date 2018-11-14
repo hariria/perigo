@@ -59,8 +59,14 @@ public class RemoveExpiredThread implements Runnable {
 	        	if (time - end > 0) {
 	    	        String userUrl = "http://localhost:9000/user/";
 	    	        
-	        		String highestBidder = item.getHighestBidder().toString();	   
-	    	        responseEntity = restTemplate.getForObject(userUrl + highestBidder, String.class);
+	    	        	        		
+	        		String highestBidder = "";
+	        		if (item.getHighestBidder() == null) highestBidder = null;
+	        		else {
+	        			highestBidder = item.getHighestBidder().toString();
+		    	        responseEntity = restTemplate.getForObject(userUrl + highestBidder, String.class);
+	        		}
+	        		
 	        		User highestUserBidder = null;
 	        		if (highestBidder != null) {
 		    			try {
@@ -94,8 +100,14 @@ public class RemoveExpiredThread implements Runnable {
 	    				e.printStackTrace();
 	    			}
 	        		
-	    			BiddingComplete completeBid = new BiddingComplete(highestUserBidder.getEmail(), seller.getEmail(), item.getTitle());
-	        		String completeBidUrl = "http://localhost:9000/biddingcomplete";
+	    			BiddingComplete completeBid = null;
+	    			if (highestBidder == null) {
+	    				completeBid = new BiddingComplete(null, seller.getEmail(), item.getTitle());
+	    			}
+	    			else completeBid = new BiddingComplete(highestUserBidder.getEmail(), seller.getEmail(), item.getTitle());
+	        		
+	    			
+	    			String completeBidUrl = "http://localhost:9000/biddingcomplete";
 	        		restTemplate.postForLocation(completeBidUrl, completeBid);		
 	    			
 	    			String entityUrl = url + item.get_id();
