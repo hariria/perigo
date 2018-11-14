@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.MongoController.perigo.models.BiddingComplete;
 import com.MongoController.perigo.models.MessageSent;
 import com.MongoController.perigo.models.User;
 import com.MongoController.perigo.repositories.UserRepository;
@@ -33,8 +34,15 @@ public class EmailController {
 	@Autowired
 	private UserRepository repository;
 	
+	
+	@RequestMapping(value="/biddingcomplete", method=RequestMethod.GET)
+	public void sendBiddingCompleteMsg(@Valid @RequestBody BiddingComplete msg) throws AddressException, MessagingException {
+		sendEmailtoHighestBidder(msg.highestBidderEmail, msg.itemName);
+		sendEmailtoSeller(msg.sellerEmail, msg.highestBidderEmail, msg.itemName);
+	}
+		
 	@RequestMapping(value="/sendmessage", method=RequestMethod.POST)
-	public String sendEmailToUser(@Valid @RequestBody MessageSent msg_sent) throws AddressException, MessagingException, IOException {
+	public String senditemMessagetouser(@Valid @RequestBody MessageSent msg_sent) throws AddressException, MessagingException, IOException {
 		send_user_item(msg_sent);
 		
 		return "Email sent successfully";
@@ -130,5 +138,94 @@ public class EmailController {
 
 		   msg.setContent(multipart);
 		   Transport.send(msg);   
-		}
+	}
+	
+	private void sendEmailtoSeller(String sellerEmail, String highestBidderEmail, String itemName) throws AddressException, MessagingException {
+		   Properties props = new Properties();
+		   props.put("mail.smtp.auth", "true");
+		   props.put("mail.smtp.starttls.enable", "true");
+		   props.put("mail.smtp.host", "smtp.gmail.com");
+		   props.put("mail.smtp.port", "587");
+		   
+		   Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		      protected PasswordAuthentication getPasswordAuthentication() {
+		         return new PasswordAuthentication("perigo.donotreply@gmail.com", "letsgetthisbread");
+		      }
+		   });
+		   Message msg = new MimeMessage(session);
+		   msg.setFrom(new InternetAddress("perigo.donotreply@gmail.com", false));
+
+		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(sellerEmail));
+		   System.out.println(sellerEmail);
+		   
+		   String content = "";
+		   MimeBodyPart messageBodyPart = new MimeBodyPart();
+
+		   if (highestBidderEmail != null) {
+			   msg.setSubject("Item Sold!");
+			   msg.setContent("Item Sold!", "text/html");
+			   msg.setSentDate(new Date());
+			   
+			   content = "Congratulations! <br>"
+					   + "The following item you was sold: " + itemName + "<br>"
+					   + "Please reach out to " + highestBidderEmail + " to arrange pickup <br>";
+		   }
+		   else {
+			   msg.setSubject("Item Not Sold");
+			   msg.setContent("Item Not Sold", "text/html");
+			   msg.setSentDate(new Date());
+
+			   
+			   content = "The following item was not sold: " + itemName + "<br>"
+					   + "If you are still interested in selling the item, please relist it on Perigo <br>";
+			   
+		   }
+
+		   System.out.println(content);
+		   
+		   messageBodyPart.setContent(content, "text/html");
+
+		   Multipart multipart = new MimeMultipart();
+		   multipart.addBodyPart(messageBodyPart);
+
+		   msg.setContent(multipart);
+		   Transport.send(msg); 
+	}
+	
+	private void sendEmailtoHighestBidder(String highestBidderEmail, String itemName) throws AddressException, MessagingException {
+		   Properties props = new Properties();
+		   props.put("mail.smtp.auth", "true");
+		   props.put("mail.smtp.starttls.enable", "true");
+		   props.put("mail.smtp.host", "smtp.gmail.com");
+		   props.put("mail.smtp.port", "587");
+		   
+		   Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		      protected PasswordAuthentication getPasswordAuthentication() {
+		         return new PasswordAuthentication("perigo.donotreply@gmail.com", "letsgetthisbread");
+		      }
+		   });
+		   Message msg = new MimeMessage(session);
+		   msg.setFrom(new InternetAddress("perigo.donotreply@gmail.com", false));
+
+		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(highestBidderEmail));
+		   System.out.println(highestBidderEmail);
+		   msg.setSubject("You Won!");
+		   msg.setContent("You Won!", "text/html");
+		   msg.setSentDate(new Date());
+
+		   MimeBodyPart messageBodyPart = new MimeBodyPart();
+		   
+		   String content = "Congratulations! <br>"
+				   + "You won the following item: " + itemName + "<br>"
+				   + "The seller will reach out to you with more information <br>";
+		   System.out.println(content);
+		   
+		   messageBodyPart.setContent(content, "text/html");
+
+		   Multipart multipart = new MimeMultipart();
+		   multipart.addBodyPart(messageBodyPart);
+
+		   msg.setContent(multipart);
+		   Transport.send(msg); 
+	}
 }
