@@ -32,6 +32,13 @@ function timeSet() {
 	    }
 	}, 1000);
 }
+function userNotSignedIn() {
+	swal({		    
+		title: "User not signed in",
+	    text: "Please sign in to save items!",
+	    type: "error"
+	});
+} 
 
 function loadUser(user) {
 	var name = user['firstName'] + " " + user['lastName'];
@@ -52,6 +59,9 @@ function loadUser(user) {
 	if (user['_id'] === sessionStorage.getItem('objectId')) {
 		document.getElementById('bid-now').style.display = "None";
 		document.getElementById('local-user-listing').style.display="Block";
+	}
+	else {
+		document.getElementById('saved').setAttribute('onclick', 'userNotSignedIn()');
 	}
 }
 
