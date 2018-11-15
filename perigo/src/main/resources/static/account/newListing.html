@@ -4,12 +4,52 @@
 		<title>Add a Listing</title>
 		<meta name="google-signin-client_id" content="58684548257-biadarc2qic8v5841bd06cblv1sddgbc.apps.googleusercontent.com">
 	</head>
+	    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-storage.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCKuSvfoFNq-3SWfPKtK23p0NvZKjjtsLA",
+        authDomain: "pergio-cs201.firebaseapp.com",
+        databaseURL: "https://pergio-cs201.firebaseio.com",
+        projectId: "pergio-cs201",
+        storageBucket: "pergio-cs201.appspot.com",
+        messagingSenderId: "648614633297"
+      };
+      firebase.initializeApp(config);
+
+      const storageService = firebase.storage();
+      const storageRef = storageService.ref();
+    </script>
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="scripts.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.0/dist/sweetalert2.all.min.js"></script>
+
+
+    <!-- ALL OTHER TAGS GO BELOW -->
+
+    <script type="text/javascript">
+      function uploadFile(file){
+		console.log(file.name);
+        const uploadTask = storageRef.child(`images/${file.name}`).put(file); //create a child directory called images, and place the file inside this directory
+        uploadTask.on('state_changed', (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+        }, (error) => {
+          // Handle unsuccessful uploads
+          console.log(error);
+        }, () => {
+           // Do something once upload is complete
+           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+             console.log(downloadURL);
+           });
+        });
+      }
+    </script>
+
 
 	<body onload="newListingPageLoad()">
 		<div id="outerContainer">

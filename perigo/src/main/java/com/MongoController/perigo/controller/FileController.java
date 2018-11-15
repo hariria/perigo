@@ -32,60 +32,61 @@ import com.MongoController.perigo.services.UploadFileResponse;
 @RestController
 public class FileController {
 
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
-    @Autowired
-    private FileStorageService fileStorageService;
-    
-    @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
-       
-        String filePath = fileStorageService.getFileStorageLocation() + "\\" + fileName;
+	@Autowired
+	private FileStorageService fileStorageService;
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
-        return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize(), filePath);
-    }
+	@PostMapping("/uploadFile")
+	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+		String fileName = fileStorageService.storeFile(file);
+		System.out.println(fileName);
+		String filePath = fileStorageService.getFileStorageLocation() + "\\" + fileName;
+		System.out.println(filePath);
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/downloadFile/")
+				.path(fileName)
+				.toUriString();
+		System.out.println(fileDownloadUri);
+		return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize(), filePath);
+	}
 
-    @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-    	return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
-    }
+	@PostMapping("/uploadMultipleFiles")
+	public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+		return Arrays.asList(files)
+				.stream()
+				.map(file -> uploadFile(file))
+				.collect(Collectors.toList());
+	}
 
-    
-    @RequestMapping(value = "/item_images/{file_name}", method = RequestMethod.GET)
-    @ResponseBody 
-    public FileSystemResource getFile(@PathVariable("file_name") String fileName) throws IOException {
-    	return new FileSystemResource(fileStorageService.loadFileAsResource(fileName).getFile());
-    }
-    
-    @GetMapping("/downloadFile/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-        // Load file as Resource
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
 
-        // Try to determine file's content type
-        String contentType = null;
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            logger.info("Could not determine file type.");
-        }
+	@RequestMapping(value = "/item_images/{file_name}", method = RequestMethod.GET)
+	@ResponseBody 
+	public FileSystemResource getFile(@PathVariable("file_name") String fileName) throws IOException {
+		return new FileSystemResource(fileStorageService.loadFileAsResource(fileName).getFile());
+	}
 
-        // Fallback to the default content type if type could not be determined
-        if(contentType == null) {
-            contentType = "application/octet-stream";
-        }
+	@GetMapping("/downloadFile/{fileName:.+}")
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+		// Load file as Resource
+		Resource resource = fileStorageService.loadFileAsResource(fileName);
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
-    }
+		// Try to determine file's content type
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+			logger.info("Could not determine file type.");
+		}
+
+		// Fallback to the default content type if type could not be determined
+		if(contentType == null) {
+			contentType = "application/octet-stream";
+		}
+
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+	}
 }

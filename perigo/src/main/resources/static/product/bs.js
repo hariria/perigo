@@ -60,9 +60,6 @@ function loadUser(user) {
 		document.getElementById('bid-now').style.display = "None";
 		document.getElementById('local-user-listing').style.display="Block";
 	}
-	else {
-		document.getElementById('saved').setAttribute('onclick', 'userNotSignedIn()');
-	}
 }
 
 function loadItem(item) {	
@@ -167,7 +164,6 @@ function onPageLoad() {
 				success : function(onSuccess) {
 					loadUser(onSuccess);
 					loadItem(result);
-					generateSavedItems(onSuccess);
 					checkCookie();
 					initMap();
 					timeSet();
@@ -382,10 +378,12 @@ function checkCookie() {
 		aTag.setAttribute('href', '/signup/signup.html');
 		aTag.innerHTML = 'Sign Up';
 		document.getElementById('bit-submit').setAttribute('onclick', 'signInToBid(); return false;');
+		document.getElementById('saved').setAttribute('onclick', 'userNotSignedIn()');
 	}
 	else {
 		aTag.setAttribute('href', '/account/account.html');
-		aTag.innerHTML = 'Account';		
+		aTag.innerHTML = 'Account';
+		generateSavedItems();
 	}
 
 	aTag.setAttribute('style', 'text-decoration: none; color: inherit;')
@@ -394,54 +392,62 @@ function checkCookie() {
 
 
 
-function generateSavedItems(result) {
-	var savedItems = result['savedItems'];
-	var userObjectId = sessionStorage.getItem("objectId");
+function generateSavedItems() {
+	$.ajax({
+		url: 'http://localhost:9000/user/' + sessionStorage.getItem('objectId'),
+		method: 'GET',
+		success: function(response) {
+			var savedItems = response['savedItems'];
+			for (var i = 0; i < savedItems.length; i++) {
+				const Url = 'http://localhost:9000/item/' + savedItems[i]['itemId'];
+				$.ajax({
+					url: Url,
+					type: "GET",
+					dataType: 'JSON',
+					success: function(result) {				
 
-	for (var i = 0; i < savedItems.length; i++) {
-		const Url = 'http://localhost:9000/item/' + savedItems[i]['itemId'];
-		$.ajax({
-			url: Url,
-			type: "GET",
-			dataType: 'JSON',
-			success: function(result) {				
+						var tr = document.createElement('tr');
+						tr.setAttribute('id', result['_id']);
 
-				var tr = document.createElement('tr');
-				tr.setAttribute('id', result['_id']);
+						var td1 = document.createElement('td');
+						var table_item_text = document.createElement('div');
+						table_item_text.setAttribute('class', 'table-item-text');
+						table_item_text.setAttribute('data-itemID', result['_id']);
+						table_item_text.setAttribute('onClick', 'getItem(this)');
+						table_item_text.innerHTML = result['title'];
+						td1.appendChild(table_item_text);
+						tr.appendChild(td1);
 
-				var td1 = document.createElement('td');
-				var table_item_text = document.createElement('div');
-				table_item_text.setAttribute('class', 'table-item-text');
-				table_item_text.setAttribute('data-itemID', result['_id']);
-				table_item_text.setAttribute('onClick', 'getItem(this)');
-				table_item_text.innerHTML = result['title'];
-				td1.appendChild(table_item_text);
-				tr.appendChild(td1);
+						var td2 = document.createElement('td');
+						var table_price_text = document.createElement('div');
+						table_price_text.setAttribute('class', 'table-price-text');
+						table_price_text.innerHTML = '$' + result['maxBid'];
+						td2.appendChild(table_price_text);
+						tr.appendChild(td2);
 
-				var td2 = document.createElement('td');
-				var table_price_text = document.createElement('div');
-				table_price_text.setAttribute('class', 'table-price-text');
-				table_price_text.innerHTML = '$' + result['maxBid'];
-				td2.appendChild(table_price_text);
-				tr.appendChild(td2);
+						var td3 = document.createElement('td');
+						var i_class = document.createElement('i');				
+						i_class.setAttribute('class', 'fas fa-times');
+						i_class.setAttribute('style', 'color: #949494;');					
+						i_class.setAttribute('data-itemID', result['_id']);
+						i_class.setAttribute('onClick', 'unsaveItem(this)');
+						td3.appendChild(i_class);
+						tr.appendChild(td3);
 
-				var td3 = document.createElement('td');
-				var i_class = document.createElement('i');				
-				i_class.setAttribute('class', 'fas fa-times');
-				i_class.setAttribute('style', 'color: #949494;');					
-				i_class.setAttribute('data-itemID', result['_id']);
-				i_class.setAttribute('onClick', 'unsaveItem(this)');
-				td3.appendChild(i_class);
-				tr.appendChild(td3);
+						document.getElementById('saved-table').appendChild(tr);
 
-				document.getElementById('saved-table').appendChild(tr);
-
-			},
-			error: function(error) {
-				console.log('Error: ' + error);
+					},
+					error: function(error) {
+						console.log('Error: ' + error);
+					}
+				})
 			}
-		})
-	}
+		}
+	
+	})
+	
+	
+
 }
 
 function unsaveItem(element){

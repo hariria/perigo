@@ -9,14 +9,14 @@ function formSubmission() {
 	var price = document.getElementsByName('price')[0].value;
 	var location = sessionStorage.getItem('location');
 
-	var formData = new FormData();
+	/*var formData = new FormData();
 	var images = [];
 	for (var i = 0; i < imagesToSend.length; i++) {
 		formData.append('files', imagesToSend[i]);
 		images.push('http://localhost:9000/item_images/' + imagesToSend[i].name);
-	}
+	}*/
 
-	$.ajax({
+	/*$.ajax({
 		url: 'http://localhost:9000/uploadMultipleFiles',
 	    type: 'post',
 	    data: formData,
@@ -24,57 +24,70 @@ function formSubmission() {
 	    processData: false,
 	    success: function(data) {
 	    	console.log('Images uploaded succesfully!');
-	    },
+	*/    	
+	
+	
+	var images = [];
+	for (var i = 0; i < imagesToSend.length; i++) {
+		uploadFile(imagesToSend[i]);
+		images.push(downloadURL);
+	}
+	
+	    	var currentDateTime = new Date().getTime();
+
+	    	var toSendJson =
+	    		{
+	    			'title' : title,
+	    			'description' : description,
+	    			'buyType' : buyType,
+	    			'keywords' : keywords,
+	    			'zipCode' : zipCode,
+	    			'images' : images,
+	    			'startForSaleDate' : currentDateTime,
+	    			'endForSaleDate' : currentDateTime + 604800000,
+	    			'userSellingItem' : sessionStorage.getItem('objectId'),
+	    			'maxBid' : price,
+	    			'location' : location
+	    		}
+
+	    	$.ajax({
+	    		url: 'http://localhost:9000/item/',
+	    		type: 'POST',
+	    		contentType:'application/json',
+	    		data : JSON.stringify(toSendJson),
+	    		success : function(result) {
+	    			console.log(result['_id']);
+	    			// Routine to add to user listing
+	    			$.ajax({
+	    				url: 'http://localhost:9000/user/addnewlisting/' + sessionStorage.getItem('objectId'),
+	    				type: 'PUT',
+	    				data: JSON.stringify({'itemId' : result['_id']}),
+	    			    contentType: "application/json",
+	    			    success: function(success) {
+	    			    	console.log('Success');
+	    			    },
+	    			    error: function(failure) {
+	    			    	console.log('failure');
+	    			    }
+	    				
+	    			})
+	    		},
+	    		error: function(error) {
+	    			console.log(error);
+	    		}
+
+	    	})
+	   /* },
 		error: function(error) {
 			console.log('Error in uploading images');
 		}
 	})
-
-
-	var currentDateTime = new Date().getTime();
-
-	var toSendJson =
-		{
-			'title' : title,
-			'description' : description,
-			'buyType' : buyType,
-			'keywords' : keywords,
-			'zipCode' : zipCode,
-			'images' : images,
-			'startForSaleDate' : currentDateTime,
-			'endForSaleDate' : currentDateTime + 604800000,
-			'userSellingItem' : sessionStorage.getItem('objectId'),
-			'maxBid' : price,
-			'location' : location
-		}
-
-	$.ajax({
-		url: 'http://localhost:9000/item/',
-		type: 'POST',
-		contentType:'application/json',
-		data : JSON.stringify(toSendJson),
-		success : function(result) {
-			console.log(result['_id']);
-			// Routine to add to user listing
-			$.ajax({
-				url: 'http://localhost:9000/user/addnewlisting/' + sessionStorage.getItem('objectId'),
-				type: 'PUT',
-				data: JSON.stringify({'itemId' : result['_id']}),
-			    contentType: "application/json",
-			})
-
-		},
-		error: function(error) {
-			console.log(error);
-		}
-
-	})
-
-
-
-	window.location.href = "/account/account.html";
+*/
+	//window.location.href = "/account/account.html";
 
 }
+
+
 
 function handleClick() {
 	var price_field = document.getElementById('price-field');
@@ -401,28 +414,30 @@ function addAListing(){
     window.location.href = './newListing.html';
 }
 
-function pushFileToGlobal(old_file) {
-
-	var oldName = old_file.name.toLowerCase();
-	var typeCheck = oldName.indexOf('.jpg');
-
-	var objectId = sessionStorage.getItem('objectId');
-
-	var newFileName = objectId + '_' + oldName;
-	if (typeCheck == '-1') {
-		newFileName += '.png';
-	}
-
-	else {
-		newFileName += '.jpg';
-	}
-
-	myNewFile = new File([old_file], newFileName, {type: old_file.type});
-
-	imagesToSend.push(myNewFile);
-
-	return myNewFile;
-}
+//function pushFileToGlobal(old_file) {
+//
+//	var oldName = old_file.name.toLowerCase();
+//	var typeCheck = oldName.indexOf('.jpg');
+//
+//	var objectId = sessionStorage.getItem('objectId');
+//
+//	var random = Math.floor(100000 + Math.random() * 900000);
+//	var newFileName = random.toString();
+//	console.log(newFileName);
+//	if (typeCheck == '-1') {
+//		newFileName += '.png';
+//	}
+//
+//	else {
+//		newFileName += '.jpg';
+//	}
+//
+//	myNewFile = new File([old_file], newFileName, {type: old_file.type});
+//
+//	imagesToSend.push(myNewFile);
+//
+//	return myNewFile;
+//}
 
 function deleteFromGlobal(filename) {
 
@@ -468,13 +483,13 @@ function previewFile() {
     var file = document.querySelector('input[type=file]').files[0];
 
 
-    var newFile = pushFileToGlobal(file);
+	imagesToSend.push(file);
 
     var reader = new FileReader();
     reader.addEventListener("load", function () {
         image.src = reader.result;
-        icon.parentNode.setAttribute('newFileName', newFile.name);
-        image.setAttribute('newFileName', newFile.name);
+        icon.parentNode.setAttribute('newFileName', file.name);
+        image.setAttribute('newFileName', file.name);
     }, false);
 
     if (file) {
