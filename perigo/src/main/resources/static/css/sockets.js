@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
         	var priceUpdate = alert.body;
         	var res = priceUpdate.split("-");
         	if (document.querySelectorAll('[data-itemid="' + res[0] + '"]')[4] != null) {
-        		document.querySelectorAll('[data-itemid="' + res[0] + '"]')[4].innerText = "$" + res[1];
+                var element = document.querySelectorAll('[data-itemid="' + res[0] + '"]')[4];
+                var inner = element.children[0];
+                inner.innerText = "$" + res[1];
         	}        	
         });
     });
