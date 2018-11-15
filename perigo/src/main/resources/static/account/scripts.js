@@ -1,4 +1,21 @@
 var imagesToSend = [];
+var images = []
+
+function uploadFile(file){
+	console.log(file.name);
+    const uploadTask = storageRef.child(`images/${file.name}`).put(file); //create a child directory called images, and place the file inside this directory
+    uploadTask.on('state_changed', (snapshot) => {
+      // Observe state change events such as progress, pause, and resume
+    }, (error) => {
+      // Handle unsuccessful uploads
+      console.log(error);
+    }, () => {
+       // Do something once upload is complete
+       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+         images.push(downloadURL);
+       });
+    });
+  }
 
 function formSubmission() {
 	var title = document.getElementsByName('title')[0].value;
@@ -27,11 +44,10 @@ function formSubmission() {
 	*/    	
 	
 	
-	var images = [];
 	for (var i = 0; i < imagesToSend.length; i++) {
 		uploadFile(imagesToSend[i]);
-		images.push(downloadURL);
 	}
+	console.log(images);
 	
 	    	var currentDateTime = new Date().getTime();
 
@@ -84,7 +100,6 @@ function formSubmission() {
 	})
 */
 	//window.location.href = "/account/account.html";
-
 }
 
 

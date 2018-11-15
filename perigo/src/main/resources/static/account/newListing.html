@@ -29,28 +29,6 @@
 	<script src="scripts.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.0/dist/sweetalert2.all.min.js"></script>
 
-
-    <!-- ALL OTHER TAGS GO BELOW -->
-
-    <script type="text/javascript">
-      function uploadFile(file){
-		console.log(file.name);
-        const uploadTask = storageRef.child(`images/${file.name}`).put(file); //create a child directory called images, and place the file inside this directory
-        uploadTask.on('state_changed', (snapshot) => {
-          // Observe state change events such as progress, pause, and resume
-        }, (error) => {
-          // Handle unsuccessful uploads
-          console.log(error);
-        }, () => {
-           // Do something once upload is complete
-           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-             console.log(downloadURL);
-           });
-        });
-      }
-    </script>
-
-
 	<body onload="newListingPageLoad()">
 		<div id="outerContainer">
 			<div class="header">
