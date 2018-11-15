@@ -34,19 +34,11 @@
         }, () => {
            // Do something once upload is complete
            console.log('success');
+           uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+             console.log(downloadURL);
+           });
         });
       }
-
-      function loadImage(){
-        let image = storageRef.child('images/IMG_0678.jpg');
-        console.log(image);
-
-        image.getMetadata().then(function(metadata) {
-          document.getElementById('imageHolder').src = metadata.downloadURLs[0]
-        }).catch(function(error) { /*error handling*/ });    
-      }
-
-
     </script>
 
   </head>
@@ -59,8 +51,8 @@
     </div>
 
     <div>
-      <button onClick="loadImage();">Load in sample image</button>
-      <img id="imageHolder"></div>
+      <img id="img" src=""/>
+    </div>
    
   </body>
 </html>
