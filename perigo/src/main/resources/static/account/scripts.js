@@ -94,7 +94,7 @@ function formSubmission() {
 
 		});
 		
-	}, 2000);
+	}, 4000);
 
 
 	   /* },
