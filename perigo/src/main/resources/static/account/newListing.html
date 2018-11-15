@@ -47,7 +47,7 @@
                         </div>
 					</div>
 					<div class="inner-frame">
-                        <form onsubmit="formSubmission(); return false;" id="new-listing-form" method="POST" ENCTYPE="multipart/form-data">
+                        <form id="new-listing-form">
                             <input class="listing-input" type="text" name="title" placeholder="Title of your listing..." required>
                             <div class="radio-input">
 <!--                                 <input onclick="handleClick(this);" class="listing-input" style="margin-left: 0px;" type="radio" name="buy-choice" value="buy it now" required> Buy It Now &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -67,7 +67,7 @@
                                     <input type="file" name="myfile" multiple accept="image/jpeg, image/png" onchange="previewFile();" required>
                                 </div>
                             </div>
-                            <input id="new-listing-submit" class="listing-input" style="border:1px solid #494949; border-radius: 15px; width: 100px; color: #494949;" type="submit" value="submit">
+                            <button id="new-listing-submit" class="listing-input" style="border:1px solid #494949; border-radius: 15px; width: 100px; color: #494949;" onClick="return false;"><div onClick="formSubmission()">Submit</div></button>
                         </form>
 					</div>
 				</div>
