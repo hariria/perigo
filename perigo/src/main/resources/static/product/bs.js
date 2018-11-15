@@ -379,6 +379,7 @@ function checkCookie() {
 		aTag.innerHTML = 'Sign Up';
 		document.getElementById('bit-submit').setAttribute('onclick', 'signInToBid(); return false;');
 		document.getElementById('saved').setAttribute('onclick', 'userNotSignedIn()');
+		document.getElementById('save-item').style.display = 'None';
 	}
 	else {
 		aTag.setAttribute('href', '/account/account.html');
@@ -557,5 +558,32 @@ function editListing() {
 }
 
 function clickedSaveItem(){
-	//TODO
+	const UserUrl = 'http://localhost:9000/user/addsaveditem/' + sessionStorage.getItem('objectId');
+	$.ajax({
+		url: UserUrl,
+		type: "PUT",
+		contentType:'application/json',
+		data: JSON.stringify({'itemId' : itemId}),
+		success: function(result) {
+
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
+
+	const ItemUrl = 'http://localhost:9000/item/addwatchinguser/' + itemId;
+	
+	$.ajax({
+		url: ItemUrl,
+		type: "PUT",
+		contentType:'application/json',
+		data: JSON.stringify({'userWatchingId' : sessionStorage.getItem('objectId')}),
+
+		success: function(result) {
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
 }
