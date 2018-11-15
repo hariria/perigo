@@ -329,18 +329,18 @@ function submitBid() {
 	
 	if (bid === "") {
 		swal({
-		  type: 'error',
-		  title: 'No Bid Entered',
-		  text: "Please enter a bid before submitting"
+			type: 'error',
+			title: 'No Bid Entered',
+			text: "Please enter a bid before submitting"
 		})
 		return false;
 	}
 	
 	else if (bid <= currentMaxBid) {
 		swal({
-		  type: 'error',
-		  title: 'Invalid Bid',
-		  text: "Your bid is less than the current price"
+			type: 'error',
+			title: 'Invalid Bid',
+			text: "Your bid is less than the current price"
 		});
 		return false;
 	}
@@ -368,9 +368,9 @@ function submitBid() {
 
 function signInToBid() {
 	swal({
-	  type: 'error',
-	  title: 'Sign In',
-	  text: "You must be signed in to bid on this item"
+		type: 'error',
+		title: 'Sign In',
+		text: "You must be signed in to bid on this item"
 	})
 }
 
@@ -520,10 +520,10 @@ $(document).ready(function(){
 
 function deleteListing() {	
 	swal({
-		  title: "Are you sure?",
-		  text: "Once deleted, you will not be able to recover this item",
-		  type: "warning",
-		  showCancelButton: true,
+			title: "Are you sure?",
+			text: "Once deleted, you will not be able to recover this item",
+			type: "warning",
+			showCancelButton: true
 		})
 		.then((willDelete) => {
 			if (willDelete.value) {
