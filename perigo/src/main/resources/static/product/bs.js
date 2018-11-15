@@ -586,4 +586,6 @@ function clickedSaveItem(){
 			console.log(error);
 		}
 	})
+	
+	location.reload();
 }
