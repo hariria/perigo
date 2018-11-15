@@ -306,6 +306,31 @@ hr {
   border: 2px solid rgb(244, 183, 182);
 }
 
+#save-button-container{
+  margin: 20px 0px;
+  max-width: 100%;
+}
+
+#save-item{
+  position: relative;
+  color: black;
+  background: white;
+  border-radius: 25px;
+  border-color: grey;
+  width: 30%;
+  height: 40px;
+  font-family: Avenir Next;
+  font-size: 15px;
+  border: 2px solid #808080;
+  transition: all .5s;
+}
+
+#save-item:hover{
+  color: white;
+  background:rgb(244, 183, 182);
+  border: 2px solid rgb(244, 183, 182);
+}
+
 .seller hr {
     height: 2px;
     border: 0;

@@ -299,6 +299,7 @@ tr:hover {
 	max-width: 325px;
 	min-height: 200px;
 	min-width: 325px;
+  object-fit: cover;
 }
 
 .item-title{

@@ -549,3 +549,7 @@ function editListing() {
 	sessionStorage.setItem('itemToEdit', itemId);
 	window.location.href = '/edit_listing/editListing.html';
 }
+
+function clickedSaveItem(){
+	//TODO
+}
