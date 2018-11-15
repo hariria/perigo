@@ -1,121 +1,159 @@
 {
     "items": [
-        {
-            "_id": null,
-            "title": "Desk Lamp",
-            "description": "Enjoy bright energy-efficient LED lighting in any space with this 3.6W LED strip-style desk Lamp. The elongated 36 piece LED strip provides wider light dispersion over Large workspaces. An ultra-slim profile and sleek black and silver finish make it ideal for any office or home. The 3 point adjustable arm and shade allows for a maximum reach of 28 inches. This Lamp is ETL listed and includes a manufacturer's 90 day limited warranty.",
-            "zipCode": 91604,
-            "forSale": false,
-            "buyType": "auction",
-            "userSellingItem": null,
-            "endForSaleDate": null,
-            "startForSaleDate": null,
-            "maxBid": 35,
-            "images": [
-                "https://target.scene7.com/is/image/Target/GUEST_1bf07f64-ee93-47c3-bb44-222992c638f9?wid=488&hei=488&fmt=pjpeg",
-                "https://secure.img1-fg.wfcdn.com/im/66979724/resize-h600-w600%5Ecompr-r85/4116/41163873/Desk+Lamps.jpg"
-            ],
-            "location": "Studio City, CA",
-            "usersWatching": [],
-            "keywords": [
-                "desk",
-                "lamp",
-                "lighting",
-                "home",
-                "decor"
-            ]
-        },
-        {
-            "_id": null,
-            "title": "Lenovo Thinkpad Laptop",
-            "description": "Selling my used Lenovo Thinkpad X280 laptop. Used it for less than a semester. DM for details",
-            "zipCode": 90089,
-            "forSale": false,
-            "buyType": "auction",
-            "userSellingItem": null,
-            "endForSaleDate": null,
-            "startForSaleDate": null,
-            "maxBid": 600,
-            "images": [
-                "https://www.lenovo.com/medias/lenovo-laptop-thinkpad-x280-hero.png?context=bWFzdGVyfHJvb3R8ODEwODd8aW1hZ2UvcG5nfGhmYi9oZTQvOTYxNzc4NjIwODI4Ni5wbmd8MDY3NWI5ZTYzZjc2MDc5NDU2ZjRmMzNiYzcyN2Q5NzVjYjM2ZDRiNDJjZjRmZTUxZThjNWNjYTM1Yzc4MmIzZQ"
-            ],
-            "location": "Los Angeles, CA",
-            "usersWatching": [],
-            "keywords": [
-                "lenovo",
-                "laptop",
-                "computer",
-                "i5",
-                "thinkpad"
-            ]
-        },
-        {
-            "_id": null,
-            "title": "Yeezy Boost 350 V2",
-            "description": "Selling my brand new, in the box, Yeezy Boost 350 V2. Serious offers only. DM for more info. Starting at $300",
-            "zipCode": 90210,
-            "forSale": false,
-            "buyType": "auction",
-            "userSellingItem": null,
-            "endForSaleDate": null,
-            "startForSaleDate": null,
-            "maxBid": 600,
-            "images": [
-                "https://cdn.runrepeat.com/i/adidas/25221/cp9652-men-yeezy-boost-350-v2-adidas-black-red-mens-black-red-fa46-600.jpg"
-            ],
-            "location": "Beverly Hills, CA",
-            "usersWatching": [],
-            "keywords": [
-                "yeezys",
-                "kanye",
-                "west",
-                "boost",
-                "nmd"
-            ]
-        }
-    ],
-    "users": [
-        {
-            "_id": null,
-            "username": "hariria",
-            "hash" : "",
-            "firstName": "Andrew",
-            "lastName": "Hariri",
-            "email": "hariria@usc.edu",
-            "location": "Burlingame, CA",
-            "zipCode": 94010,
-            "userRating": 5,
-            "savedItems": [],
-            "sellingItems": [],
-            "image": "https://avatars2.githubusercontent.com/u/31301117?s=400&v=4"
-        },
-        {
-            "_id": null,
-            "username": "agkrut",
-            "hash" : "",
-            "firstName": "Arthur",
-            "lastName": "Krut",
-            "email": "akrut@usc.edu",
-            "location": "Encino, CA",
-            "zipCode": 91436,
-            "userRating": 5,
-            "savedItems": [],
-            "sellingItems": [],
-            "image": "http://bytes.usc.edu/cs104/img/akrut.jpg"
-        },
-        {
-            "_id": null,
-            "username": "izzard",
-            "hash" : "",
-            "firstName": "Zachary",
-            "lastName": "Izzard",
-            "email": "izzard@usc.edu",
-            "location": "Pennington, NJ",
-            "zipCode": 8534,
-            "userRating": 5,
-            "savedItems": [],
-            "sellingItems": [],
-            "image": "http://bytes.usc.edu/cs102/img/Zach_Izzard.jpg"
-        }
-    ]
+    {
+        "_id": null,
+        "title": "Signed Kobe Bryant Autograph",
+        "description": "A real authentic Kobe Bryant autograph. With certificate of authenticity.",
+        "zipCode" : 91403,
+        "forSale": false,
+        "buyType": "auction",
+        "userSellingItem": null,
+        "endForSaleDate": null,
+        "startForSaleDate": null,
+        "maxBid": 200,
+        "images": [
+            "https://images.psacard.com/s3/cu-psa/autographfacts/1996-kobe-bryant-signed-photo-1141.jpg?h=1000"
+        ],
+        "location": "Sherman Oaks, CA",
+        "usersWatching": [],
+        "keywords": [
+            "kobe",
+            "bryant",
+            "signed",
+            "autograph",
+            "lakers"
+        ]
+    },
+    {
+        "_id": null,
+        "title": "Desk Lamp",
+        "description": "Enjoy bright energy-efficient LED lighting in any space with this 3.6W LED strip-style desk Lamp. The elongated 36 piece LED strip provides wider light dispersion over Large workspaces. An ultra-slim profile and sleek black and silver finish make it ideal for any office or home. The 3 point adjustable arm and shade allows for a maximum reach of 28 inches. This Lamp is ETL listed and includes a manufacturer's 90 day limited warranty.",
+        "zipCode": 91604,
+        "forSale": false,
+        "buyType": "auction",
+        "userSellingItem": null,
+        "endForSaleDate": null,
+        "startForSaleDate": null,
+        "maxBid": 35,
+        "images": [
+            "https://target.scene7.com/is/image/Target/GUEST_1bf07f64-ee93-47c3-bb44-222992c638f9?wid=488&hei=488&fmt=pjpeg",
+            "https://secure.img1-fg.wfcdn.com/im/66979724/resize-h600-w600%5Ecompr-r85/4116/41163873/Desk+Lamps.jpg"
+        ],
+        "location": "Studio City, CA",
+        "usersWatching": [],
+        "keywords": [
+            "desk",
+            "lamp",
+            "lighting",
+            "home",
+            "decor"
+        ]
+    },
+    {
+        "_id": null,
+        "title": "Lenovo Thinkpad Laptop",
+        "description": "Selling my used Lenovo Thinkpad X280 laptop. Used it for less than a semester. DM for details",
+        "zipCode": 90089,
+        "forSale": false,
+        "buyType": "auction",
+        "userSellingItem": null,
+        "endForSaleDate": null,
+        "startForSaleDate": null,
+        "maxBid": 600,
+        "images": [
+            "https://www.lenovo.com/medias/lenovo-laptop-thinkpad-x280-hero.png?context=bWFzdGVyfHJvb3R8ODEwODd8aW1hZ2UvcG5nfGhmYi9oZTQvOTYxNzc4NjIwODI4Ni5wbmd8MDY3NWI5ZTYzZjc2MDc5NDU2ZjRmMzNiYzcyN2Q5NzVjYjM2ZDRiNDJjZjRmZTUxZThjNWNjYTM1Yzc4MmIzZQ"
+        ],
+        "location": "Los Angeles, CA",
+        "usersWatching": [],
+        "keywords": [
+            "lenovo",
+            "laptop",
+            "computer",
+            "i5",
+            "thinkpad"
+        ]
+    },
+    {
+        "_id": null,
+        "title": "Yeezy Boost 350 V2",
+        "description": "Selling my brand new, in the box, Yeezy Boost 350 V2. Serious offers only. DM for more info. Starting at $300",
+        "zipCode": 90210,
+        "forSale": false,
+        "buyType": "auction",
+        "userSellingItem": null,
+        "endForSaleDate": null,
+        "startForSaleDate": null,
+        "maxBid": 600,
+        "images": [
+            "https://cdn.runrepeat.com/i/adidas/25221/cp9652-men-yeezy-boost-350-v2-adidas-black-red-mens-black-red-fa46-600.jpg"
+        ],
+        "location": "Beverly Hills, CA",
+        "usersWatching": [],
+        "keywords": [
+            "yeezys",
+            "kanye",
+            "west",
+            "boost",
+            "nmd"
+        ]
+    }
+],
+"users": [
+    {
+        "_id": null,
+        "username": "hariria",
+        "hash" : "",
+        "firstName": "Andrew",
+        "lastName": "Hariri",
+        "email": "hariria@usc.edu",
+        "location": "Burlingame, CA",
+        "zipCode": 94010,
+        "userRating": 5,
+        "savedItems": [],
+        "sellingItems": [],
+        "image": "https://avatars2.githubusercontent.com/u/31301117?s=400&v=4"
+    },
+    {
+        "_id": null,
+        "username": "agkrut",
+        "hash" : "",
+        "firstName": "Arthur",
+        "lastName": "Krut",
+        "email": "akrut@usc.edu",
+        "location": "Encino, CA",
+        "zipCode": 91436,
+        "userRating": 5,
+        "savedItems": [],
+        "sellingItems": [],
+        "image": "http://bytes.usc.edu/cs104/img/akrut.jpg"
+    },
+    {
+        "_id": null,
+        "username": "izzard",
+        "hash" : "",
+        "firstName": "Zachary",
+        "lastName": "Izzard",
+        "email": "izzard@usc.edu",
+        "location": "Pennington, NJ",
+        "zipCode": 8534,
+        "userRating": 5,
+        "savedItems": [],
+        "sellingItems": [],
+        "image": "http://bytes.usc.edu/cs102/img/Zach_Izzard.jpg"
+    },
+            {
+        "_id": null,
+        "username": "sungbinkim",
+        "hash" : "",
+        "firstName": "Brian",
+        "lastName": "Kim",
+        "email": "sungbinkim@usc.edu",
+        "location": "Seoul, South Korea",
+        "zipCode": 90089,
+        "userRating": 5,
+        "savedItems": [],
+        "sellingItems": [],
+        "image": "https://github.com/hariria/perigo/raw/master/v1/frontend/illustrations/icons/perigoIcon.png"
+    }
+]
 }

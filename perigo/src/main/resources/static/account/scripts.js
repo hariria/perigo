@@ -3,8 +3,7 @@ var images = []
 
 function uploadFile(file){
 	console.log(file.name);
-    const uploadTask = storageRef.child(`images/${file.name}`).put(file);
-    //create a child directory called images, and place the file inside this directory
+    const uploadTask = storageRef.child(`images/${file.name}`).put(file); //create a child directory called images, and place the file inside this directory
     uploadTask.on('state_changed', (snapshot) => {
       // Observe state change events such as progress, pause, and resume
     }, (error) => {
@@ -13,20 +12,10 @@ function uploadFile(file){
     }, () => {
        // Do something once upload is complete
        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-           images.push(downloadURL);
+         images.push(downloadURL);
        });
     });
   }
-
-function loopUploadFiles(callback){
-    for (var i = 0; i < imagesToSend.length; i++) {
-		uploadFile(imagesToSend[i]);
-	}
-    if (typeof callback == "function"){
-        callback();
-    }
-}
-
 
 function formSubmission() {
 	var title = document.getElementsByName('title')[0].value;
@@ -37,54 +26,75 @@ function formSubmission() {
 	var price = document.getElementsByName('price')[0].value;
 	var location = sessionStorage.getItem('location');
 
-	loopUploadFiles(function() {
-        console.log(images);
-    	var currentDateTime = new Date().getTime();
+	/*var formData = new FormData();
+	var images = [];
+	for (var i = 0; i < imagesToSend.length; i++) {
+		formData.append('files', imagesToSend[i]);
+		images.push('http://localhost:9000/item_images/' + imagesToSend[i].name);
+	}*/
 
-    	var toSendJson =
-    		{
-    			'title' : title,
-    			'description' : description,
-    			'buyType' : buyType,
-    			'keywords' : keywords,
-    			'zipCode' : zipCode,
-    			'images' : images,
-    			'startForSaleDate' : currentDateTime,
-    			'endForSaleDate' : currentDateTime + 604800000,
-    			'userSellingItem' : sessionStorage.getItem('objectId'),
-    			'maxBid' : price,
-    			'location' : location
-    		}
+	/*$.ajax({
+		url: 'http://localhost:9000/uploadMultipleFiles',
+	    type: 'post',
+	    data: formData,
+	    contentType: false,
+	    processData: false,
+	    success: function(data) {
+	    	console.log('Images uploaded succesfully!');
+	*/    	
+	
+	
+	for (var i = 0; i < imagesToSend.length; i++) {
+		uploadFile(imagesToSend[i]);
+	}
+	
+	setTimeout(function() {
+		var currentDateTime = new Date().getTime();
+		var toSendJson =
+		{
+				'title' : title,
+				'description' : description,
+				'buyType' : buyType,
+				'keywords' : keywords,
+				'zipCode' : zipCode,
+				'images' : images,
+				'startForSaleDate' : currentDateTime,
+				'endForSaleDate' : currentDateTime + 604800000,
+				'userSellingItem' : sessionStorage.getItem('objectId'),
+				'maxBid' : price,
+				'location' : location
+		}
 
-    	$.ajax({
-    		url: 'http://localhost:9000/item/',
-    		type: 'POST',
-    		contentType:'application/json',
-    		data : JSON.stringify(toSendJson),
-    		success : function(result) {
-    			console.log(result['_id']);
-    			// Routine to add to user listing
-    			$.ajax({
-    				url: 'http://localhost:9000/user/addnewlisting/' + sessionStorage.getItem('objectId'),
-    				type: 'PUT',
-    				data: JSON.stringify({'itemId' : result['_id']}),
-    			    contentType: "application/json",
-    			    success: function(success) {
-    			    	console.log('Success');
-    			    },
-    			    error: function(failure) {
-    			    	console.log('failure');
-    			    }
+		$.ajax({
+			url: 'http://localhost:9000/item/',
+			type: 'POST',
+			contentType:'application/json',
+			data : JSON.stringify(toSendJson),
+			success : function(result) {
+				console.log(result['_id']);
+				// Routine to add to user listing
+				$.ajax({
+					url: 'http://localhost:9000/user/addnewlisting/' + sessionStorage.getItem('objectId'),
+					type: 'PUT',
+					data: JSON.stringify({'itemId' : result['_id']}),
+					contentType: "application/json",
+					success: function(success) {
+						console.log('Success');
+						window.location.href = "/account/account.html";
+					},
+					error: function(failure) {
+						console.log('failure');
+					}
 
-    			})
-    		},
-    		error: function(error) {
-    			console.log(error);
-    		}
+				})
+			},
+			error: function(error) {
+				console.log(error);
+			}
 
-    	});
-    });
-
+		});
+		
+	}, 2000);
 
 
 	   /* },
@@ -156,14 +166,14 @@ function retrieveUserInfo() {
 			var zipCode = result['zipCode'];
 			var rating = result['userRating'];
 			var image = result['image'];
-
+			
 			document.getElementById('email-address').innerHTML = email;
 			document.getElementById('firstName-field').innerHTML = firstName;
 			document.getElementById('lastName-field').innerHTML = lastName;
 			document.getElementById('location-field').innerHTML = location;
 			document.getElementById('zip-field').innerHTML = zipCode;
 			document.getElementById('profile-pic').setAttribute('src', image);
-
+			
 			sessionStorage.setItem('user', JSON.stringify(result));
 			showListings();
 
