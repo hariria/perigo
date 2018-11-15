@@ -167,7 +167,7 @@ public class EmailController {
 			   msg.setSentDate(new Date());
 			   
 			   content = "Congratulations! <br>"
-					   + "The following item you was sold: " + itemName + "<br>"
+					   + "The following item was sold: " + itemName + "<br>"
 					   + "Please reach out to " + highestBidderEmail + " to arrange pickup. <br>";
 		   }
 		   else {
